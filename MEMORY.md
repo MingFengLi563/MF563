@@ -22,7 +22,7 @@
 ### salesmartly-api-skills (2026-03-24)
 - **来源：** https://github.com/Sale-Smartly/salesmartly-api-skills
 - **功能：** SaleSmartly CRM 全功能 API — 26 个脚本覆盖客户/会话/营销/WhatsApp 管理
-- **API Key：** ⚠️ 待配置（需从 SalesMartly 后台获取）
+- **API Key：** ⚠️ 待配置（需从 SaleSmartly 后台获取）
 - **配置文件：** `~/.openclaw/workspace/skills/salesmartly-api-skills/api-key.json`
 
 ---

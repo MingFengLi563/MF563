@@ -150,4 +150,4 @@ curl -X POST "https://graph.facebook.com/v21.0/me/messages" \
 
 ## 作者
 
-Created for FRANCo - SalesMartly Product Manager
+Created for FRANCo - SaleSmartly Product Manager

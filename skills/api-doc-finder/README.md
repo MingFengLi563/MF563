@@ -123,4 +123,4 @@ Google Calendar API 有哪些接口可以创建事件
 
 ## 作者
 
-Created for FRANCo - SalesMartly Product Manager
+Created for FRANCo - SaleSmartly Product Manager

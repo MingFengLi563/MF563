@@ -14,7 +14,7 @@ _Learn about the person you're helping. Update this as you go._
 
 _(What do they care about? What projects are they working on? What annoys them? What makes them laugh? Build this over time.)_
 
-- SalesMartly 产品经理
+- SaleSmartly 产品经理
 - 产品有 10,000+ 付费用户，正在探索 AI 能力融合
 - 需求来源：Teambition
 - 文档工具：钉钉文档（Word 格式）
