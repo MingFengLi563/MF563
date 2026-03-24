@@ -93,3 +93,24 @@ To https://github.com/MingFengLi563/MF563.git
 ✅ 掘金面板已更新！
 🌐 访问地址：https://mingfengli563.github.io/MF563/
 🕐 数据截止时间：2026-03-24 00:00
+🚀 开始更新掘金面板数据...
+
+📅 数据更新时间：2026-03-24 12:00
+📊 读取 session 数据...
+   模型：qwen3.5-plus
+   输入 Token: 269.5k
+   输出 Token: 830
+   总消耗：270.3k / 100.0k (270.3%)
+   估算成本：$0.4093 (输入:0.0015/K, 输出:0.006/K)
+
+🔄 更新 HTML 文件...
+📤 提交更改...
+[gh-pages a4e0875] 🔄 手动更新消耗数据 (2026-03-24 12:00)
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+🚀 推送到 GitHub...
+To https://github.com/MingFengLi563/MF563.git
+   c467d62..a4e0875  gh-pages -> gh-pages
+
+✅ 掘金面板已更新！
+🌐 访问地址：https://mingfengli563.github.io/MF563/
+🕐 数据截止时间：2026-03-24 12:00
