@@ -1,0 +1,9 @@
+{
+  "index": 0,
+  "installed": [],
+  "lastAttempt": "2026-03-16T20:30:00+08:00",
+  "lastError": "Rate limit exceeded - waiting for retry window",
+  "pendingSkill": "feishu-bitable",
+  "retryAfter": "2026-03-16T21:00:00+08:00",
+  "status": "waiting"
+}

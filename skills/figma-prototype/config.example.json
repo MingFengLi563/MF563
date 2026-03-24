@@ -1,0 +1,13 @@
+{
+  "_comment": "Figma 原型助手配置 - 私有技能",
+  "_help": {
+    "access_token": "在 Figma Account Settings → Personal access tokens 生成",
+    "team_id": "团队页面 URL 中的 /team/XXX 部分",
+    "project_id": "项目页面 URL 中的 /project/XXX 部分",
+    "default_file_id": "默认操作的文件 ID，文件 URL 中的 /file/XXX 部分"
+  },
+  "access_token": "",
+  "team_id": "",
+  "project_id": "",
+  "default_file_id": ""
+}

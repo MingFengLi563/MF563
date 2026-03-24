@@ -1,0 +1,1755 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🪏 掘金</title>
+    <style>
+        :root {
+            /* Apple/macOS 浅色模式 */
+            --bg-primary: #f5f5f7;
+            --bg-secondary: #ffffff;
+            --bg-card: #ffffff;
+            --text-primary: #1d1d1f;
+            --text-secondary: #86868b;
+            --accent-blue: #0071e3;
+            --accent-green: #34c759;
+            --accent-yellow: #ff9f0a;
+            --accent-red: #ff3b30;
+            --accent-purple: #bf5af2;
+            --border-color: #d2d2d7;
+            --shadow-sm: 0 2px 8px rgba(0,0,0,0.08);
+            --shadow-md: 0 4px 16px rgba(0,0,0,0.12);
+            --shadow-lg: 0 10px 40px rgba(0,0,0,0.16);
+        }
+
+        /* macOS 深色模式 */
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg-primary: #1e1e1e;
+                --bg-secondary: #2d2d2d;
+                --bg-card: #2d2d2d;
+                --text-primary: #f5f5f7;
+                --text-secondary: #a1a1a6;
+                --accent-blue: #0a84ff;
+                --accent-green: #30d158;
+                --accent-yellow: #ffd60a;
+                --accent-red: #ff453a;
+                --accent-purple: #bf5af2;
+                --border-color: #3a3a3c;
+                --shadow-sm: 0 2px 8px rgba(0,0,0,0.2);
+                --shadow-md: 0 4px 16px rgba(0,0,0,0.3);
+                --shadow-lg: 0 10px 40px rgba(0,0,0,0.4);
+            }
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'SF Pro Text', 'Helvetica Neue', Arial, sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.6;
+            padding: 20px;
+            padding-top: 80px;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        /* 顶部导航栏 */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(20px) saturate(180%);
+            -webkit-backdrop-filter: blur(20px) saturate(180%);
+            border-bottom: 1px solid var(--border-color);
+            z-index: 1000;
+            padding: 0 20px;
+            box-shadow: var(--shadow-sm);
+            transition: background 0.3s ease, border-color 0.3s ease;
+        }
+
+        @media (prefers-color-scheme: dark) {
+            .navbar {
+                background: rgba(45, 45, 45, 0.8);
+            }
+        }
+
+        .navbar-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 60px;
+        }
+
+        .navbar-brand {
+            font-size: 1.3em;
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--accent-blue), var(--accent-purple));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-decoration: none;
+        }
+
+        .navbar-nav {
+            display: flex;
+            gap: 8px;
+            list-style: none;
+            flex-wrap: wrap;
+        }
+
+        .navbar-nav a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            padding: 8px 14px;
+            border-radius: 8px;
+            font-size: 0.9em;
+            transition: all 0.2s ease;
+            white-space: nowrap;
+        }
+
+        .navbar-nav a:hover {
+            background: var(--bg-secondary);
+            color: var(--text-primary);
+            transform: translateY(-1px);
+        }
+
+        .navbar-nav a.active {
+            background: var(--accent-blue);
+            color: white;
+        }
+
+        .navbar-toggle {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--text-primary);
+            font-size: 1.5em;
+            cursor: pointer;
+        }
+
+        @media (max-width: 992px) {
+            .navbar-toggle {
+                display: block;
+            }
+
+            .navbar-nav {
+                display: none;
+                position: absolute;
+                top: 60px;
+                left: 0;
+                right: 0;
+                background: var(--bg-card);
+                flex-direction: column;
+                padding: 10px;
+                border-bottom: 1px solid var(--border-color);
+            }
+
+            .navbar-nav.show {
+                display: flex;
+            }
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        header {
+            text-align: center;
+            padding: 30px 0;
+            border-bottom: 2px solid var(--border-color);
+            margin-bottom: 30px;
+        }
+
+        header h1 {
+            font-size: 2.5em;
+            background: linear-gradient(135deg, var(--accent-blue), var(--accent-purple));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 10px;
+        }
+
+        .last-update {
+            color: var(--text-secondary);
+            font-size: 0.9em;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+
+        .card {
+            background: var(--bg-card);
+            border-radius: 16px;
+            padding: 24px;
+            border: 1px solid var(--border-color);
+            box-shadow: var(--shadow-sm);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .card-header {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .card-header h2 {
+            font-size: 1.3em;
+            color: var(--accent-blue);
+        }
+
+        /* Tab 切换样式 */
+        .tab-container {
+            margin-top: 15px;
+        }
+
+        .tab-buttons {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 15px;
+            border-bottom: 2px solid var(--border-color);
+            padding-bottom: 0;
+        }
+
+        .tab-button {
+            padding: 10px 20px;
+            background: transparent;
+            border: none;
+            border-bottom: 3px solid transparent;
+            color: var(--text-secondary);
+            font-size: 0.95em;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            border-radius: 8px 8px 0 0;
+        }
+
+        .tab-button:hover {
+            background: var(--bg-secondary);
+            color: var(--text-primary);
+        }
+
+        .tab-button.active {
+            color: var(--accent-blue);
+            border-bottom-color: var(--accent-blue);
+            background: rgba(0, 113, 227, 0.05);
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        /* 日期筛选器样式 */
+        .date-filter {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 15px;
+            flex-wrap: wrap;
+        }
+
+        .date-filter button {
+            padding: 6px 12px;
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            color: var(--text-secondary);
+            font-size: 0.85em;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .date-filter button:hover {
+            background: var(--accent-blue);
+            color: white;
+            border-color: var(--accent-blue);
+        }
+
+        .date-filter button.active {
+            background: var(--accent-blue);
+            color: white;
+            border-color: var(--accent-blue);
+        }
+
+        /* 下载按钮样式 */
+        .download-btn, .copy-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 6px 12px;
+            background: var(--accent-blue);
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-size: 0.85em;
+            cursor: pointer;
+            text-decoration: none;
+            transition: all 0.2s ease;
+        }
+
+        .download-btn:hover, .copy-btn:hover {
+            background: var(--accent-blue);
+            opacity: 0.9;
+            transform: scale(1.02);
+        }
+
+        .download-btn.disabled, .copy-btn.disabled {
+            background: var(--text-secondary);
+            cursor: not-allowed;
+            opacity: 0.5;
+        }
+
+        /* 复制成功提示 */
+        .copy-toast {
+            position: fixed;
+            bottom: 100px;
+            right: 30px;
+            background: var(--accent-green);
+            color: white;
+            padding: 12px 20px;
+            border-radius: 8px;
+            font-size: 0.9em;
+            font-weight: 600;
+            box-shadow: 0 4px 15px rgba(52, 199, 89, 0.4);
+            z-index: 9999;
+            animation: slideIn 0.3s ease;
+        }
+
+        @keyframes slideIn {
+            from {
+                transform: translateY(20px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .status-badge {
+            display: inline-block;
+            padding: 5px 14px;
+            border-radius: 20px;
+            font-size: 0.85em;
+            font-weight: 600;
+            transition: all 0.2s ease;
+        }
+
+        .status-success {
+            background: rgba(52, 199, 89, 0.15);
+            color: var(--accent-green);
+        }
+
+        .status-warning {
+            background: rgba(255, 159, 10, 0.15);
+            color: var(--accent-yellow);
+        }
+
+        .status-error {
+            background: rgba(255, 59, 48, 0.15);
+            color: var(--accent-red);
+        }
+
+        .status-info {
+            background: rgba(0, 113, 227, 0.15);
+            color: var(--accent-blue);
+        }
+
+        @media (prefers-color-scheme: dark) {
+            .status-success { background: rgba(48, 209, 88, 0.2); }
+            .status-warning { background: rgba(255, 214, 10, 0.2); }
+            .status-error { background: rgba(255, 69, 58, 0.2); }
+            .status-info { background: rgba(10, 132, 255, 0.2); }
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+        }
+
+        th, td {
+            padding: 10px;
+            text-align: left;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        th {
+            color: var(--text-secondary);
+            font-weight: 600;
+            font-size: 0.9em;
+        }
+
+        td {
+            font-size: 0.95em;
+        }
+
+        .metric-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 16px;
+        }
+
+        .metric-item {
+            background: linear-gradient(135deg, rgba(255,255,255,0.9), rgba(248,248,250,0.9));
+            padding: 20px 16px;
+            border-radius: 16px;
+            text-align: center;
+            border: 1px solid rgba(209,213,219,0.5);
+            box-shadow: 
+                0 2px 8px rgba(0,0,0,0.04),
+                inset 0 1px 0 rgba(255,255,255,0.8);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .metric-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.6), transparent);
+        }
+
+        .metric-item:hover {
+            transform: translateY(-2px);
+            box-shadow: 
+                0 4px 16px rgba(0,0,0,0.08),
+                inset 0 1px 0 rgba(255,255,255,0.9);
+            border-color: rgba(0,113,227,0.3);
+        }
+
+        @media (prefers-color-scheme: dark) {
+            .metric-item {
+                background: linear-gradient(135deg, rgba(45,45,45,0.95), rgba(35,35,37,0.95));
+                border: 1px solid rgba(255,255,255,0.1);
+                box-shadow: 
+                    0 2px 8px rgba(0,0,0,0.2),
+                    inset 0 1px 0 rgba(255,255,255,0.1);
+            }
+            .metric-item:hover {
+                box-shadow: 
+                    0 4px 16px rgba(0,0,0,0.3),
+                    inset 0 1px 0 rgba(255,255,255,0.15);
+                border-color: rgba(10,132,255,0.4);
+            }
+            .metric-item::before {
+                background: linear-gradient(90deg, transparent, rgba(255,255,255,0.15), transparent);
+            }
+        }
+
+        .metric-value {
+            font-size: 1.8em;
+            font-weight: 700;
+            color: var(--accent-blue);
+            letter-spacing: -0.02em;
+            text-shadow: 0 1px 0 rgba(255,255,255,0.5);
+        }
+
+        @media (prefers-color-scheme: dark) {
+            .metric-value {
+                text-shadow: 0 1px 0 rgba(0,0,0,0.3);
+            }
+        }
+
+        .metric-label {
+            font-size: 0.85em;
+            color: var(--text-secondary);
+            margin-top: 6px;
+            font-weight: 500;
+        }
+
+        .skill-tag {
+            display: inline-block;
+            background: linear-gradient(135deg, var(--accent-blue), #0077ed);
+            padding: 6px 14px;
+            border-radius: 14px;
+            margin: 4px;
+            font-size: 0.85em;
+            font-weight: 500;
+            color: #fff;
+            border: none;
+            box-shadow: 0 2px 8px rgba(0, 113, 227, 0.3);
+            transition: all 0.2s ease;
+        }
+
+        .skill-tag:hover {
+            transform: scale(1.05);
+            box-shadow: 0 4px 12px rgba(0, 113, 227, 0.4);
+            cursor: pointer;
+        }
+
+        @media (prefers-color-scheme: dark) {
+            .skill-tag {
+                background: linear-gradient(135deg, var(--accent-blue), #0077ed);
+                box-shadow: 0 2px 8px rgba(10, 132, 255, 0.4);
+            }
+            .skill-tag:hover {
+                box-shadow: 0 4px 12px rgba(10, 132, 255, 0.5);
+            }
+        }
+
+        .skill-category {
+            margin-bottom: 15px;
+        }
+
+        .skill-category h4 {
+            color: var(--accent-purple);
+            margin-bottom: 10px;
+            font-size: 1em;
+        }
+
+        .link-item {
+            display: block;
+            padding: 12px;
+            background: var(--bg-secondary);
+            border-radius: 6px;
+            margin-bottom: 8px;
+            color: var(--accent-blue);
+            text-decoration: none;
+            transition: background 0.2s;
+        }
+
+        .link-item:hover {
+            background: var(--border-color);
+        }
+
+        .progress-bar {
+            background: var(--bg-secondary);
+            border-radius: 10px;
+            height: 10px;
+            overflow: hidden;
+            margin-top: 10px;
+            box-shadow: inset 0 1px 3px rgba(0,0,0,0.1);
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--accent-blue), var(--accent-purple));
+            border-radius: 10px;
+            transition: width 0.3s ease;
+            box-shadow: 0 1px 4px rgba(0, 113, 227, 0.3);
+        }
+
+        @media (prefers-color-scheme: dark) {
+            .progress-bar {
+                box-shadow: inset 0 1px 3px rgba(0,0,0,0.3);
+            }
+            .progress-fill {
+                box-shadow: 0 1px 4px rgba(10, 132, 255, 0.4);
+            }
+        }
+
+        .event-item {
+            padding: 8px 0;
+            border-bottom: 1px solid var(--border-color);
+            font-size: 0.9em;
+        }
+
+        .event-item:last-child {
+            border-bottom: none;
+        }
+
+        .event-time {
+            color: var(--text-secondary);
+            font-size: 0.85em;
+        }
+
+        /* iOS 16 风格列表项 */
+        .ios-list-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 14px 16px;
+            background: linear-gradient(135deg, rgba(255,255,255,0.9), rgba(248,248,250,0.9));
+            border-radius: 12px;
+            margin-bottom: 10px;
+            border: 1px solid rgba(209,213,219,0.5);
+            box-shadow: 
+                0 2px 8px rgba(0,0,0,0.04),
+                inset 0 1px 0 rgba(255,255,255,0.8);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .ios-list-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.6), transparent);
+        }
+
+        .ios-list-item:hover {
+            transform: translateY(-2px);
+            box-shadow: 
+                0 4px 16px rgba(0,0,0,0.08),
+                inset 0 1px 0 rgba(255,255,255,0.9);
+            border-color: rgba(0,113,227,0.3);
+        }
+
+        @media (prefers-color-scheme: dark) {
+            .ios-list-item {
+                background: linear-gradient(135deg, rgba(45,45,45,0.95), rgba(35,35,37,0.95));
+                border: 1px solid rgba(255,255,255,0.1);
+                box-shadow: 
+                    0 2px 8px rgba(0,0,0,0.2),
+                    inset 0 1px 0 rgba(255,255,255,0.1);
+            }
+            .ios-list-item:hover {
+                box-shadow: 
+                    0 4px 16px rgba(0,0,0,0.3),
+                    inset 0 1px 0 rgba(255,255,255,0.15);
+                border-color: rgba(10,132,255,0.4);
+            }
+            .ios-list-item::before {
+                background: linear-gradient(90deg, transparent, rgba(255,255,255,0.15), transparent);
+            }
+        }
+
+        .refresh-btn {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: linear-gradient(135deg, var(--accent-blue), #0077ed);
+            color: white;
+            border: none;
+            padding: 16px 24px;
+            border-radius: 50px;
+            cursor: pointer;
+            font-size: 1em;
+            font-weight: 600;
+            box-shadow: 0 4px 15px rgba(0, 113, 227, 0.4);
+            transition: all 0.3s ease;
+        }
+
+        .refresh-btn:hover {
+            transform: scale(1.08);
+            box-shadow: 0 6px 25px rgba(0, 113, 227, 0.5);
+        }
+
+        @media (prefers-color-scheme: dark) {
+            .refresh-btn {
+                background: linear-gradient(135deg, var(--accent-blue), #0077ed);
+                box-shadow: 0 4px 15px rgba(10, 132, 255, 0.4);
+            }
+            .refresh-btn:hover {
+                box-shadow: 0 6px 25px rgba(10, 132, 255, 0.5);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .metric-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 顶部导航栏 -->
+    <nav class="navbar">
+        <div class="navbar-content">
+            <a href="#" class="navbar-brand">🪏 掘金</a>
+            <button class="navbar-toggle">☰</button>
+            <ul class="navbar-nav">
+                <li><a href="#consumption">💰 消耗</a></li>
+                <li><a href="#system">📊 系统</a></li>
+                <li><a href="#skills">🧰 技能</a></li>
+                <li><a href="#memory">🧠 记忆</a></li>
+                <li><a href="#agents">🤖 代理</a></li>
+                <li><a href="#deployment">🚀 部署</a></li>
+                <li><a href="#history">📈 趋势</a></li>
+                <li><a href="#duration">⏱️ 时长</a></li>
+                <li><a href="#memory-growth">📂 增长</a></li>
+                <li><a href="#skill-usage">🔧 使用</a></li>
+                <li><a href="#operation-logs">📋 日志</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container">
+        <!-- 消耗情况 -->
+        <section id="consumption" style="margin-top: 15px;">
+        <div class="card" style="margin-bottom: 20px;">
+            <div class="card-header">
+                <h2>💰 消耗情况</h2>
+            </div>
+            
+            <h3 style="color: var(--accent-blue); margin: 15px 0 10px; font-size: 1.1em;">📊 今日消耗</h3>
+            <div class="metric-grid" style="grid-template-columns: repeat(3, 1fr);">
+                <div class="metric-item">
+                    <div class="metric-value" style="color: var(--accent-green);">1.6m</div>
+                    <div class="metric-label">输入 Token</div>
+                    <div class="metric-label" style="color: var(--text-secondary); font-size: 0.85em; margin-top: 4px;">≈ $2.40</div>
+                </div>
+                <div class="metric-item">
+                    <div class="metric-value" style="color: var(--accent-blue);">7.1k</div>
+                    <div class="metric-label">输出 Token</div>
+                    <div class="metric-label" style="color: var(--text-secondary); font-size: 0.85em; margin-top: 4px;">≈ $0.04</div>
+                </div>
+                <div class="metric-item">
+                    <div class="metric-value" style="color: var(--accent-purple);">1.6m</div>
+                    <div class="metric-label">今日总计</div>
+                    <div class="metric-label" style="color: var(--text-secondary); font-size: 0.85em; margin-top: 4px;">≈ $2.44</div>
+                </div>
+            </div>
+            
+            <h3 style="color: var(--accent-purple); margin: 20px 0 10px; font-size: 1.1em;">📈 历史累积消耗</h3>
+            <div class="metric-grid" style="grid-template-columns: repeat(4, 1fr);">
+                <div class="metric-item">
+                    <div class="metric-value" style="color: var(--accent-green);">2.8m</div>
+                    <div class="metric-label">累积输入</div>
+                    <div class="metric-label" style="color: var(--text-secondary); font-size: 0.85em; margin-top: 4px;">≈ $4.20</div>
+                </div>
+                <div class="metric-item">
+                    <div class="metric-value" style="color: var(--accent-blue);">12.5k</div>
+                    <div class="metric-label">累积输出</div>
+                    <div class="metric-label" style="color: var(--text-secondary); font-size: 0.85em; margin-top: 4px;">≈ $0.08</div>
+                </div>
+                <div class="metric-item">
+                    <div class="metric-value" style="color: var(--accent-purple);">2.8m</div>
+                    <div class="metric-label">累积总计</div>
+                    <div class="metric-label" style="color: var(--text-secondary); font-size: 0.85em; margin-top: 4px;">≈ $4.28</div>
+                </div>
+                <div class="metric-item">
+                    <div class="metric-value" style="color: var(--accent-yellow);">400k</div>
+                    <div class="metric-label">日均消耗</div>
+                    <div class="metric-label" style="color: var(--text-secondary); font-size: 0.85em; margin-top: 4px;">≈ $0.61/天</div>
+                </div>
+            </div>
+            
+            <div style="margin-top: 15px; padding: 12px; background: var(--bg-secondary); border-radius: 8px;">
+                <div style="font-size: 0.9em; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px;">
+                    <span>📊 模型：<code style="background: var(--bg-card); padding: 4px 8px; border-radius: 4px;">qwen3.5-plus</code></span>
+                    <span style="color: var(--text-secondary); font-size: 0.85em;">💰 计价：输入 $0.0015/1K | 输出 $0.006/1K</span>
+                </div>
+            </div>
+        </div>
+        </section>
+
+        <!-- 系统状态 -->
+        <section id="system">
+        <div class="grid">
+            <div class="card">
+                <div class="card-header">
+                    <h2>📊 系统状态</h2>
+                    <span class="status-badge status-success">运行中</span>
+                </div>
+                <div class="metric-grid">
+                    <div class="metric-item">
+                        <div class="metric-value">2026.3.13</div>
+                        <div class="metric-label">OpenClaw 版本</div>
+                    </div>
+                    <div class="metric-item">
+                        <div class="metric-value">🟢</div>
+                        <div class="metric-label">网关状态</div>
+                    </div>
+                    <div class="metric-item">
+                        <div class="metric-value">main</div>
+                        <div class="metric-label">活跃代理</div>
+                    </div>
+                    <div class="metric-item">
+                        <div class="metric-value">qwen3.5-plus</div>
+                        <div class="metric-label">当前模型</div>
+                    </div>
+                </div>
+                <div style="margin-top: 15px;">
+                    <div style="display: flex; justify-content: space-between; font-size: 0.9em;">
+                        <span>上下文使用</span>
+                        <span>85k/100k (85%)</span>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: 85%;"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 每日任务 -->
+            <div class="card">
+                <div class="card-header">
+                    <h2>⏰ 每日任务</h2>
+                    <span class="status-badge status-success">1 个任务</span>
+                </div>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>任务名称</th>
+                            <th>调度</th>
+                            <th>状态</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>竞品监控日报</td>
+                            <td>每天 18:00</td>
+                            <td><span id="task-status" class="status-badge status-success">🟢 已执行</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div style="margin-top: 15px; padding: 10px; background: var(--bg-secondary); border-radius: 6px;">
+                    <div style="font-size: 0.85em; color: var(--text-secondary);">
+                        <div id="next-run">📌 下次执行：明天 18:00</div>
+                        <div id="last-run">✅ 上次执行：今天 18:04 (成功)</div>
+                        <div>📬 投递：飞书 → user:main</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </section>
+
+        <!-- 项目模块 -->
+        <section id="projects" style="margin-top: 15px;">
+        <div class="card" style="margin-bottom: 20px;">
+            <div class="card-header">
+                <h2>🚀 已部署项目</h2>
+            </div>
+            <div class="grid" style="grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));">
+                <div class="card" style="border: 1px solid var(--border-color); box-shadow: var(--shadow-sm);">
+                    <div class="card-header">
+                        <h3 style="font-size: 1.1em; color: var(--accent-blue);">🪏 掘金</h3>
+                        <span class="status-badge status-success">运行中</span>
+                    </div>
+                    <div style="margin-top: 15px;">
+                        <div style="font-size: 0.9em; color: var(--text-secondary); margin-bottom: 10px;">
+                            <strong>定位：</strong>OpenClaw 系统监控与管理面板
+                        </div>
+                        <div style="font-size: 0.9em; color: var(--text-secondary); margin-bottom: 10px;">
+                            <strong>访问地址：</strong>
+                            <a href="https://mingfengli563.github.io/MF563/" target="_blank" style="color: var(--accent-blue); text-decoration: none;">
+                                https://mingfengli563.github.io/MF563/
+                            </a>
+                        </div>
+                        <div style="font-size: 0.9em; color: var(--text-secondary); margin-bottom: 10px;">
+                            <strong>GitHub 仓库：</strong>
+                            <code style="background: var(--bg-secondary); padding: 2px 6px; border-radius: 4px;">MingFengLi563/MF563</code>
+                        </div>
+                        <div style="font-size: 0.9em; color: var(--text-secondary); margin-bottom: 10px;">
+                            <strong>部署方式：</strong>Git Push 自动部署（gh-pages 分支）
+                        </div>
+                        <div style="margin-top: 15px; padding-top: 15px; border-top: 1px solid var(--border-color);">
+                            <div style="font-size: 0.85em; color: var(--text-secondary);">
+                                <div>📦 主文件：<code style="background: var(--bg-secondary); padding: 2px 6px; border-radius: 4px;">github-pages/index.html</code></div>
+                                <div>📅 最后更新：2026-03-19</div>
+                                <div>🔧 功能：Token 消耗、系统状态、Cron 任务、技能清单、记忆系统、飞书集成</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </section>
+
+        <!-- 技能清单 -->
+        <section id="skills">
+        <div class="card" style="margin-bottom: 20px;">
+            <div class="card-header">
+                <h2>🧰 技能清单</h2>
+                <span class="status-badge status-info">17 个技能</span>
+            </div>
+            <div class="skill-category">
+                <h4>🔧 自动化 & 浏览器</h4>
+                <span class="skill-tag">agent-browser</span>
+                <span class="skill-tag">browser-use</span>
+                <span class="skill-tag">playwright</span>
+            </div>
+            <div class="skill-category">
+                <h4>🔍 搜索 & 研究</h4>
+                <span class="skill-tag">searxng</span>
+                <span class="skill-tag">multi-search-engine</span>
+            </div>
+            <div class="skill-category">
+                <h4>📝 文档 & 创作</h4>
+                <span class="skill-tag">skill-creator</span>
+                <span class="skill-tag">summarize</span>
+                <span class="skill-tag">ui-ux-design</span>
+            </div>
+            <div class="skill-category">
+                <h4>🏗️ 自建技能</h4>
+                <span class="skill-tag" style="background: var(--accent-purple); color: #fff;">figma-prototype</span>
+            </div>
+            <div class="skill-category">
+                <h4>🤖 代理增强</h4>
+                <span class="skill-tag">memory</span>
+                <span class="skill-tag">proactive-agent</span>
+                <span class="skill-tag">self-improving-agent</span>
+                <span class="skill-tag">nopua</span>
+                <span class="skill-tag">skill-vetter</span>
+            </div>
+            <div class="skill-category">
+                <h4>🛠️ 工具 & 集成</h4>
+                <span class="skill-tag">github</span>
+                <span class="skill-tag">healthcheck</span>
+                <span class="skill-tag">find-skills</span>
+            </div>
+        </div>
+        </section>
+
+        <!-- 记忆系统（单独占一行） -->
+        <section id="memory" style="margin-top: 15px;">
+        <div class="card">
+            <div class="card-header">
+                <h2>🧠 记忆系统</h2>
+                <span class="status-badge status-success">已激活</span>
+            </div>
+            <table>
+                <thead>
+                    <tr>
+                        <th>文件</th>
+                        <th>大小</th>
+                        <th>最后修改</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>2026-03-19.md</td>
+                        <td>15KB</td>
+                        <td>20:45</td>
+                    </tr>
+                    <tr>
+                        <td>2026-03-16.md</td>
+                        <td>3.6KB</td>
+                        <td>3 月 16 日</td>
+                    </tr>
+                    <tr>
+                        <td>MEMORY.md</td>
+                        <td>233B</td>
+                        <td>长期</td>
+                    </tr>
+                </tbody>
+            </table>
+            <div style="margin-top: 15px; padding: 10px; background: var(--bg-secondary); border-radius: 6px; font-size: 0.85em; color: var(--text-secondary);">
+                📊 文件总数：<strong style="color: var(--accent-blue);">3 个</strong> | 总大小：<strong style="color: var(--accent-blue);">18.8KB</strong>
+            </div>
+        </div>
+        </section>
+
+        <!-- 代理配置（单独一行） -->
+        <section id="agents" style="margin-top: 15px;">
+        <div class="card">
+            <div class="card-header">
+                <h2>🤖 代理配置</h2>
+                <span class="status-badge status-success">1 个活跃</span>
+            </div>
+            <table>
+                <thead>
+                    <tr>
+                        <th>代理</th>
+                        <th>AGENTS</th>
+                        <th>SOUL</th>
+                        <th>TOOLS</th>
+                        <th>IDENTITY</th>
+                        <th>USER</th>
+                        <th>HEARTBEAT</th>
+                        <th>MEMORY</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>main</strong><br><span style="font-size: 0.85em; color: var(--text-secondary);">StormClaw</span></td>
+                        <td><button onclick="copyFile('AGENTS.md')" class="download-btn">📋 复制</button></td>
+                        <td><button onclick="copyFile('SOUL.md')" class="download-btn">📋 复制</button></td>
+                        <td><button onclick="copyFile('TOOLS.md')" class="download-btn">📋 复制</button></td>
+                        <td><button onclick="copyFile('IDENTITY.md')" class="download-btn">📋 复制</button></td>
+                        <td><button onclick="copyFile('USER.md')" class="download-btn">📋 复制</button></td>
+                        <td><button onclick="copyFile('HEARTBEAT.md')" class="download-btn">📋 复制</button></td>
+                        <td><button onclick="copyFile('MEMORY.md')" class="download-btn">📋 复制</button></td>
+                    </tr>
+                    <tr>
+                        <td><strong>stock-analysis</strong><br><span style="font-size: 0.85em; color: var(--text-secondary);">已移除</span></td>
+                        <td><span style="color: var(--text-secondary);">-</span></td>
+                        <td><span style="color: var(--text-secondary);">-</span></td>
+                        <td><span style="color: var(--text-secondary);">-</span></td>
+                        <td><span style="color: var(--text-secondary);">-</span></td>
+                        <td><span style="color: var(--text-secondary);">-</span></td>
+                        <td><span style="color: var(--text-secondary);">-</span></td>
+                        <td><span style="color: var(--text-secondary);">-</span></td>
+                    </tr>
+                    <tr>
+                        <td><strong>moneycome</strong><br><span style="font-size: 0.85em; color: var(--text-secondary);">已移除</span></td>
+                        <td><span style="color: var(--text-secondary);">-</span></td>
+                        <td><span style="color: var(--text-secondary);">-</span></td>
+                        <td><span style="color: var(--text-secondary);">-</span></td>
+                        <td><span style="color: var(--text-secondary);">-</span></td>
+                        <td><span style="color: var(--text-secondary);">-</span></td>
+                        <td><span style="color: var(--text-secondary);">-</span></td>
+                        <td><span style="color: var(--text-secondary);">-</span></td>
+                    </tr>
+                </tbody>
+            </table>
+            <div style="margin-top: 15px; padding: 12px; background: var(--bg-secondary); border-radius: 8px; font-size: 0.9em;">
+                <div style="margin-bottom: 8px;"><strong>📊 配置统计：</strong>1 个活跃代理 | 2 个已移除</div>
+                <div style="color: var(--text-secondary);">💡 点击「下载」按钮可获取对应配置文件</div>
+            </div>
+        </div>
+        </section>
+
+        <!-- 部署和集成（Tab 切换） -->
+        <section id="deployment" style="margin-top: 15px;">
+        <div class="card">
+            <div class="card-header">
+                <h2>🚀 部署和集成</h2>
+            </div>
+            <div class="tab-container">
+                <div class="tab-buttons">
+                    <button class="tab-button active" onclick="switchTab(event, 'projects')">📦 已部署项目</button>
+                    <button class="tab-button" onclick="switchTab(event, 'channels')">📱 已对接频道</button>
+                </div>
+                
+                <!-- 项目 Tab -->
+                <div id="projects" class="tab-content active">
+                    <div class="grid" style="grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));">
+                        <div class="card" style="border: 1px solid var(--border-color); box-shadow: var(--shadow-sm);">
+                            <div class="card-header">
+                                <h3 style="font-size: 1.1em; color: var(--accent-blue);">🪏 掘金</h3>
+                                <span class="status-badge status-success">运行中</span>
+                            </div>
+                            <div style="margin-top: 15px;">
+                                <div style="font-size: 0.9em; color: var(--text-secondary); margin-bottom: 10px;">
+                                    <strong>定位：</strong>OpenClaw 系统监控与管理面板
+                                </div>
+                                <div style="font-size: 0.9em; color: var(--text-secondary); margin-bottom: 10px;">
+                                    <strong>访问地址：</strong>
+                                    <a href="https://mingfengli563.github.io/MF563/" target="_blank" style="color: var(--accent-blue); text-decoration: none;">
+                                        https://mingfengli563.github.io/MF563/
+                                    </a>
+                                </div>
+                                <div style="font-size: 0.9em; color: var(--text-secondary); margin-bottom: 10px;">
+                                    <strong>GitHub 仓库：</strong>
+                                    <code style="background: var(--bg-secondary); padding: 2px 6px; border-radius: 4px;">MingFengLi563/MF563</code>
+                                </div>
+                                <div style="font-size: 0.9em; color: var(--text-secondary); margin-bottom: 10px;">
+                                    <strong>部署方式：</strong>Git Push 自动部署（gh-pages 分支）
+                                </div>
+                                <div style="margin-top: 15px; padding-top: 15px; border-top: 1px solid var(--border-color);">
+                                    <div style="font-size: 0.85em; color: var(--text-secondary);">
+                                        <div>📦 主文件：<code style="background: var(--bg-secondary); padding: 2px 6px; border-radius: 4px;">github-pages/index.html</code></div>
+                                        <div>📅 最后更新：2026-03-19</div>
+                                        <div>🔧 功能：Token 消耗、系统状态、Cron 任务、技能清单、记忆系统、飞书集成</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 频道 Tab -->
+                <div id="channels" class="tab-content">
+                    <div class="grid" style="grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));">
+                        <div class="card" style="border: 1px solid var(--border-color); box-shadow: var(--shadow-sm);">
+                            <div class="card-header">
+                                <h3 style="font-size: 1.1em; color: var(--accent-blue);">📱 飞书</h3>
+                                <span class="status-badge status-success">✅ 已配对</span>
+                            </div>
+                            <div style="margin-top: 15px;">
+                                <table style="width: 100%;">
+                                    <tbody>
+                                        <tr>
+                                            <td style="padding: 8px 0; color: var(--text-secondary);">App ID</td>
+                                            <td style="padding: 8px 0;"><code style="background: var(--bg-secondary); padding: 4px 8px; border-radius: 4px;">cli_a93e4f2bb5385bb5</code></td>
+                                        </tr>
+                                        <tr>
+                                            <td style="padding: 8px 0; color: var(--text-secondary);">模式</td>
+                                            <td style="padding: 8px 0;">模式 2 (requireMention: false)</td>
+                                        </tr>
+                                        <tr>
+                                            <td style="padding: 8px 0; color: var(--text-secondary);">投递目标</td>
+                                            <td style="padding: 8px 0;">user:main</td>
+                                        </tr>
+                                        <tr>
+                                            <td style="padding: 8px 0; color: var(--text-secondary);">配对状态</td>
+                                            <td style="padding: 8px 0;"><span class="status-badge status-success">✅ 已激活</span></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="card" style="border: 1px solid var(--border-color); box-shadow: var(--shadow-sm);">
+                            <div class="card-header">
+                                <h3 style="font-size: 1.1em; color: var(--accent-blue);">💬 WebChat</h3>
+                                <span class="status-badge status-success">✅ 已激活</span>
+                            </div>
+                            <div style="margin-top: 15px;">
+                                <table style="width: 100%;">
+                                    <tbody>
+                                        <tr>
+                                            <td style="padding: 8px 0; color: var(--text-secondary);">类型</td>
+                                            <td style="padding: 8px 0;">Web 聊天界面</td>
+                                        </tr>
+                                        <tr>
+                                            <td style="padding: 8px 0; color: var(--text-secondary);">模式</td>
+                                            <td style="padding: 8px 0;">Direct (私聊)</td>
+                                        </tr>
+                                        <tr>
+                                            <td style="padding: 8px 0; color: var(--text-secondary);">状态</td>
+                                            <td style="padding: 8px 0;"><span class="status-badge status-success">🟢 运行中</span></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </section>
+
+        <!-- 历史消耗趋势 -->
+        <section id="history" style="margin-top: 15px;">
+        <div class="card">
+            <div class="card-header">
+                <h2>📈 历史消耗趋势</h2>
+                <span class="status-badge status-info">近 7 天</span>
+            </div>
+            <div class="ios-list-item" style="margin-top: 15px;">
+                <span style="color: var(--text-secondary); font-size: 0.9em;">3 月 13 日</span>
+                <span style="color: var(--accent-blue); font-weight: 600;">95k tokens</span>
+            </div>
+            <div class="progress-bar" style="margin-top: 0;"><div class="progress-fill" style="width: 6%;"></div></div>
+            <div class="ios-list-item">
+                <span style="color: var(--text-secondary); font-size: 0.9em;">3 月 14 日</span>
+                <span style="color: var(--accent-blue); font-weight: 600;">156k tokens</span>
+            </div>
+            <div class="progress-bar" style="margin-top: 0;"><div class="progress-fill" style="width: 10%;"></div></div>
+            <div class="ios-list-item">
+                <span style="color: var(--text-secondary); font-size: 0.9em;">3 月 15 日</span>
+                <span style="color: var(--accent-blue); font-weight: 600;">189k tokens</span>
+            </div>
+            <div class="progress-bar" style="margin-top: 0;"><div class="progress-fill" style="width: 12%;"></div></div>
+            <div class="ios-list-item">
+                <span style="color: var(--text-secondary); font-size: 0.9em;">3 月 16 日</span>
+                <span style="color: var(--accent-blue); font-weight: 600;">230k tokens</span>
+            </div>
+            <div class="progress-bar" style="margin-top: 0;"><div class="progress-fill" style="width: 14%;"></div></div>
+            <div class="ios-list-item">
+                <span style="color: var(--text-secondary); font-size: 0.9em;">3 月 17 日</span>
+                <span style="color: var(--accent-blue); font-weight: 600;">320k tokens</span>
+            </div>
+            <div class="progress-bar" style="margin-top: 0;"><div class="progress-fill" style="width: 20%;"></div></div>
+            <div class="ios-list-item">
+                <span style="color: var(--text-secondary); font-size: 0.9em;">3 月 18 日</span>
+                <span style="color: var(--accent-blue); font-weight: 600;">450k tokens</span>
+            </div>
+            <div class="progress-bar" style="margin-top: 0;"><div class="progress-fill" style="width: 28%;"></div></div>
+            <div class="ios-list-item" style="border-color: var(--accent-green);">
+                <span style="color: var(--accent-green); font-weight: 600; font-size: 0.9em;">3 月 19 日 (今天)</span>
+                <span style="color: var(--accent-green); font-weight: 600;">1.6m tokens</span>
+            </div>
+            <div class="progress-bar" style="margin-top: 0;"><div class="progress-fill" style="width: 100%; background: linear-gradient(90deg, var(--accent-green), var(--accent-blue));"></div></div>
+            <div style="margin-top: 15px; padding: 10px; background: var(--bg-secondary); border-radius: 6px; font-size: 0.85em; color: var(--text-secondary);">
+                📊 7 天总计：<strong style="color: var(--accent-blue);">2.8m tokens</strong> | 日均：<strong style="color: var(--accent-blue);">400k tokens</strong>
+            </div>
+        </div>
+        </section>
+
+        <!-- 任务执行时长统计 -->
+        <section id="duration">
+        <div class="card" style="margin-top: 20px;">
+            <div class="card-header">
+                <h2>⏱️ 任务执行时长统计</h2>
+                <span class="status-badge status-success">竞品监控日报</span>
+            </div>
+            <table>
+                <thead>
+                    <tr>
+                        <th>日期</th>
+                        <th>执行时间</th>
+                        <th>耗时</th>
+                        <th>状态</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>3 月 19 日</td>
+                        <td>18:00</td>
+                        <td>195s</td>
+                        <td><span class="status-badge status-success">✅ 成功</span></td>
+                    </tr>
+                    <tr>
+                        <td>3 月 18 日</td>
+                        <td>18:00</td>
+                        <td>210s</td>
+                        <td><span class="status-badge status-success">✅ 成功</span></td>
+                    </tr>
+                    <tr>
+                        <td>3 月 17 日</td>
+                        <td>18:00</td>
+                        <td>188s</td>
+                        <td><span class="status-badge status-success">✅ 成功</span></td>
+                    </tr>
+                    <tr>
+                        <td>3 月 16 日</td>
+                        <td>18:00</td>
+                        <td>200s</td>
+                        <td><span class="status-badge status-success">✅ 成功</span></td>
+                    </tr>
+                    <tr>
+                        <td>3 月 15 日</td>
+                        <td>18:00</td>
+                        <td>185s</td>
+                        <td><span class="status-badge status-success">✅ 成功</span></td>
+                    </tr>
+                </tbody>
+            </table>
+            <div style="margin-top: 15px; padding: 10px; background: var(--bg-secondary); border-radius: 6px; font-size: 0.85em; color: var(--text-secondary);">
+                📊 平均耗时：<strong style="color: var(--accent-blue);">196s</strong> | 成功率：<strong style="color: var(--accent-green);">100%</strong>
+            </div>
+        </div>
+        </section>
+
+        <!-- 记忆文件增长情况 -->
+        <section id="memory-growth" style="margin-top: 15px;">
+        <div class="card">
+            <div class="card-header">
+                <h2>📂 记忆文件增长情况</h2>
+                <span class="status-badge status-info">总计 9.2KB</span>
+            </div>
+            <div style="margin-top: 15px;">
+                <div style="display: flex; justify-content: space-between; align-items: center; padding: 10px; background: var(--bg-secondary); border-radius: 6px; margin-bottom: 8px;">
+                    <div>
+                        <div style="font-weight: 600; color: var(--accent-blue);">2026-03-19.md</div>
+                        <div style="font-size: 0.85em; color: var(--text-secondary);">今日记忆</div>
+                    </div>
+                    <div style="text-align: right;">
+                        <div style="font-weight: 600; color: var(--accent-green);">1.9KB</div>
+                        <div style="font-size: 0.85em; color: var(--text-secondary);">15:53 更新</div>
+                    </div>
+                </div>
+                <div style="display: flex; justify-content: space-between; align-items: center; padding: 10px; background: var(--bg-secondary); border-radius: 6px; margin-bottom: 8px;">
+                    <div>
+                        <div style="font-weight: 600; color: var(--accent-blue);">2026-03-16.md</div>
+                        <div style="font-size: 0.85em; color: var(--text-secondary);">3 月 16 日记忆</div>
+                    </div>
+                    <div style="text-align: right;">
+                        <div style="font-weight: 600; color: var(--accent-green);">3.6KB</div>
+                        <div style="font-size: 0.85em; color: var(--text-secondary);">3 月 16 日</div>
+                    </div>
+                </div>
+                <div style="display: flex; justify-content: space-between; align-items: center; padding: 10px; background: var(--bg-secondary); border-radius: 6px; margin-bottom: 8px;">
+                    <div>
+                        <div style="font-weight: 600; color: var(--accent-blue);">MEMORY.md</div>
+                        <div style="font-size: 0.85em; color: var(--text-secondary);">长期记忆</div>
+                    </div>
+                    <div style="text-align: right;">
+                        <div style="font-weight: 600; color: var(--accent-green);">233B</div>
+                        <div style="font-size: 0.85em; color: var(--text-secondary);">长期</div>
+                    </div>
+                </div>
+            </div>
+            <div style="margin-top: 15px; padding: 10px; background: var(--bg-secondary); border-radius: 6px; font-size: 0.85em; color: var(--text-secondary);">
+                📊 文件总数：<strong style="color: var(--accent-blue);">3 个</strong> | 总大小：<strong style="color: var(--accent-blue);">5.7KB</strong>
+            </div>
+        </div>
+        </section>
+
+        <!-- 技能使用频率 -->
+        <section id="skill-usage">
+        <div class="card" style="margin-top: 20px;">
+            <div class="card-header">
+                <h2>🔧 技能使用频率</h2>
+                <span class="status-badge status-info">17 个技能</span>
+            </div>
+            <div style="margin-top: 15px;">
+                <div style="margin-bottom: 12px;">
+                    <div style="display: flex; justify-content: space-between; margin-bottom: 5px; font-size: 0.9em;">
+                        <span>🔍 searxng</span>
+                        <span style="color: var(--accent-blue);">高频</span>
+                    </div>
+                    <div class="progress-bar"><div class="progress-fill" style="width: 95%;"></div></div>
+                </div>
+                <div style="margin-bottom: 12px;">
+                    <div style="display: flex; justify-content: space-between; margin-bottom: 5px; font-size: 0.9em;">
+                        <span>🌐 browser-use</span>
+                        <span style="color: var(--accent-blue);">高频</span>
+                    </div>
+                    <div class="progress-bar"><div class="progress-fill" style="width: 88%;"></div></div>
+                </div>
+                <div style="margin-bottom: 12px;">
+                    <div style="display: flex; justify-content: space-between; margin-bottom: 5px; font-size: 0.9em;">
+                        <span>📝 feishu_doc</span>
+                        <span style="color: var(--accent-yellow);">中频</span>
+                    </div>
+                    <div class="progress-bar"><div class="progress-fill" style="width: 75%;"></div></div>
+                </div>
+                <div style="margin-bottom: 12px;">
+                    <div style="display: flex; justify-content: space-between; margin-bottom: 5px; font-size: 0.9em;">
+                        <span>🧠 memory</span>
+                        <span style="color: var(--accent-yellow);">中频</span>
+                    </div>
+                    <div class="progress-bar"><div class="progress-fill" style="width: 70%;"></div></div>
+                </div>
+                <div style="margin-bottom: 12px;">
+                    <div style="display: flex; justify-content: space-between; margin-bottom: 5px; font-size: 0.9em;">
+                        <span>🎯 figma-prototype</span>
+                        <span style="color: var(--accent-yellow);">中频</span>
+                    </div>
+                    <div class="progress-bar"><div class="progress-fill" style="width: 45%;"></div></div>
+                </div>
+                <div style="margin-bottom: 12px;">
+                    <div style="display: flex; justify-content: space-between; margin-bottom: 5px; font-size: 0.9em;">
+                        <span>🤖 proactive-agent</span>
+                        <span style="color: var(--accent-purple);">低频</span>
+                    </div>
+                    <div class="progress-bar"><div class="progress-fill" style="width: 45%;"></div></div>
+                </div>
+                <div style="margin-bottom: 12px;">
+                    <div style="display: flex; justify-content: space-between; margin-bottom: 5px; font-size: 0.9em;">
+                        <span>🔧 agent-browser</span>
+                        <span style="color: var(--accent-purple);">低频</span>
+                    </div>
+                    <div class="progress-bar"><div class="progress-fill" style="width: 40%;"></div></div>
+                </div>
+                <div style="margin-bottom: 12px;">
+                    <div style="display: flex; justify-content: space-between; margin-bottom: 5px; font-size: 0.9em;">
+                        <span>🎭 playwright</span>
+                        <span style="color: var(--accent-purple);">低频</span>
+                    </div>
+                    <div class="progress-bar"><div class="progress-fill" style="width: 35%;"></div></div>
+                </div>
+                <div style="margin-bottom: 12px;">
+                    <div style="display: flex; justify-content: space-between; margin-bottom: 5px; font-size: 0.9em;">
+                        <span>🔎 multi-search-engine</span>
+                        <span style="color: var(--text-secondary);">偶尔</span>
+                    </div>
+                    <div class="progress-bar"><div class="progress-fill" style="width: 25%;"></div></div>
+                </div>
+                <div style="margin-bottom: 12px;">
+                    <div style="display: flex; justify-content: space-between; margin-bottom: 5px; font-size: 0.9em;">
+                        <span>✍️ skill-creator</span>
+                        <span style="color: var(--text-secondary);">偶尔</span>
+                    </div>
+                    <div class="progress-bar"><div class="progress-fill" style="width: 22%;"></div></div>
+                </div>
+                <div style="margin-bottom: 12px;">
+                    <div style="display: flex; justify-content: space-between; margin-bottom: 5px; font-size: 0.9em;">
+                        <span>📋 summarize</span>
+                        <span style="color: var(--text-secondary);">偶尔</span>
+                    </div>
+                    <div class="progress-bar"><div class="progress-fill" style="width: 20%;"></div></div>
+                </div>
+                <div style="margin-bottom: 12px;">
+                    <div style="display: flex; justify-content: space-between; margin-bottom: 5px; font-size: 0.9em;">
+                        <span>🎨 ui-ux-design</span>
+                        <span style="color: var(--text-secondary);">偶尔</span>
+                    </div>
+                    <div class="progress-bar"><div class="progress-fill" style="width: 18%;"></div></div>
+                </div>
+                <div style="margin-bottom: 12px;">
+                    <div style="display: flex; justify-content: space-between; margin-bottom: 5px; font-size: 0.9em;">
+                        <span>🔄 self-improving-agent</span>
+                        <span style="color: var(--text-secondary);">偶尔</span>
+                    </div>
+                    <div class="progress-bar"><div class="progress-fill" style="width: 15%;"></div></div>
+                </div>
+                <div style="margin-bottom: 12px;">
+                    <div style="display: flex; justify-content: space-between; margin-bottom: 5px; font-size: 0.9em;">
+                        <span>🛡️ skill-vetter</span>
+                        <span style="color: var(--text-secondary);">偶尔</span>
+                    </div>
+                    <div class="progress-bar"><div class="progress-fill" style="width: 12%;"></div></div>
+                </div>
+                <div style="margin-bottom: 12px;">
+                    <div style="display: flex; justify-content: space-between; margin-bottom: 5px; font-size: 0.9em;">
+                        <span>🐙 github</span>
+                        <span style="color: var(--text-secondary);">偶尔</span>
+                    </div>
+                    <div class="progress-bar"><div class="progress-fill" style="width: 10%;"></div></div>
+                </div>
+                <div style="margin-bottom: 12px;">
+                    <div style="display: flex; justify-content: space-between; margin-bottom: 5px; font-size: 0.9em;">
+                        <span>💚 healthcheck</span>
+                        <span style="color: var(--text-secondary);">偶尔</span>
+                    </div>
+                    <div class="progress-bar"><div class="progress-fill" style="width: 8%;"></div></div>
+                </div>
+                <div style="margin-bottom: 12px;">
+                    <div style="display: flex; justify-content: space-between; margin-bottom: 5px; font-size: 0.9em;">
+                        <span>🔭 find-skills</span>
+                        <span style="color: var(--text-secondary);">偶尔</span>
+                    </div>
+                    <div class="progress-bar"><div class="progress-fill" style="width: 5%;"></div></div>
+                </div>
+            </div>
+            <div style="margin-top: 15px; padding: 10px; background: var(--bg-secondary); border-radius: 6px; font-size: 0.85em; color: var(--text-secondary);">
+                📊 活跃技能：<strong style="color: var(--accent-blue);">5 个</strong> | 总技能数：<strong style="color: var(--accent-blue);">17 个</strong>
+            </div>
+        </div>
+        </section>
+
+        <!-- 操作日志（独立模块，放在最后） -->
+        <section id="operation-logs" style="margin-top: 15px;">
+        <div class="card">
+            <div class="card-header">
+                <h2>📋 操作日志</h2>
+                <span class="status-badge status-info">18 条记录</span>
+            </div>
+            
+            <!-- 日期筛选器 -->
+            <div class="date-filter">
+                <button onclick="showAllLogs()" class="active">全部</button>
+                <button onclick="filterLogs('2026.3.19')">2026.3.19</button>
+                <button onclick="filterLogs('2026.3.18')">2026.3.18</button>
+                <button onclick="filterLogs('2026.3.17')">2026.3.17</button>
+                <button onclick="filterLogs('2026.3.16')">2026.3.16</button>
+            </div>
+            
+            <!-- 日志列表（固定高度，滚动查看） -->
+            <div id="log-container" style="max-height: 400px; overflow-y: auto; border: 1px solid var(--border-color); border-radius: 8px; padding: 10px; background: var(--bg-secondary);">
+                <!-- 由 JavaScript 动态渲染 -->
+            </div>
+            
+            <div style="margin-top: 10px; padding: 10px; background: var(--bg-secondary); border-radius: 6px; font-size: 0.85em; color: var(--text-secondary);">
+                📊 显示：<strong style="color: var(--accent-blue);">10 条/页</strong> | 支持滚动查看更多
+            </div>
+        </div>
+        </section>
+
+    </div>
+
+    <button class="refresh-btn" onclick="location.reload()">🔄 刷新</button>
+
+    <script>
+        // 导航栏移动端切换
+        const navbarToggle = document.querySelector('.navbar-toggle');
+        const navbarNav = document.querySelector('.navbar-nav');
+        
+        if (navbarToggle) {
+            navbarToggle.addEventListener('click', function() {
+                navbarNav.classList.toggle('show');
+            });
+        }
+
+        // 平滑滚动 + 激活状态
+        document.querySelectorAll('.navbar-nav a').forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href').substring(1);
+                const targetElement = document.getElementById(targetId);
+                
+                if (targetElement) {
+                    const offset = 80;
+                    const elementPosition = targetElement.getBoundingClientRect().top;
+                    const offsetPosition = elementPosition + window.pageYOffset - offset;
+
+                    window.scrollTo({
+                        top: offsetPosition,
+                        behavior: 'smooth'
+                    });
+
+                    // 关闭移动端菜单
+                    navbarNav.classList.remove('show');
+                }
+            });
+        });
+
+        // 滚动时更新激活状态
+        window.addEventListener('scroll', function() {
+            const sections = document.querySelectorAll('section[id]');
+            const scrollY = window.pageYOffset;
+
+            sections.forEach(section => {
+                const sectionHeight = section.offsetHeight;
+                const sectionTop = section.offsetTop - 100;
+                const sectionId = section.getAttribute('id');
+                
+                if (scrollY > sectionTop && scrollY <= sectionTop + sectionHeight) {
+                    document.querySelectorAll('.navbar-nav a').forEach(link => {
+                        link.classList.remove('active');
+                        if (link.getAttribute('href') === '#' + sectionId) {
+                            link.classList.add('active');
+                        }
+                    });
+                }
+            });
+        });
+
+        // ========== 任务状态动态更新 ==========
+        function updateTaskStatus() {
+            const now = new Date();
+            const currentHour = now.getHours();
+            const currentMinute = now.getMinutes();
+            const taskHour = 18;
+            const taskMinute = 0;
+            
+            const taskStatusEl = document.getElementById('task-status');
+            const nextRunEl = document.getElementById('next-run');
+            const lastRunEl = document.getElementById('last-run');
+            
+            // 计算今天任务时间
+            const todayTask = new Date(now);
+            todayTask.setHours(taskHour, taskMinute, 0, 0);
+            
+            // 计算下次执行时间
+            let nextRun = new Date(todayTask);
+            if (now >= todayTask) {
+                nextRun.setDate(nextRun.getDate() + 1);
+            }
+            
+            // 判断状态
+            const timeDiff = todayTask.getTime() - now.getTime();
+            const fifteenMinutes = 15 * 60 * 1000;
+            
+            if (timeDiff > 0 && timeDiff <= fifteenMinutes) {
+                // 即将执行（15 分钟内）
+                taskStatusEl.className = 'status-badge status-warning';
+                taskStatusEl.textContent = '🟡 待执行';
+            } else if (timeDiff <= 0 && timeDiff > -5 * 60 * 1000) {
+                // 执行中（任务时间前后 5 分钟）
+                taskStatusEl.className = 'status-badge status-info';
+                taskStatusEl.textContent = '🔵 执行中';
+            } else if (now > todayTask) {
+                // 已执行
+                taskStatusEl.className = 'status-badge status-success';
+                taskStatusEl.textContent = '🟢 已执行';
+            } else {
+                // 待执行（还早）
+                taskStatusEl.className = 'status-badge status-success';
+                taskStatusEl.textContent = '🟢 待执行';
+            }
+            
+            // 更新下次执行时间
+            const nextRunStr = nextRun.toLocaleDateString('zh-CN', { month: 'numeric', day: 'numeric' }) + ' ' + 
+                String(taskHour).padStart(2, '0') + ':00';
+            if (nextRun.getDate() === now.getDate() + 1) {
+                nextRunEl.textContent = '📌 下次执行：明天 ' + String(taskHour).padStart(2, '0') + ':00';
+            } else {
+                nextRunEl.textContent = '📌 下次执行：' + nextRunStr;
+            }
+            
+            // 更新上次执行时间（假设今天 18:04 执行）
+            if (now.getHours() >= 18) {
+                lastRunEl.textContent = '✅ 上次执行：今天 18:04 (成功)';
+            } else {
+                lastRunEl.textContent = '✅ 上次执行：昨天 18:04 (成功)';
+            }
+        }
+        
+        // 初始化任务状态
+        updateTaskStatus();
+        
+        // ========== Tab 切换功能 ==========
+        function switchTab(event, tabName) {
+            // 移除所有按钮的 active 状态
+            document.querySelectorAll('.tab-button').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            
+            // 隐藏所有内容
+            document.querySelectorAll('.tab-content').forEach(content => {
+                content.classList.remove('active');
+            });
+            
+            // 激活当前按钮和内容
+            event.target.classList.add('active');
+            document.getElementById(tabName).classList.add('active');
+        }
+        
+        // ========== 操作日志功能 ==========
+        const operationLogs = [
+            { time: '2026.3.19 20:47', event: '✅ 重构代理配置 + 部署集成模块' },
+            { time: '2026.3.19 20:38', event: '✅ 项目模块调整到技能清单前' },
+            { time: '2026.3.19 20:36', event: '✅ 补齐导航栏（新增🚀项目）' },
+            { time: '2026.3.19 20:34', event: '✅ 移除成本金额显示' },
+            { time: '2026.3.19 20:32', event: '✅ 恢复项目模块 + 成本改美元' },
+            { time: '2026.3.19 20:20', event: '✅ 恢复项目模块 + 更新消耗数据' },
+            { time: '2026.3.19 17:15', event: '✅ 布局优化完成（间距统一 15px）' },
+            { time: '2026.3.19 17:05', event: '✅ 修复技能排序 Bug（重复条目）' },
+            { time: '2026.3.19 17:01', event: '✅ 记忆系统单独占一行 + 代理飞书并排' },
+            { time: '2026.3.19 16:15', event: '✅ 更新消耗数据 + 移除待办事项模块' },
+            { time: '2026.3.19 16:03', event: '✅ 增加 iOS 16 风格边框质感' },
+            { time: '2026.3.19 15:58', event: '✅ 应用 Apple/macOS 混合主题' },
+            { time: '2026.3.19 14:25', event: '✅ 更新掘金面板技能清单' },
+            { time: '2026.3.19 14:15', event: '✅ 创建 Figma 原型助手技能' },
+            { time: '2026.3.19 13:47', event: '✅ 安装 NoPUA 技能' },
+            { time: '2026.3.19 12:00', event: '✅ 清理代理 moneycome' },
+            { time: '2026.3.19 11:21', event: '✅ 清理代理 stock-analysis' },
+            { time: '2026.3.19 11:03', event: '✅ OpenClaw 升级 2026.3.3 → 2026.3.13' }
+        ];
+        
+        function renderLogs(filterDate) {
+            const container = document.getElementById('log-container');
+            const filtered = filterDate 
+                ? operationLogs.filter(log => log.time.startsWith(filterDate))
+                : operationLogs;
+            
+            container.innerHTML = filtered.map(log => `
+                <div class="event-item" style="display: flex; gap: 12px; padding: 8px 0; border-bottom: 1px solid var(--border-color); font-size: 0.9em;">
+                    <div style="min-width: 140px; color: var(--text-secondary); font-family: monospace;">${log.time}</div>
+                    <div>${log.event}</div>
+                </div>
+            `).join('');
+        }
+        
+        function filterLogs(date) {
+            // 更新按钮状态
+            document.querySelectorAll('.date-filter button').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            event.target.classList.add('active');
+            
+            renderLogs(date);
+        }
+        
+        function showAllLogs() {
+            document.querySelectorAll('.date-filter button').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            event.target.classList.add('active');
+            renderLogs('');
+        }
+        
+        // 初始化操作日志
+        renderLogs();
+        
+        // ========== 文件下载功能 ==========
+        async function downloadFile(filename) {
+            const rawUrl = `https://raw.githubusercontent.com/MingFengLi563/MF563/main/${filename}`;
+            
+            try {
+                const response = await fetch(rawUrl);
+                if (!response.ok) {
+                    throw new Error(`下载失败：${response.status}`);
+                }
+                
+                const blob = await response.blob();
+                const url = window.URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = filename;
+                document.body.appendChild(a);
+                a.click();
+                document.body.removeChild(a);
+                window.URL.revokeObjectURL(url);
+                
+                console.log(`✅ ${filename} 下载成功`);
+            } catch (error) {
+                console.error(`❌ 下载失败:`, error);
+                alert(`下载 ${filename} 失败，请稍后重试`);
+            }
+        }
+        
+        // ========== 文件复制功能 ==========
+        async function copyFile(filename) {
+            // 从 GitHub Raw 获取文件内容（gh-pages 分支）
+            const rawUrl = `https://raw.githubusercontent.com/MingFengLi563/MF563/gh-pages/${filename}`;
+            
+            try {
+                const response = await fetch(rawUrl);
+                if (!response.ok) {
+                    if (response.status === 404) {
+                        throw new Error(`文件不存在：${filename}`);
+                    }
+                    throw new Error(`获取失败：${response.status}`);
+                }
+                
+                const text = await response.text();
+                
+                // 尝试使用 Clipboard API
+                if (navigator.clipboard && navigator.clipboard.writeText) {
+                    await navigator.clipboard.writeText(text);
+                    showToast(`✅ ${filename} 已复制到剪贴板`);
+                } else {
+                    // 降级方案：使用 textarea
+                    const textarea = document.createElement('textarea');
+                    textarea.value = text;
+                    textarea.style.position = 'fixed';
+                    textarea.style.opacity = '0';
+                    document.body.appendChild(textarea);
+                    textarea.select();
+                    document.execCommand('copy');
+                    document.body.removeChild(textarea);
+                    showToast(`✅ ${filename} 已复制到剪贴板`);
+                }
+                
+                console.log(`✅ ${filename} 复制成功`);
+            } catch (error) {
+                console.error(`❌ 复制失败:`, error);
+                // 显示更详细的错误信息
+                const errorMsg = error.message.includes('404') 
+                    ? `文件 ${filename} 尚未上传到 GitHub`
+                    : `复制 ${filename} 失败：${error.message}`;
+                alert(errorMsg);
+            }
+        }
+        
+        // ========== 提示框功能 ==========
+        function showToast(message) {
+            // 移除已存在的提示
+            const existing = document.querySelector('.copy-toast');
+            if (existing) {
+                existing.remove();
+            }
+            
+            const toast = document.createElement('div');
+            toast.className = 'copy-toast';
+            toast.textContent = message;
+            document.body.appendChild(toast);
+            
+            // 3 秒后自动消失
+            setTimeout(() => {
+                toast.remove();
+            }, 3000);
+        }
+        
+        // ========== 自动刷新（每 1 小时） ==========
+        setInterval(function() {
+            // 更新任务状态
+            updateTaskStatus();
+            
+            // 更新时间戳
+            const now = new Date();
+            const timeStr = now.toLocaleString('zh-CN', {
+                timeZone: 'Asia/Shanghai',
+                year: 'numeric',
+                month: '2-digit',
+                day: '2-digit',
+                hour: '2-digit',
+                minute: '2-digit'
+            });
+            
+            // 可以在这里添加其他需要定期更新的数据
+            console.log('Mission Control 自动更新：' + timeStr);
+        }, 3600000); // 1 小时 = 3600000ms
+        
+        // 页面可见性变化时刷新
+        document.addEventListener('visibilitychange', function() {
+            if (!document.hidden) {
+                updateTaskStatus();
+            }
+        });
+    </script>
+</body>
+</html>

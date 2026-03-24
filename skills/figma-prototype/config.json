@@ -1,0 +1,9 @@
+{
+  "_comment": "Figma 原型助手配置 - 私有技能",
+  "access_token": "figd_Qopc0BTz0v_SVLjOmmW_ZghLlrIVvhOojtaRSRrs",
+  "team_id": "1427895126753128930",
+  "project_id": "290003694",
+  "default_file_id": "x24OO3aFsPVsY1aLthzFld",
+  "_note": "只操作 FRANCo 项目文件，不影响其他同事的原型",
+  "_restrict": "只能修改 x24OO3aFsPVsY1aLthzFld 文件内的内容"
+}

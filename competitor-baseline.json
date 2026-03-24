@@ -1,0 +1,59 @@
+{
+  "lastRun": "2026-03-24T10:06:00+08:00",
+  "competitors": {
+    "intercom": {
+      "latestArticle": "Kaizen for the AI era: How small improvements build smarter support",
+      "latestDate": "2026-03-19",
+      "url": "https://www.intercom.com/blog/kaizen-for-the-ai-era-how-small-improvements-build-smarter-support/"
+    },
+    "respond-io": {
+      "latestArticles": [
+        "How to Sell on WhatsApp in 2026",
+        "WhatsApp Marketing ROI",
+        "WhatsApp AI Chatbot for Lead Management",
+        "Best AI Chat Agents for Business",
+        "WhatsApp AI Agent",
+        "How to Set Up WhatsApp Business Calling API",
+        "WhatsApp Business Calling API Debuts on respond.io",
+        "TikTok Business Messaging Now on respond.io",
+        "TikTok Messaging Ads"
+      ],
+      "latestDate": "2026-03-17"
+    },
+    "sleekflow": {
+      "latestArticle": "Behind the AgentFlow: How we build a scalable agentic AI system for smart conversations",
+      "latestDate": "2026-03-18",
+      "url": "https://sleekflow.io/blog/sleekflow-ai-engine"
+    },
+    "pancake": {
+      "status": "unreachable",
+      "lastChecked": "2026-03-24"
+    },
+    "tidio": {
+      "latestArticles": [
+        "How to Scale Customer Support: 13 Practical Strategies",
+        "Chatbot ROI: How to Calculate It & What to Track for Most Profit",
+        "Generative AI Agents: How They Work and When to Use Them",
+        "LiveAgent vs. Zendesk: Discover the Best Platform for Your Team",
+        "9 Best AI Tools for Social Media in 2026",
+        "7 Best AI Shopping Assistants for Ecommerce in 2026",
+        "How to Build a Chatbot for Customer Support [Guide 2026]",
+        "7 Best Call Center Tools for Agents in 2026 [Comparison]"
+      ],
+      "latestDate": "2026-03-19"
+    },
+    "manychat": {
+      "status": "403-forbidden",
+      "lastChecked": "2026-03-24"
+    },
+    "mixdesk": {
+      "latestArticle": "Mixdesk vs Crisp：哪种 AI 客服方案更适合你的跨境团队？",
+      "latestDate": "2025-12-18",
+      "url": "https://mixdesk.com/blog/comparison-of-ai-customer-service-systems/"
+    },
+    "okkicrm": {
+      "status": "dns-error",
+      "lastChecked": "2026-03-24"
+    }
+  }
+}
