@@ -1,0 +1,23 @@
+# 会话记忆（私有）
+memory/
+MEMORY.md
+
+# 配置文件（可能包含敏感信息）
+*.env
+config.json
+openclaw.json
+
+# 临时文件
+*.log
+*.tmp
+.DS_Store
+Thumbs.db
+
+# 依赖
+node_modules/
+__pycache__/
+*.pyc
+
+# 构建产物
+dist/
+build/
