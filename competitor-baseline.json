@@ -1,14 +1,16 @@
 {
-  "lastRun": "2026-03-24T10:06:00+08:00",
+  "lastRun": "2026-03-29T18:00:00+08:00",
   "competitors": {
     "intercom": {
-      "latestArticle": "Kaizen for the AI era: How small improvements build smarter support",
-      "latestDate": "2026-03-19",
-      "url": "https://www.intercom.com/blog/kaizen-for-the-ai-era-how-small-improvements-build-smarter-support/"
+      "latestArticle": "Announcing Fin Apex: The age of vertical models is here",
+      "latestDate": "2026-03-26",
+      "url": "https://www.intercom.com/blog/announcing-fin-apex-the-age-of-vertical-models-is-here/"
     },
     "respond-io": {
       "latestArticles": [
+        "Facebook Messenger Marketing: A How-To Guide",
         "How to Sell on WhatsApp in 2026",
+        "Choose respond.io to turn chats into revenue",
         "WhatsApp Marketing ROI",
         "WhatsApp AI Chatbot for Lead Management",
         "Best AI Chat Agents for Business",
@@ -16,44 +18,48 @@
         "How to Set Up WhatsApp Business Calling API",
         "WhatsApp Business Calling API Debuts on respond.io",
         "TikTok Business Messaging Now on respond.io",
-        "TikTok Messaging Ads"
+        "TikTok Messaging Ads",
+        "respond.io no longer supports other BSPs - here's why",
+        "Respond 3.0"
       ],
-      "latestDate": "2026-03-17"
+      "latestDate": "2026-03-29"
     },
     "sleekflow": {
-      "latestArticle": "Behind the AgentFlow: How we build a scalable agentic AI system for smart conversations",
-      "latestDate": "2026-03-18",
-      "url": "https://sleekflow.io/blog/sleekflow-ai-engine"
+      "latestArticle": "Introducing AgentFlow: Build AI agents for lead qualification, nurturing and conversion",
+      "latestDate": "2026-03-28",
+      "url": "https://sleekflow.io/blog/agentflow"
     },
     "pancake": {
       "status": "unreachable",
-      "lastChecked": "2026-03-24"
+      "lastChecked": "2026-03-29"
     },
     "tidio": {
       "latestArticles": [
-        "How to Scale Customer Support: 13 Practical Strategies",
-        "Chatbot ROI: How to Calculate It & What to Track for Most Profit",
-        "Generative AI Agents: How They Work and When to Use Them",
-        "LiveAgent vs. Zendesk: Discover the Best Platform for Your Team",
-        "9 Best AI Tools for Social Media in 2026",
-        "7 Best AI Shopping Assistants for Ecommerce in 2026",
-        "How to Build a Chatbot for Customer Support [Guide 2026]",
-        "7 Best Call Center Tools for Agents in 2026 [Comparison]"
+        "[Tidio help desk] Custom ticket fields are now available in your inbox",
+        "[Lyro AI] Sync product database with WooComerce",
+        "[Lyro AI] Sync product database in any language with Lyro",
+        "[Lyro AI] Train Lyro to give the right answers to the right customers",
+        "[Lyro AI Agent] Your AI Agent can understand images",
+        "[Lyro AI Agent] View conversations impacted by your Guidance"
       ],
-      "latestDate": "2026-03-19"
+      "latestDate": "2026-03-11"
     },
     "manychat": {
       "status": "403-forbidden",
-      "lastChecked": "2026-03-24"
+      "lastChecked": "2026-03-29"
     },
     "mixdesk": {
-      "latestArticle": "Mixdesk vs Crisp：哪种 AI 客服方案更适合你的跨境团队？",
-      "latestDate": "2025-12-18",
-      "url": "https://mixdesk.com/blog/comparison-of-ai-customer-service-systems/"
+      "latestArticles": [
+        "全渠道获客利器：Mixdesk 如何重塑 Facebook 自动回复工具的转化链路",
+        "2026 年 WhatsApp 客服工具实测排名：Mixdesk 多账号聚合能力深度评测",
+        "2026 年 TikTok 客服系统实测排名：3 款主流工具选购指南"
+      ],
+      "latestDate": "2026-03-26",
+      "url": "https://mixdesk.com/blog/facebook-auto-reply-tool/"
     },
     "okkicrm": {
       "status": "dns-error",
-      "lastChecked": "2026-03-24"
+      "lastChecked": "2026-03-29"
     }
   }
 }

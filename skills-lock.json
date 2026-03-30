@@ -1,0 +1,25 @@
+{
+  "version": 1,
+  "skills": {
+    "byted-airesearch-videoeval": {
+      "source": "bytedance/agentkit-samples",
+      "sourceType": "github",
+      "computedHash": "1625dde5e7161c2f3188bbe69c1522b4db6de8c4682bde1296dac41ad65a4908"
+    },
+    "byted-data-search": {
+      "source": "bytedance/agentkit-samples",
+      "sourceType": "github",
+      "computedHash": "3e60313edd000da83cc5ede42abe67478d80c82bc1717a259aa08ff17262acd5"
+    },
+    "byted-marketing-agent-inspiration-insight": {
+      "source": "bytedance/agentkit-samples",
+      "sourceType": "github",
+      "computedHash": "b200465c622e215e93cb5ac38653f4d143eba244eddc88ecb12a1463d10f008f"
+    },
+    "byted-marketing-agent-trending-list": {
+      "source": "bytedance/agentkit-samples",
+      "sourceType": "github",
+      "computedHash": "a30173c059c5967799ffc29883ceb8a7929864336c450181a6bcdbc322cb8526"
+    }
+  }
+}
