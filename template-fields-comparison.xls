@@ -1,0 +1,277 @@
+<?xml version="1.0"?>
+<?mso-application progid="Excel.Sheet"?>
+<Workbook xmlns="urn:schemas-microsoft-com:office:spreadsheet"
+ xmlns:o="urn:schemas-microsoft-com:office:office"
+ xmlns:x="urn:schemas-microsoft-com:office:excel"
+ xmlns:ss="urn:schemas-microsoft-com:office:spreadsheet"
+ xmlns:html="http://www.w3.org/TR/REC-html40">
+ <DocumentProperties xmlns="urn:schemas-microsoft-com:office:office">
+  <Author>J.A.R.V.I.S.</Author>
+  <Created>2026-04-01T00:00:00Z</Created>
+ </DocumentProperties>
+ <Styles>
+  <Style ss:ID="Default" ss:Name="Normal">
+   <Alignment ss:Vertical="Center"/>
+   <Borders/>
+   <Font ss:FontName="Arial" ss:Size="11"/>
+   <Interior/>
+   <NumberFormat/>
+   <Protection/>
+  </Style>
+  <Style ss:ID="header">
+   <Font ss:FontName="Arial" ss:Size="12" ss:Bold="1" ss:Color="#FFFFFF"/>
+   <Interior ss:Color="#4472C4" ss:Pattern="Solid"/>
+   <Alignment ss:Horizontal="Center" ss:Vertical="Center" ss:WrapText="1"/>
+   <Borders>
+    <Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1"/>
+    <Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1"/>
+    <Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1"/>
+    <Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1"/>
+   </Borders>
+  </Style>
+  <Style ss:ID="cell">
+   <Font ss:FontName="Arial" ss:Size="11"/>
+   <Alignment ss:Vertical="Center" ss:WrapText="1"/>
+   <Borders>
+    <Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1"/>
+    <Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1"/>
+    <Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1"/>
+    <Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1"/>
+   </Borders>
+  </Style>
+ </Styles>
+ <Worksheet ss:Name="消息模板字段对比">
+  <Table>
+   <Column ss:Width="150"/>
+   <Column ss:Width="200"/>
+   <Column ss:Width="200"/>
+   <Column ss:Width="250"/>
+   <Column ss:Width="350"/>
+   <Row ss:Height="25">
+    <Cell ss:StyleID="header"><Data ss:Type="String">字段</Data></Cell>
+    <Cell ss:StyleID="header"><Data ss:Type="String">WhatsApp API</Data></Cell>
+    <Cell ss:StyleID="header"><Data ss:Type="String">Email</Data></Cell>
+    <Cell ss:StyleID="header"><Data ss:Type="String">Messenger</Data></Cell>
+    <Cell ss:StyleID="header"><Data ss:Type="String">说明</Data></Cell>
+   </Row>
+   <Row ss:Height="25">
+    <Cell ss:StyleID="cell"><Data ss:Type="String">模板名称</Data></Cell>
+    <Cell ss:StyleID="cell"><Data ss:Type="String">✅</Data></Cell>
+    <Cell ss:StyleID="cell"><Data ss:Type="String">✅</Data></Cell>
+    <Cell ss:StyleID="cell"><Data ss:Type="String">✅</Data></Cell>
+    <Cell ss:StyleID="cell"><Data ss:Type="String">模板显示名称</Data></Cell>
+   </Row>
+   <Row ss:Height="25">
+    <Cell ss:StyleID="cell"><Data ss:Type="String">模板 ID</Data></Cell>
+    <Cell ss:StyleID="cell"><Data ss:Type="String">✅ (tmpl_xxx)</Data></Cell>
+    <Cell ss:StyleID="cell"><Data ss:Type="String">❌</Data></Cell>
+    <Cell ss:StyleID="cell"><Data ss:Type="String">❌</Data></Cell>
+    <Cell ss:StyleID="cell"><Data ss:Type="String">WhatsApp 官方模板 ID</Data></Cell>
+   </Row>
+   <Row ss:Height="25">
+    <Cell ss:StyleID="cell"><Data ss:Type="String">模板标签</Data></Cell>
+    <Cell ss:StyleID="cell"><Data ss:Type="String">✅</Data></Cell>
+    <Cell ss:StyleID="cell"><Data ss:Type="String">❌</Data></Cell>
+    <Cell ss:StyleID="cell"><Data ss:Type="String">❌</Data></Cell>
+    <Cell ss:StyleID="cell"><Data ss:Type="String">WhatsApp 专属标签</Data></Cell>
+   </Row>
+   <Row ss:Height="25">
+    <Cell ss:StyleID="cell"><Data ss:Type="String">模板分类</Data></Cell>
+    <Cell ss:StyleID="cell"><Data ss:Type="String">❌</Data></Cell>
+    <Cell ss:StyleID="cell"><Data ss:Type="String">✅ (树形结构)</Data></Cell>
+    <Cell ss:StyleID="cell"><Data ss:Type="String">❌</Data></Cell>
+    <Cell ss:StyleID="cell"><Data ss:Type="String">Email 专属分类</Data></Cell>
+   </Row>
+   <Row ss:Height="25">
+    <Cell ss:StyleID="cell"><Data ss:Type="String">关联账号</Data></Cell>
+    <Cell ss:StyleID="cell"><Data ss:Type="String">✅ (业务账号)</Data></Cell>
+    <Cell ss:StyleID="cell"><Data ss:Type="String">❌</Data></Cell>
+    <Cell ss:StyleID="cell"><Data ss:Type="String">✅ (社媒账号)</Data></Cell>
+    <Cell ss:StyleID="cell"><Data ss:Type="String">关联的渠道账号</Data></Cell>
+   </Row>
+   <Row ss:Height="25">
+    <Cell ss:StyleID="cell"><Data ss:Type="String">内容类型</Data></Cell>
+    <Cell ss:StyleID="cell"><Data ss:Type="String">✅ (文本/图片/视频)</Data></Cell>
+    <Cell ss:StyleID="cell"><Data ss:Type="String">❌</Data></Cell>
+    <Cell ss:StyleID="cell"><Data ss:Type="String">❌</Data></Cell>
+    <Cell ss:StyleID="cell"><Data ss:Type="String">WhatsApp 内容格式</Data></Cell>
+   </Row>
+   <Row ss:Height="25">
+    <Cell ss:StyleID="cell"><Data ss:Type="String">模板类型</Data></Cell>
+    <Cell ss:StyleID="cell"><Data ss:Type="String">❌</Data></Cell>
+    <Cell ss:StyleID="cell"><Data ss:Type="String">❌</Data></Cell>
+    <Cell ss:StyleID="cell"><Data ss:Type="String">✅ (通知类/营销/订阅)</Data></Cell>
+    <Cell ss:StyleID="cell"><Data ss:Type="String">Messenger 模板类别</Data></Cell>
+   </Row>
+   <Row ss:Height="25">
+    <Cell ss:StyleID="cell"><Data ss:Type="String">模板内容</Data></Cell>
+    <Cell ss:StyleID="cell"><Data ss:Type="String">✅</Data></Cell>
+    <Cell ss:StyleID="cell"><Data ss:Type="String">❌</Data></Cell>
+    <Cell ss:StyleID="cell"><Data ss:Type="String">✅</Data></Cell>
+    <Cell ss:StyleID="cell"><Data ss:Type="String">模板正文内容</Data></Cell>
+   </Row>
+   <Row ss:Height="25">
+    <Cell ss:StyleID="cell"><Data ss:Type="String">语言</Data></Cell>
+    <Cell ss:StyleID="cell"><Data ss:Type="String">✅</Data></Cell>
+    <Cell ss:StyleID="cell"><Data ss:Type="String">❌</Data></Cell>
+    <Cell ss:StyleID="cell"><Data ss:Type="String">✅</Data></Cell>
+    <Cell ss:StyleID="cell"><Data ss:Type="String">模板语言</Data></Cell>
+   </Row>
+   <Row ss:Height="25">
+    <Cell ss:StyleID="cell"><Data ss:Type="String">模板状态</Data></Cell>
+    <Cell ss:StyleID="cell"><Data ss:Type="String">✅ (有效/拒绝)</Data></Cell>
+    <Cell ss:StyleID="cell"><Data ss:Type="String">❌</Data></Cell>
+    <Cell ss:StyleID="cell"><Data ss:Type="String">✅ (有效/无效/提交失败)</Data></Cell>
+    <Cell ss:StyleID="cell"><Data ss:Type="String">审核/启用状态</Data></Cell>
+   </Row>
+   <Row ss:Height="25">
+    <Cell ss:StyleID="cell"><Data ss:Type="String">编辑时间</Data></Cell>
+    <Cell ss:StyleID="cell"><Data ss:Type="String">❌</Data></Cell>
+    <Cell ss:StyleID="cell"><Data ss:Type="String">✅ (可排序)</Data></Cell>
+    <Cell ss:StyleID="cell"><Data ss:Type="String">✅</Data></Cell>
+    <Cell ss:StyleID="cell"><Data ss:Type="String">最后修改时间</Data></Cell>
+   </Row>
+   <Row ss:Height="25">
+    <Cell ss:StyleID="cell"><Data ss:Type="String">创建时间</Data></Cell>
+    <Cell ss:StyleID="cell"><Data ss:Type="String">❌</Data></Cell>
+    <Cell ss:StyleID="cell"><Data ss:Type="String">✅ (可排序)</Data></Cell>
+    <Cell ss:StyleID="cell"><Data ss:Type="String">✅</Data></Cell>
+    <Cell ss:StyleID="cell"><Data ss:Type="String">模板创建时间</Data></Cell>
+   </Row>
+   <Row ss:Height="25">
+    <Cell ss:StyleID="cell"><Data ss:Type="String"></Data></Cell>
+    <Cell ss:StyleID="cell"><Data ss:Type="String"></Data></Cell>
+    <Cell ss:StyleID="cell"><Data ss:Type="String"></Data></Cell>
+    <Cell ss:StyleID="cell"><Data ss:Type="String"></Data></Cell>
+    <Cell ss:StyleID="cell"><Data ss:Type="String"></Data></Cell>
+   </Row>
+   <Row ss:Height="25">
+    <Cell ss:StyleID="header"><Data ss:Type="String">筛选条件</Data></Cell>
+    <Cell ss:StyleID="header"><Data ss:Type="String"></Data></Cell>
+    <Cell ss:StyleID="header"><Data ss:Type="String"></Data></Cell>
+    <Cell ss:StyleID="header"><Data ss:Type="String"></Data></Cell>
+    <Cell ss:StyleID="header"><Data ss:Type="String"></Data></Cell>
+   </Row>
+   <Row ss:Height="25">
+    <Cell ss:StyleID="cell"><Data ss:Type="String">搜索</Data></Cell>
+    <Cell ss:StyleID="cell"><Data ss:Type="String">✅ 模板名称</Data></Cell>
+    <Cell ss:StyleID="cell"><Data ss:Type="String">✅ 模板名称</Data></Cell>
+    <Cell ss:StyleID="cell"><Data ss:Type="String">✅ 模板名称/类型/状态/语言</Data></Cell>
+    <Cell ss:StyleID="cell"><Data ss:Type="String">搜索框</Data></Cell>
+   </Row>
+   <Row ss:Height="25">
+    <Cell ss:StyleID="cell"><Data ss:Type="String">模板类型筛选</Data></Cell>
+    <Cell ss:StyleID="cell"><Data ss:Type="String">✅</Data></Cell>
+    <Cell ss:StyleID="cell"><Data ss:Type="String">❌</Data></Cell>
+    <Cell ss:StyleID="cell"><Data ss:Type="String">✅</Data></Cell>
+    <Cell ss:StyleID="cell"><Data ss:Type="String">按类型过滤</Data></Cell>
+   </Row>
+   <Row ss:Height="25">
+    <Cell ss:StyleID="cell"><Data ss:Type="String">账号筛选</Data></Cell>
+    <Cell ss:StyleID="cell"><Data ss:Type="String">✅ (业务账号)</Data></Cell>
+    <Cell ss:StyleID="cell"><Data ss:Type="String">❌</Data></Cell>
+    <Cell ss:StyleID="cell"><Data ss:Type="String">✅ (社媒账号)</Data></Cell>
+    <Cell ss:StyleID="cell"><Data ss:Type="String">按账号过滤</Data></Cell>
+   </Row>
+   <Row ss:Height="25">
+    <Cell ss:StyleID="cell"><Data ss:Type="String">状态筛选</Data></Cell>
+    <Cell ss:StyleID="cell"><Data ss:Type="String">✅ (有效/拒绝)</Data></Cell>
+    <Cell ss:StyleID="cell"><Data ss:Type="String">❌</Data></Cell>
+    <Cell ss:StyleID="cell"><Data ss:Type="String">✅ (有效/无效/提交失败)</Data></Cell>
+    <Cell ss:StyleID="cell"><Data ss:Type="String">按状态过滤</Data></Cell>
+   </Row>
+   <Row ss:Height="25">
+    <Cell ss:StyleID="cell"><Data ss:Type="String">语言筛选</Data></Cell>
+    <Cell ss:StyleID="cell"><Data ss:Type="String">✅</Data></Cell>
+    <Cell ss:StyleID="cell"><Data ss:Type="String">❌</Data></Cell>
+    <Cell ss:StyleID="cell"><Data ss:Type="String">✅</Data></Cell>
+    <Cell ss:StyleID="cell"><Data ss:Type="String">按语言过滤</Data></Cell>
+   </Row>
+   <Row ss:Height="25">
+    <Cell ss:StyleID="cell"><Data ss:Type="String">分类筛选</Data></Cell>
+    <Cell ss:StyleID="cell"><Data ss:Type="String">❌</Data></Cell>
+    <Cell ss:StyleID="cell"><Data ss:Type="String">✅ (树形)</Data></Cell>
+    <Cell ss:StyleID="cell"><Data ss:Type="String">❌</Data></Cell>
+    <Cell ss:StyleID="cell"><Data ss:Type="String">Email 专属</Data></Cell>
+   </Row>
+   <Row ss:Height="25">
+    <Cell ss:StyleID="cell"><Data ss:Type="String">时间排序</Data></Cell>
+    <Cell ss:StyleID="cell"><Data ss:Type="String">❌</Data></Cell>
+    <Cell ss:StyleID="cell"><Data ss:Type="String">✅ (编辑/创建时间)</Data></Cell>
+    <Cell ss:StyleID="cell"><Data ss:Type="String">❌</Data></Cell>
+    <Cell ss:StyleID="cell"><Data ss:Type="String">Email 专属排序</Data></Cell>
+   </Row>
+   <Row ss:Height="25">
+    <Cell ss:StyleID="cell"><Data ss:Type="String"></Data></Cell>
+    <Cell ss:StyleID="cell"><Data ss:Type="String"></Data></Cell>
+    <Cell ss:StyleID="cell"><Data ss:Type="String"></Data></Cell>
+    <Cell ss:StyleID="cell"><Data ss:Type="String"></Data></Cell>
+    <Cell ss:StyleID="cell"><Data ss:Type="String"></Data></Cell>
+   </Row>
+   <Row ss:Height="25">
+    <Cell ss:StyleID="header"><Data ss:Type="String">操作</Data></Cell>
+    <Cell ss:StyleID="header"><Data ss:Type="String"></Data></Cell>
+    <Cell ss:StyleID="header"><Data ss:Type="String"></Data></Cell>
+    <Cell ss:StyleID="header"><Data ss:Type="String"></Data></Cell>
+    <Cell ss:StyleID="header"><Data ss:Type="String"></Data></Cell>
+   </Row>
+   <Row ss:Height="25">
+    <Cell ss:StyleID="cell"><Data ss:Type="String">创建</Data></Cell>
+    <Cell ss:StyleID="cell"><Data ss:Type="String">✅ 添加新模板</Data></Cell>
+    <Cell ss:StyleID="cell"><Data ss:Type="String">✅ 创建模板</Data></Cell>
+    <Cell ss:StyleID="cell"><Data ss:Type="String">✅ 创建新模板</Data></Cell>
+    <Cell ss:StyleID="cell"><Data ss:Type="String">新建模板</Data></Cell>
+   </Row>
+   <Row ss:Height="25">
+    <Cell ss:StyleID="cell"><Data ss:Type="String">编辑</Data></Cell>
+    <Cell ss:StyleID="cell"><Data ss:Type="String">❌</Data></Cell>
+    <Cell ss:StyleID="cell"><Data ss:Type="String">✅</Data></Cell>
+    <Cell ss:StyleID="cell"><Data ss:Type="String">✅ (部分)</Data></Cell>
+    <Cell ss:StyleID="cell"><Data ss:Type="String">修改模板</Data></Cell>
+   </Row>
+   <Row ss:Height="25">
+    <Cell ss:StyleID="cell"><Data ss:Type="String">复制</Data></Cell>
+    <Cell ss:StyleID="cell"><Data ss:Type="String">✅</Data></Cell>
+    <Cell ss:StyleID="cell"><Data ss:Type="String">✅</Data></Cell>
+    <Cell ss:StyleID="cell"><Data ss:Type="String">✅</Data></Cell>
+    <Cell ss:StyleID="cell"><Data ss:Type="String">复制模板</Data></Cell>
+   </Row>
+   <Row ss:Height="25">
+    <Cell ss:StyleID="cell"><Data ss:Type="String">删除</Data></Cell>
+    <Cell ss:StyleID="cell"><Data ss:Type="String">✅</Data></Cell>
+    <Cell ss:StyleID="cell"><Data ss:Type="String">✅</Data></Cell>
+    <Cell ss:StyleID="cell"><Data ss:Type="String">✅</Data></Cell>
+    <Cell ss:StyleID="cell"><Data ss:Type="String">删除模板</Data></Cell>
+   </Row>
+   <Row ss:Height="25">
+    <Cell ss:StyleID="cell"><Data ss:Type="String">查看</Data></Cell>
+    <Cell ss:StyleID="cell"><Data ss:Type="String">❌</Data></Cell>
+    <Cell ss:StyleID="cell"><Data ss:Type="String">❌</Data></Cell>
+    <Cell ss:StyleID="cell"><Data ss:Type="String">✅</Data></Cell>
+    <Cell ss:StyleID="cell"><Data ss:Type="String">查看模板详情</Data></Cell>
+   </Row>
+   <Row ss:Height="25">
+    <Cell ss:StyleID="cell"><Data ss:Type="String">创建计划</Data></Cell>
+    <Cell ss:StyleID="cell"><Data ss:Type="String">❌</Data></Cell>
+    <Cell ss:StyleID="cell"><Data ss:Type="String">✅</Data></Cell>
+    <Cell ss:StyleID="cell"><Data ss:Type="String">❌</Data></Cell>
+    <Cell ss:StyleID="cell"><Data ss:Type="String">Email 专属</Data></Cell>
+   </Row>
+   <Row ss:Height="25">
+    <Cell ss:StyleID="cell"><Data ss:Type="String">同步</Data></Cell>
+    <Cell ss:StyleID="cell"><Data ss:Type="String">✅ 同步模版</Data></Cell>
+    <Cell ss:StyleID="cell"><Data ss:Type="String">❌</Data></Cell>
+    <Cell ss:StyleID="cell"><Data ss:Type="String">❌</Data></Cell>
+    <Cell ss:StyleID="cell"><Data ss:Type="String">WhatsApp 专属</Data></Cell>
+   </Row>
+   <Row ss:Height="25">
+    <Cell ss:StyleID="cell"><Data ss:Type="String">批量操作</Data></Cell>
+    <Cell ss:StyleID="cell"><Data ss:Type="String">❌</Data></Cell>
+    <Cell ss:StyleID="cell"><Data ss:Type="String">❌</Data></Cell>
+    <Cell ss:StyleID="cell"><Data ss:Type="String">✅ 一键删除</Data></Cell>
+    <Cell ss:StyleID="cell"><Data ss:Type="String">批量处理</Data></Cell>
+   </Row>
+
+  </Table>
+ </Worksheet>
+</Workbook>
