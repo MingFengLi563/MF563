@@ -18,148 +18,88 @@
       line-height: 1.6;
     }
 
-    .layout {
-      display: flex;
-      min-height: 100vh;
-    }
-
-    /* ========== 左侧导航 ========== */
-    .sidebar {
-      width: 240px;
-      background: #fff;
-      border-right: 1px solid #e8eaed;
-      padding: 20px 0;
-      flex-shrink: 0;
-    }
-
-    .nav-section {
-      margin-bottom: 24px;
-    }
-
-    .nav-section-title {
-      padding: 8px 20px;
-      font-size: 12px;
-      font-weight: 600;
-      color: #999;
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-    }
-
-    .nav-item {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      padding: 10px 20px;
-      cursor: pointer;
-      transition: all 0.2s;
-      color: #666;
-      font-size: 14px;
-      border-left: 3px solid transparent;
-    }
-
-    .nav-item:hover {
-      background: #f8f9fa;
-      color: #1a73e8;
-    }
-
-    .nav-item.active {
-      background: #e8f0fe;
-      color: #1a73e8;
-      border-left-color: #1a73e8;
-      font-weight: 500;
-    }
-
-    .nav-item .icon {
-      width: 20px;
-      height: 20px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 16px;
-    }
-
-    .nav-subitem {
-      padding: 8px 20px 8px 50px;
-      cursor: pointer;
-      transition: all 0.2s;
-      color: #666;
-      font-size: 13px;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-
-    .nav-subitem:hover {
-      background: #f8f9fa;
-      color: #1a73e8;
-    }
-
-    .nav-subitem.active {
-      background: #e8f0fe;
-      color: #1a73e8;
-      font-weight: 500;
-    }
-
-    .nav-subitem .channel-dot {
-      width: 8px;
-      height: 8px;
-      border-radius: 50%;
-    }
-
-    /* ========== 主内容区 ========== */
-    .main-content {
-      flex: 1;
+    .container {
+      max-width: 1400px;
+      margin: 0 auto;
       padding: 24px;
-      overflow-y: auto;
     }
 
-    .breadcrumb {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      margin-bottom: 20px;
-      font-size: 14px;
-      color: #666;
-    }
-
-    .breadcrumb-item {
-      color: #666;
-    }
-
-    .breadcrumb-item.active {
-      color: #1a1a1a;
-      font-weight: 500;
-    }
-
-    .breadcrumb-separator {
-      color: #ccc;
-    }
-
-    .page-header {
+    /* ========== 一级分类 Tab（顶部） ========== */
+    .primary-tabs {
       background: #fff;
-      padding: 20px 24px;
       border-radius: 8px;
       margin-bottom: 20px;
       box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+      padding: 0 24px;
     }
 
-    .page-title {
-      font-size: 20px;
-      font-weight: 600;
-      color: #1a1a1a;
-      margin-bottom: 16px;
+    .primary-tab-list {
+      display: flex;
+      gap: 0;
+      border-bottom: 2px solid #e8eaed;
+    }
+
+    .primary-tab {
+      padding: 16px 32px;
+      background: transparent;
+      border: none;
+      cursor: pointer;
+      font-size: 15px;
+      font-weight: 500;
+      color: #666;
+      border-bottom: 3px solid transparent;
+      margin-bottom: -2px;
+      transition: all 0.2s;
       display: flex;
       align-items: center;
       gap: 10px;
+      position: relative;
     }
 
-    .channel-tabs {
+    .primary-tab:hover {
+      color: #1a73e8;
+      background: rgba(26, 115, 232, 0.04);
+    }
+
+    .primary-tab.active {
+      color: #1a73e8;
+      border-bottom-color: #1a73e8;
+    }
+
+    .primary-tab .icon {
+      font-size: 18px;
+    }
+
+    .primary-tab .count {
+      background: #f1f3f4;
+      color: #666;
+      font-size: 12px;
+      padding: 2px 8px;
+      border-radius: 10px;
+      font-weight: 500;
+    }
+
+    .primary-tab.active .count {
+      background: #e8f0fe;
+      color: #1a73e8;
+    }
+
+    /* ========== 二级分类 Tab（渠道切换） ========== */
+    .secondary-tabs {
+      background: #fff;
+      border-radius: 8px;
+      margin-bottom: 20px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+      padding: 0 24px;
+    }
+
+    .secondary-tab-list {
       display: flex;
       gap: 8px;
       border-bottom: 2px solid #e8eaed;
     }
 
-    .channel-tab {
+    .secondary-tab {
       padding: 12px 20px;
       background: transparent;
       border: none;
@@ -175,14 +115,29 @@
       gap: 8px;
     }
 
-    .channel-tab:hover {
+    .secondary-tab:hover {
       color: #1a73e8;
       background: rgba(26, 115, 232, 0.04);
     }
 
-    .channel-tab.active {
+    .secondary-tab.active {
       color: #1a73e8;
       border-bottom-color: #1a73e8;
+    }
+
+    .channel-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+    }
+
+    /* ========== 页面内容 ========== */
+    .page-section {
+      display: none;
+    }
+
+    .page-section.active {
+      display: block;
     }
 
     .filter-bar {
@@ -525,412 +480,450 @@
   </style>
 </head>
 <body class="channel-whatsapp">
-  <div class="layout">
-    <!-- ========== 左侧导航 ========== -->
-    <div class="sidebar">
-      <div class="nav-section">
-        <div class="nav-section-title">营销</div>
-        <div class="nav-item" onclick="switchPage('broadcast')">
-          <span class="icon">📢</span>
-          群发消息
-        </div>
-        <div class="nav-item active" onclick="switchPage('templates')">
+  <div class="container">
+    <!-- ========== 一级分类 Tab（顶部） ========== -->
+    <div class="primary-tabs">
+      <div class="primary-tab-list">
+        <button class="primary-tab active" onclick="switchPrimary('templates')">
           <span class="icon">📁</span>
           我的模板
+          <span class="count">24</span>
+        </button>
+        <button class="primary-tab" onclick="switchPrimary('broadcast')">
+          <span class="icon">📢</span>
+          群发消息
+          <span class="count">12</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- ========== 我的模板 页面 ========== -->
+    <div id="templatesPage" class="page-section active">
+      <!-- 二级分类 Tab（渠道切换） -->
+      <div class="secondary-tabs">
+        <div class="secondary-tab-list">
+          <button class="secondary-tab active" data-channel="whatsapp" onclick="switchChannel('whatsapp')">
+            <span class="channel-dot" style="background: #25D366;"></span>
+            WhatsApp API
+          </button>
+          <button class="secondary-tab" data-channel="email" onclick="switchChannel('email')">
+            <span class="channel-dot" style="background: #EA4335;"></span>
+            Email
+          </button>
+          <button class="secondary-tab" data-channel="messenger" onclick="switchChannel('messenger')">
+            <span class="channel-dot" style="background: #0084FF;"></span>
+            Messenger
+          </button>
         </div>
-        <div class="nav-subitem" data-channel="whatsapp" onclick="switchChannel('whatsapp')">
-          <span class="channel-dot" style="background: #25D366;"></span>
-          WhatsApp API
+      </div>
+
+      <!-- 筛选栏 -->
+      <div class="filter-bar">
+        <div class="filter-row">
+          <div class="filter-item">
+            <span class="filter-label">🔍 搜索</span>
+            <input type="text" class="filter-input" placeholder="模板名称/ID..." id="searchInput">
+          </div>
+          <div class="filter-item field-whatsapp">
+            <span class="filter-label">状态</span>
+            <select class="filter-select">
+              <option value="">全部</option>
+              <option value="approved">已通过</option>
+              <option value="pending">审核中</option>
+              <option value="rejected">已拒绝</option>
+            </select>
+          </div>
+          <div class="filter-item field-whatsapp">
+            <span class="filter-label">分类</span>
+            <select class="filter-select">
+              <option value="">全部</option>
+              <option value="marketing">营销推广</option>
+              <option value="utility">通知服务</option>
+              <option value="authentication">身份验证</option>
+            </select>
+          </div>
+          <div class="filter-item field-email">
+            <span class="filter-label">状态</span>
+            <select class="filter-select">
+              <option value="">全部</option>
+              <option value="active">启用</option>
+              <option value="disabled">禁用</option>
+            </select>
+          </div>
+          <div class="filter-item field-email">
+            <span class="filter-label">分类</span>
+            <select class="filter-select">
+              <option value="">全部</option>
+              <option value="order">订单类</option>
+              <option value="marketing">营销类</option>
+              <option value="notification">通知类</option>
+            </select>
+          </div>
+          <div class="filter-item field-messenger">
+            <span class="filter-label">状态</span>
+            <select class="filter-select">
+              <option value="">全部</option>
+              <option value="active">启用</option>
+              <option value="archived">已归档</option>
+            </select>
+          </div>
+          <div class="filter-item field-messenger">
+            <span class="filter-label">类型</span>
+            <select class="filter-select">
+              <option value="">全部</option>
+              <option value="notification">通知类</option>
+              <option value="marketing">营销类</option>
+              <option value="subscription">订阅类</option>
+            </select>
+          </div>
+          <div style="flex: 1;"></div>
+          <button class="btn btn-secondary" onclick="showToast('已重置筛选')">重置</button>
+          <button class="btn btn-primary" onclick="showToast('创建新模板')">+ 创建模板</button>
         </div>
-        <div class="nav-subitem" data-channel="email" onclick="switchChannel('email')">
-          <span class="channel-dot" style="background: #EA4335;"></span>
-          Email
-        </div>
-        <div class="nav-subitem" data-channel="messenger" onclick="switchChannel('messenger')">
-          <span class="channel-dot" style="background: #0084FF;"></span>
-          Messenger
+      </div>
+
+      <!-- 批量操作 -->
+      <div class="batch-actions" id="batchActions">
+        <span class="batch-count">已选择 <span id="selectedCount">0</span> 个模板</span>
+        <button class="btn btn-secondary" onclick="showToast('批量复制')">批量复制</button>
+        <button class="btn btn-secondary field-email" onclick="showToast('批量创建计划')">批量创建计划</button>
+        <button class="btn btn-danger" onclick="showToast('批量删除', 'error')">批量删除</button>
+        <button class="btn btn-secondary" onclick="clearSelection()">取消选择</button>
+      </div>
+
+      <!-- 表格 -->
+      <div class="table-container">
+        <table>
+          <thead>
+            <tr>
+              <th style="width: 40px;">
+                <input type="checkbox" class="checkbox" id="selectAll" onchange="toggleSelectAll()">
+              </th>
+              <th>模板名称</th>
+              <th class="field-whatsapp">模板 ID</th>
+              <th class="field-whatsapp">状态</th>
+              <th class="field-whatsapp">分类</th>
+              <th class="field-email">主题</th>
+              <th class="field-email">状态</th>
+              <th class="field-email">分类</th>
+              <th class="field-messenger">模板类型</th>
+              <th class="field-messenger">状态</th>
+              <th class="field-messenger">类别</th>
+              <th>语言</th>
+              <th>最后修改</th>
+              <th>操作</th>
+            </tr>
+          </thead>
+          <tbody id="templateTableBody">
+            <!-- WhatsApp 模板数据 -->
+            <tr data-id="1" class="channel-whatsapp">
+              <td><input type="checkbox" class="checkbox row-checkbox" onchange="updateBatchActions()"></td>
+              <td>
+                <div class="template-name">订单确认通知</div>
+                <div class="template-id">order_confirmation_v2</div>
+              </td>
+              <td class="field-whatsapp">tmpl_whatsapp_001</td>
+              <td class="field-whatsapp"><span class="status-badge status-approved">已通过</span></td>
+              <td class="field-whatsapp"><span class="category-tag">通知服务</span></td>
+              <td class="field-email">-</td>
+              <td class="field-email">-</td>
+              <td class="field-email">-</td>
+              <td class="field-messenger">-</td>
+              <td class="field-messenger">-</td>
+              <td class="field-messenger">-</td>
+              <td><span class="language"><span class="flag-icon">🇨🇳</span> 中文</span></td>
+              <td class="last-modified">2026-03-30 14:23</td>
+              <td>
+                <div class="actions">
+                  <button class="action-btn" onclick="showToast('已复制模板')">复制</button>
+                  <button class="action-btn" onclick="showToast('查看模板详情')">查看</button>
+                  <button class="action-btn danger" onclick="showToast('已删除模板', 'error')">删除</button>
+                </div>
+              </td>
+            </tr>
+            <tr data-id="2" class="channel-whatsapp">
+              <td><input type="checkbox" class="checkbox row-checkbox" onchange="updateBatchActions()"></td>
+              <td>
+                <div class="template-name">物流发货通知</div>
+                <div class="template-id">shipping_notification</div>
+              </td>
+              <td class="field-whatsapp">tmpl_whatsapp_002</td>
+              <td class="field-whatsapp"><span class="status-badge status-approved">已通过</span></td>
+              <td class="field-whatsapp"><span class="category-tag">通知服务</span></td>
+              <td class="field-email">-</td>
+              <td class="field-email">-</td>
+              <td class="field-email">-</td>
+              <td class="field-messenger">-</td>
+              <td class="field-messenger">-</td>
+              <td class="field-messenger">-</td>
+              <td><span class="language"><span class="flag-icon">🇺🇸</span> English</span></td>
+              <td class="last-modified">2026-03-29 10:15</td>
+              <td>
+                <div class="actions">
+                  <button class="action-btn" onclick="showToast('已复制模板')">复制</button>
+                  <button class="action-btn" onclick="showToast('查看模板详情')">查看</button>
+                  <button class="action-btn danger" onclick="showToast('已删除模板', 'error')">删除</button>
+                </div>
+              </td>
+            </tr>
+            <tr data-id="3" class="channel-whatsapp">
+              <td><input type="checkbox" class="checkbox row-checkbox" onchange="updateBatchActions()"></td>
+              <td>
+                <div class="template-name">促销活动提醒</div>
+                <div class="template-id">promo_campaign_2026</div>
+              </td>
+              <td class="field-whatsapp">tmpl_whatsapp_003</td>
+              <td class="field-whatsapp"><span class="status-badge status-pending">审核中</span></td>
+              <td class="field-whatsapp"><span class="category-tag">营销推广</span></td>
+              <td class="field-email">-</td>
+              <td class="field-email">-</td>
+              <td class="field-email">-</td>
+              <td class="field-messenger">-</td>
+              <td class="field-messenger">-</td>
+              <td class="field-messenger">-</td>
+              <td><span class="language"><span class="flag-icon">🇨🇳</span> 中文</span></td>
+              <td class="last-modified">2026-03-31 09:00</td>
+              <td>
+                <div class="actions">
+                  <button class="action-btn" onclick="showToast('已复制模板')">复制</button>
+                  <button class="action-btn" onclick="showToast('查看模板详情')">查看</button>
+                  <button class="action-btn danger" onclick="showToast('已删除模板', 'error')">删除</button>
+                </div>
+              </td>
+            </tr>
+            
+            <!-- Email 模板数据 -->
+            <tr data-id="4" class="channel-email">
+              <td><input type="checkbox" class="checkbox row-checkbox" onchange="updateBatchActions()"></td>
+              <td>
+                <div class="template-name">订单发货通知</div>
+                <div class="template-id">email_order_shipped</div>
+              </td>
+              <td class="field-whatsapp">-</td>
+              <td class="field-whatsapp">-</td>
+              <td class="field-whatsapp">-</td>
+              <td class="field-email">您的订单已发货</td>
+              <td class="field-email"><span class="status-badge status-active">启用</span></td>
+              <td class="field-email"><span class="category-tag">订单类</span></td>
+              <td class="field-messenger">-</td>
+              <td class="field-messenger">-</td>
+              <td class="field-messenger">-</td>
+              <td><span class="language"><span class="flag-icon">🇨🇳</span> 中文</span></td>
+              <td class="last-modified">2026-03-28 16:45</td>
+              <td>
+                <div class="actions">
+                  <button class="action-btn" onclick="showToast('已复制模板')">复制</button>
+                  <button class="action-btn" onclick="showToast('创建发送计划')">创建计划</button>
+                  <button class="action-btn danger" onclick="showToast('已删除模板', 'error')">删除</button>
+                </div>
+              </td>
+            </tr>
+            <tr data-id="5" class="channel-email">
+              <td><input type="checkbox" class="checkbox row-checkbox" onchange="updateBatchActions()"></td>
+              <td>
+                <div class="template-name">促销活动邮件</div>
+                <div class="template-id">email_promo_2026</div>
+              </td>
+              <td class="field-whatsapp">-</td>
+              <td class="field-whatsapp">-</td>
+              <td class="field-whatsapp">-</td>
+              <td class="field-email">🎉 春季大促开始啦！</td>
+              <td class="field-email"><span class="status-badge status-active">启用</span></td>
+              <td class="field-email"><span class="category-tag">营销类</span></td>
+              <td class="field-messenger">-</td>
+              <td class="field-messenger">-</td>
+              <td class="field-messenger">-</td>
+              <td><span class="language"><span class="flag-icon">🇺🇸</span> English</span></td>
+              <td class="last-modified">2026-03-27 11:30</td>
+              <td>
+                <div class="actions">
+                  <button class="action-btn" onclick="showToast('已复制模板')">复制</button>
+                  <button class="action-btn" onclick="showToast('创建发送计划')">创建计划</button>
+                  <button class="action-btn danger" onclick="showToast('已删除模板', 'error')">删除</button>
+                </div>
+              </td>
+            </tr>
+            
+            <!-- Messenger 模板数据 -->
+            <tr data-id="6" class="channel-messenger">
+              <td><input type="checkbox" class="checkbox row-checkbox" onchange="updateBatchActions()"></td>
+              <td>
+                <div class="template-name">欢迎消息</div>
+                <div class="template-id">messenger_welcome</div>
+              </td>
+              <td class="field-whatsapp">-</td>
+              <td class="field-whatsapp">-</td>
+              <td class="field-whatsapp">-</td>
+              <td class="field-email">-</td>
+              <td class="field-email">-</td>
+              <td class="field-email">-</td>
+              <td class="field-messenger">通知类</td>
+              <td class="field-messenger"><span class="status-badge status-active">启用</span></td>
+              <td class="field-messenger"><span class="category-tag">客户服务</span></td>
+              <td><span class="language"><span class="flag-icon">🇺🇸</span> English</span></td>
+              <td class="last-modified">2026-03-26 09:15</td>
+              <td>
+                <div class="actions">
+                  <button class="action-btn" onclick="showToast('已复制模板')">复制</button>
+                  <button class="action-btn" onclick="showToast('查看模板详情')">查看</button>
+                  <button class="action-btn danger" onclick="showToast('已删除模板', 'error')">删除</button>
+                </div>
+              </td>
+            </tr>
+            <tr data-id="7" class="channel-messenger">
+              <td><input type="checkbox" class="checkbox row-checkbox" onchange="updateBatchActions()"></td>
+              <td>
+                <div class="template-name">促销推广</div>
+                <div class="template-id">messenger_promo</div>
+              </td>
+              <td class="field-whatsapp">-</td>
+              <td class="field-whatsapp">-</td>
+              <td class="field-whatsapp">-</td>
+              <td class="field-email">-</td>
+              <td class="field-email">-</td>
+              <td class="field-email">-</td>
+              <td class="field-messenger">营销类</td>
+              <td class="field-messenger"><span class="status-badge status-archived">已归档</span></td>
+              <td class="field-messenger"><span class="category-tag">促销活动</span></td>
+              <td><span class="language"><span class="flag-icon">🇨🇳</span> 中文</span></td>
+              <td class="last-modified">2026-03-25 14:20</td>
+              <td>
+                <div class="actions">
+                  <button class="action-btn" onclick="showToast('已复制模板')">复制</button>
+                  <button class="action-btn" onclick="showToast('查看模板详情')">查看</button>
+                  <button class="action-btn danger" onclick="showToast('已删除模板', 'error')">删除</button>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <div class="pagination">
+          <div class="pagination-info">显示 1-7 共 24 个模板</div>
+          <div class="pagination-controls">
+            <button class="page-btn" disabled>上一页</button>
+            <button class="page-btn active">1</button>
+            <button class="page-btn">2</button>
+            <button class="page-btn">3</button>
+            <button class="page-btn">下一页</button>
+          </div>
         </div>
       </div>
     </div>
 
-    <!-- ========== 主内容区 ========== -->
-    <div class="main-content">
-      <!-- 面包屑导航 -->
-      <div class="breadcrumb">
-        <span class="breadcrumb-item">营销</span>
-        <span class="breadcrumb-separator">/</span>
-        <span class="breadcrumb-item active" id="breadcrumbCurrent">我的模板 > WhatsApp API</span>
-      </div>
-
-      <!-- 页面内容：我的模板 -->
-      <div id="templatesPage">
-        <div class="page-header">
-          <div class="page-title">
-            <span id="pageTitleIcon">📱</span>
-            <span id="pageTitleText">WhatsApp API 模板</span>
-          </div>
-          <div class="channel-tabs">
-            <button class="channel-tab active" data-channel="whatsapp" onclick="switchChannel('whatsapp')">
-              <span style="width: 12px; height: 12px; border-radius: 50%; background: #25D366;"></span>
-              WhatsApp API
-            </button>
-            <button class="channel-tab" data-channel="email" onclick="switchChannel('email')">
-              <span style="width: 12px; height: 12px; border-radius: 50%; background: #EA4335;"></span>
-              Email
-            </button>
-            <button class="channel-tab" data-channel="messenger" onclick="switchChannel('messenger')">
-              <span style="width: 12px; height: 12px; border-radius: 50%; background: #0084FF;"></span>
-              Messenger
-            </button>
-          </div>
+    <!-- ========== 群发消息 页面 ========== -->
+    <div id="broadcastPage" class="page-section">
+      <div class="broadcast-stats">
+        <div class="stat-card">
+          <div class="stat-value">12</div>
+          <div class="stat-label">进行中</div>
         </div>
-
-        <div class="filter-bar">
-          <div class="filter-row">
-            <div class="filter-item">
-              <span class="filter-label">🔍 搜索</span>
-              <input type="text" class="filter-input" placeholder="模板名称/ID..." id="searchInput">
-            </div>
-            <div class="filter-item field-whatsapp">
-              <span class="filter-label">状态</span>
-              <select class="filter-select">
-                <option value="">全部</option>
-                <option value="approved">已通过</option>
-                <option value="pending">审核中</option>
-                <option value="rejected">已拒绝</option>
-              </select>
-            </div>
-            <div class="filter-item field-whatsapp">
-              <span class="filter-label">分类</span>
-              <select class="filter-select">
-                <option value="">全部</option>
-                <option value="marketing">营销推广</option>
-                <option value="utility">通知服务</option>
-                <option value="authentication">身份验证</option>
-              </select>
-            </div>
-            <div class="filter-item field-email">
-              <span class="filter-label">状态</span>
-              <select class="filter-select">
-                <option value="">全部</option>
-                <option value="active">启用</option>
-                <option value="disabled">禁用</option>
-              </select>
-            </div>
-            <div class="filter-item field-email">
-              <span class="filter-label">分类</span>
-              <select class="filter-select">
-                <option value="">全部</option>
-                <option value="order">订单类</option>
-                <option value="marketing">营销类</option>
-                <option value="notification">通知类</option>
-              </select>
-            </div>
-            <div class="filter-item field-messenger">
-              <span class="filter-label">状态</span>
-              <select class="filter-select">
-                <option value="">全部</option>
-                <option value="active">启用</option>
-                <option value="archived">已归档</option>
-              </select>
-            </div>
-            <div class="filter-item field-messenger">
-              <span class="filter-label">类型</span>
-              <select class="filter-select">
-                <option value="">全部</option>
-                <option value="notification">通知类</option>
-                <option value="marketing">营销类</option>
-                <option value="subscription">订阅类</option>
-              </select>
-            </div>
-            <div style="flex: 1;"></div>
-            <button class="btn btn-secondary" onclick="showToast('已重置筛选')">重置</button>
-            <button class="btn btn-primary" onclick="showToast('创建新模板')">+ 创建模板</button>
-          </div>
+        <div class="stat-card">
+          <div class="stat-value">156</div>
+          <div class="stat-label">已完成</div>
         </div>
-
-        <div class="batch-actions" id="batchActions">
-          <span class="batch-count">已选择 <span id="selectedCount">0</span> 个模板</span>
-          <button class="btn btn-secondary" onclick="showToast('批量复制')">批量复制</button>
-          <button class="btn btn-secondary field-email" onclick="showToast('批量创建计划')">批量创建计划</button>
-          <button class="btn btn-danger" onclick="showToast('批量删除', 'error')">批量删除</button>
-          <button class="btn btn-secondary" onclick="clearSelection()">取消选择</button>
+        <div class="stat-card">
+          <div class="stat-value">3</div>
+          <div class="stat-label">已取消</div>
         </div>
-
-        <div class="table-container">
-          <table>
-            <thead>
-              <tr>
-                <th style="width: 40px;">
-                  <input type="checkbox" class="checkbox" id="selectAll" onchange="toggleSelectAll()">
-                </th>
-                <th>模板名称</th>
-                <th class="field-whatsapp">模板 ID</th>
-                <th class="field-whatsapp">状态</th>
-                <th class="field-whatsapp">分类</th>
-                <th class="field-email">主题</th>
-                <th class="field-email">状态</th>
-                <th class="field-email">分类</th>
-                <th class="field-messenger">模板类型</th>
-                <th class="field-messenger">状态</th>
-                <th class="field-messenger">类别</th>
-                <th>语言</th>
-                <th>最后修改</th>
-                <th>操作</th>
-              </tr>
-            </thead>
-            <tbody id="templateTableBody">
-              <!-- WhatsApp 模板数据 -->
-              <tr data-id="1" class="channel-whatsapp">
-                <td><input type="checkbox" class="checkbox row-checkbox" onchange="updateBatchActions()"></td>
-                <td>
-                  <div class="template-name">订单确认通知</div>
-                  <div class="template-id">order_confirmation_v2</div>
-                </td>
-                <td class="field-whatsapp">tmpl_whatsapp_001</td>
-                <td class="field-whatsapp"><span class="status-badge status-approved">已通过</span></td>
-                <td class="field-whatsapp"><span class="category-tag">通知服务</span></td>
-                <td class="field-email">-</td>
-                <td class="field-email">-</td>
-                <td class="field-email">-</td>
-                <td class="field-messenger">-</td>
-                <td class="field-messenger">-</td>
-                <td class="field-messenger">-</td>
-                <td><span class="language"><span class="flag-icon">🇨🇳</span> 中文</span></td>
-                <td class="last-modified">2026-03-30 14:23</td>
-                <td>
-                  <div class="actions">
-                    <button class="action-btn" onclick="showToast('已复制模板')">复制</button>
-                    <button class="action-btn" onclick="showToast('查看模板详情')">查看</button>
-                    <button class="action-btn danger" onclick="showToast('已删除模板', 'error')">删除</button>
-                  </div>
-                </td>
-              </tr>
-              <tr data-id="2" class="channel-whatsapp">
-                <td><input type="checkbox" class="checkbox row-checkbox" onchange="updateBatchActions()"></td>
-                <td>
-                  <div class="template-name">物流发货通知</div>
-                  <div class="template-id">shipping_notification</div>
-                </td>
-                <td class="field-whatsapp">tmpl_whatsapp_002</td>
-                <td class="field-whatsapp"><span class="status-badge status-approved">已通过</span></td>
-                <td class="field-whatsapp"><span class="category-tag">通知服务</span></td>
-                <td class="field-email">-</td>
-                <td class="field-email">-</td>
-                <td class="field-email">-</td>
-                <td class="field-messenger">-</td>
-                <td class="field-messenger">-</td>
-                <td class="field-messenger">-</td>
-                <td><span class="language"><span class="flag-icon">🇺🇸</span> English</span></td>
-                <td class="last-modified">2026-03-29 10:15</td>
-                <td>
-                  <div class="actions">
-                    <button class="action-btn" onclick="showToast('已复制模板')">复制</button>
-                    <button class="action-btn" onclick="showToast('查看模板详情')">查看</button>
-                    <button class="action-btn danger" onclick="showToast('已删除模板', 'error')">删除</button>
-                  </div>
-                </td>
-              </tr>
-              <tr data-id="3" class="channel-whatsapp">
-                <td><input type="checkbox" class="checkbox row-checkbox" onchange="updateBatchActions()"></td>
-                <td>
-                  <div class="template-name">促销活动提醒</div>
-                  <div class="template-id">promo_campaign_2026</div>
-                </td>
-                <td class="field-whatsapp">tmpl_whatsapp_003</td>
-                <td class="field-whatsapp"><span class="status-badge status-pending">审核中</span></td>
-                <td class="field-whatsapp"><span class="category-tag">营销推广</span></td>
-                <td class="field-email">-</td>
-                <td class="field-email">-</td>
-                <td class="field-email">-</td>
-                <td class="field-messenger">-</td>
-                <td class="field-messenger">-</td>
-                <td class="field-messenger">-</td>
-                <td><span class="language"><span class="flag-icon">🇨🇳</span> 中文</span></td>
-                <td class="last-modified">2026-03-31 09:00</td>
-                <td>
-                  <div class="actions">
-                    <button class="action-btn" onclick="showToast('已复制模板')">复制</button>
-                    <button class="action-btn" onclick="showToast('查看模板详情')">查看</button>
-                    <button class="action-btn danger" onclick="showToast('已删除模板', 'error')">删除</button>
-                  </div>
-                </td>
-              </tr>
-              
-              <!-- Email 模板数据 -->
-              <tr data-id="4" class="channel-email">
-                <td><input type="checkbox" class="checkbox row-checkbox" onchange="updateBatchActions()"></td>
-                <td>
-                  <div class="template-name">订单发货通知</div>
-                  <div class="template-id">email_order_shipped</div>
-                </td>
-                <td class="field-whatsapp">-</td>
-                <td class="field-whatsapp">-</td>
-                <td class="field-whatsapp">-</td>
-                <td class="field-email">您的订单已发货</td>
-                <td class="field-email"><span class="status-badge status-active">启用</span></td>
-                <td class="field-email"><span class="category-tag">订单类</span></td>
-                <td class="field-messenger">-</td>
-                <td class="field-messenger">-</td>
-                <td class="field-messenger">-</td>
-                <td><span class="language"><span class="flag-icon">🇨🇳</span> 中文</span></td>
-                <td class="last-modified">2026-03-28 16:45</td>
-                <td>
-                  <div class="actions">
-                    <button class="action-btn" onclick="showToast('已复制模板')">复制</button>
-                    <button class="action-btn" onclick="showToast('创建发送计划')">创建计划</button>
-                    <button class="action-btn danger" onclick="showToast('已删除模板', 'error')">删除</button>
-                  </div>
-                </td>
-              </tr>
-              <tr data-id="5" class="channel-email">
-                <td><input type="checkbox" class="checkbox row-checkbox" onchange="updateBatchActions()"></td>
-                <td>
-                  <div class="template-name">促销活动邮件</div>
-                  <div class="template-id">email_promo_2026</div>
-                </td>
-                <td class="field-whatsapp">-</td>
-                <td class="field-whatsapp">-</td>
-                <td class="field-whatsapp">-</td>
-                <td class="field-email">🎉 春季大促开始啦！</td>
-                <td class="field-email"><span class="status-badge status-active">启用</span></td>
-                <td class="field-email"><span class="category-tag">营销类</span></td>
-                <td class="field-messenger">-</td>
-                <td class="field-messenger">-</td>
-                <td class="field-messenger">-</td>
-                <td><span class="language"><span class="flag-icon">🇺🇸</span> English</span></td>
-                <td class="last-modified">2026-03-27 11:30</td>
-                <td>
-                  <div class="actions">
-                    <button class="action-btn" onclick="showToast('已复制模板')">复制</button>
-                    <button class="action-btn" onclick="showToast('创建发送计划')">创建计划</button>
-                    <button class="action-btn danger" onclick="showToast('已删除模板', 'error')">删除</button>
-                  </div>
-                </td>
-              </tr>
-              
-              <!-- Messenger 模板数据 -->
-              <tr data-id="6" class="channel-messenger">
-                <td><input type="checkbox" class="checkbox row-checkbox" onchange="updateBatchActions()"></td>
-                <td>
-                  <div class="template-name">欢迎消息</div>
-                  <div class="template-id">messenger_welcome</div>
-                </td>
-                <td class="field-whatsapp">-</td>
-                <td class="field-whatsapp">-</td>
-                <td class="field-whatsapp">-</td>
-                <td class="field-email">-</td>
-                <td class="field-email">-</td>
-                <td class="field-email">-</td>
-                <td class="field-messenger">通知类</td>
-                <td class="field-messenger"><span class="status-badge status-active">启用</span></td>
-                <td class="field-messenger"><span class="category-tag">客户服务</span></td>
-                <td><span class="language"><span class="flag-icon">🇺🇸</span> English</span></td>
-                <td class="last-modified">2026-03-26 09:15</td>
-                <td>
-                  <div class="actions">
-                    <button class="action-btn" onclick="showToast('已复制模板')">复制</button>
-                    <button class="action-btn" onclick="showToast('查看模板详情')">查看</button>
-                    <button class="action-btn danger" onclick="showToast('已删除模板', 'error')">删除</button>
-                  </div>
-                </td>
-              </tr>
-              <tr data-id="7" class="channel-messenger">
-                <td><input type="checkbox" class="checkbox row-checkbox" onchange="updateBatchActions()"></td>
-                <td>
-                  <div class="template-name">促销推广</div>
-                  <div class="template-id">messenger_promo</div>
-                </td>
-                <td class="field-whatsapp">-</td>
-                <td class="field-whatsapp">-</td>
-                <td class="field-whatsapp">-</td>
-                <td class="field-email">-</td>
-                <td class="field-email">-</td>
-                <td class="field-email">-</td>
-                <td class="field-messenger">营销类</td>
-                <td class="field-messenger"><span class="status-badge status-archived">已归档</span></td>
-                <td class="field-messenger"><span class="category-tag">促销活动</span></td>
-                <td><span class="language"><span class="flag-icon">🇨🇳</span> 中文</span></td>
-                <td class="last-modified">2026-03-25 14:20</td>
-                <td>
-                  <div class="actions">
-                    <button class="action-btn" onclick="showToast('已复制模板')">复制</button>
-                    <button class="action-btn" onclick="showToast('查看模板详情')">查看</button>
-                    <button class="action-btn danger" onclick="showToast('已删除模板', 'error')">删除</button>
-                  </div>
-                </td>
-              </tr>
-            </tbody>
-          </table>
-          <div class="pagination">
-            <div class="pagination-info">显示 1-7 共 24 个模板</div>
-            <div class="pagination-controls">
-              <button class="page-btn" disabled>上一页</button>
-              <button class="page-btn active">1</button>
-              <button class="page-btn">2</button>
-              <button class="page-btn">3</button>
-              <button class="page-btn">下一页</button>
-            </div>
-          </div>
+        <div class="stat-card">
+          <div class="stat-value">171</div>
+          <div class="stat-label">总计</div>
         </div>
       </div>
 
-      <!-- 页面内容：群发消息（隐藏） -->
-      <div id="broadcastPage" style="display: none;">
-        <div class="page-header">
-          <div class="page-title">
-            <span>📢</span>
-            <span>群发消息</span>
+      <div class="filter-bar">
+        <div class="filter-row">
+          <div class="filter-item">
+            <span class="filter-label">🔍 搜索</span>
+            <input type="text" class="filter-input" placeholder="任务名称...">
           </div>
+          <div class="filter-item">
+            <span class="filter-label">状态</span>
+            <select class="filter-select">
+              <option value="">全部</option>
+              <option value="running">进行中</option>
+              <option value="completed">已完成</option>
+              <option value="cancelled">已取消</option>
+            </select>
+          </div>
+          <div class="filter-item">
+            <span class="filter-label">渠道</span>
+            <select class="filter-select">
+              <option value="">全部</option>
+              <option value="whatsapp">WhatsApp</option>
+              <option value="email">Email</option>
+              <option value="messenger">Messenger</option>
+            </select>
+          </div>
+          <div style="flex: 1;"></div>
+          <button class="btn btn-secondary" onclick="showToast('已重置筛选')">重置</button>          <button class="btn btn-primary" onclick="showToast('创建群发任务')">+ 创建任务</button>
         </div>
-        
-        <div class="broadcast-stats">
-          <div class="stat-card">
-            <div class="stat-value">12</div>
-            <div class="stat-label">进行中</div>
+      </div>
+
+      <div class="table-container">
+        <table>
+          <thead>
+            <tr>
+              <th>任务名称</th>
+              <th>渠道</th>
+              <th>发送数量</th>
+              <th>状态</th>
+              <th>创建时间</th>
+              <th>操作</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>春季促销活动</td>
+              <td>📱 WhatsApp</td>
+              <td>5,000</td>
+              <td><span class="status-badge status-approved">进行中</span></td>
+              <td>2026-03-30 10:00</td>
+              <td>
+                <div class="actions">
+                  <button class="action-btn" onclick="showToast('查看详情')">查看</button>
+                  <button class="action-btn danger" onclick="showToast('已取消任务', 'error')">取消</button>
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td>新品上架通知</td>
+              <td>📧 Email</td>
+              <td>12,000</td>
+              <td><span class="status-badge status-active">已完成</span></td>
+              <td>2026-03-28 14:30</td>
+              <td>
+                <div class="actions">
+                  <button class="action-btn" onclick="showToast('查看详情')">查看</button>
+                  <button class="action-btn" onclick="showToast('已复制任务')">复制</button>
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td>会员专属优惠</td>
+              <td>💬 Messenger</td>
+              <td>3,500</td>
+              <td><span class="status-badge status-archived">已取消</span></td>
+              <td>2026-03-25 09:00</td>
+              <td>
+                <div class="actions">
+                  <button class="action-btn" onclick="showToast('查看详情')">查看</button>
+                  <button class="action-btn" onclick="showToast('已复制任务')">复制</button>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <div class="pagination">
+          <div class="pagination-info">显示 1-3 共 12 个任务</div>
+          <div class="pagination-controls">
+            <button class="page-btn" disabled>上一页</button>
+            <button class="page-btn active">1</button>
+            <button class="page-btn">2</button>
+            <button class="page-btn">3</button>
+            <button class="page-btn">4</button>
+            <button class="page-btn">下一页</button>
           </div>
-          <div class="stat-card">
-            <div class="stat-value">156</div>
-            <div class="stat-label">已完成</div>
-          </div>
-          <div class="stat-card">
-            <div class="stat-value">3</div>
-            <div class="stat-label">已取消</div>
-          </div>
-          <div class="stat-card">
-            <div class="stat-value">171</div>
-            <div class="stat-label">总计</div>
-          </div>
-        </div>
-        
-        <div class="table-container">
-          <table>
-            <thead>
-              <tr>
-                <th>任务名称</th>
-                <th>渠道</th>
-                <th>发送数量</th>
-                <th>状态</th>
-                <th>创建时间</th>
-                <th>操作</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>春季促销活动</td>
-                <td>📱 WhatsApp</td>
-                <td>5,000</td>
-                <td><span class="status-badge status-approved">进行中</span></td>
-                <td>2026-03-30 10:00</td>
-                <td>
-                  <div class="actions">
-                    <button class="action-btn" onclick="showToast('查看详情')">查看</button>
-                    <button class="action-btn danger" onclick="showToast('已取消任务', 'error')">取消</button>
-                  </div>
-                </td>
-              </tr>
-            </tbody>
-          </table>
         </div>
       </div>
     </div>
@@ -939,68 +932,35 @@
   <div class="toast" id="toast"></div>
 
   <script>
-    let currentPage = 'templates';
     let currentChannel = 'whatsapp';
 
-    function switchPage(page) {
-      currentPage = page;
-      
-      // 更新导航状态
-      document.querySelectorAll('.nav-item').forEach(item => {
-        item.classList.remove('active');
+    function switchPrimary(page) {
+      document.querySelectorAll('.primary-tab').forEach(tab => {
+        tab.classList.remove('active');
       });
       event.currentTarget.classList.add('active');
       
-      // 切换页面显示
       if (page === 'templates') {
-        document.getElementById('templatesPage').style.display = 'block';
-        document.getElementById('broadcastPage').style.display = 'none';
-        document.getElementById('breadcrumbCurrent').textContent = '我的模板 > ' + getChannelName(currentChannel);
+        document.getElementById('templatesPage').classList.add('active');
+        document.getElementById('broadcastPage').classList.remove('active');
       } else {
-        document.getElementById('templatesPage').style.display = 'none';
-        document.getElementById('broadcastPage').style.display = 'block';
-        document.getElementById('breadcrumbCurrent').textContent = '群发消息';
+        document.getElementById('templatesPage').classList.remove('active');
+        document.getElementById('broadcastPage').classList.add('active');
       }
-      
-      showToast('切换到' + (page === 'templates' ? '我的模板' : '群发消息'));
     }
 
     function switchChannel(channel) {
       currentChannel = channel;
       
-      // 更新导航子项状态
-      document.querySelectorAll('.nav-subitem').forEach(item => {
-        item.classList.remove('active');
-        if (item.dataset.channel === channel) {
-          item.classList.add('active');
-        }
-      });
-      
-      // 更新顶部 Tab 状态
-      document.querySelectorAll('.channel-tab').forEach(tab => {
+      document.querySelectorAll('.secondary-tab').forEach(tab => {
         tab.classList.remove('active');
         if (tab.dataset.channel === channel) {
           tab.classList.add('active');
         }
       });
       
-      // 更新 body class
       document.body.className = 'channel-' + channel;
       
-      // 更新面包屑
-      document.getElementById('breadcrumbCurrent').textContent = '我的模板 > ' + getChannelName(channel);
-      
-      // 更新页面标题
-      const icons = { whatsapp: '📱', email: '📧', messenger: '💬' };
-      const titles = { 
-        whatsapp: 'WhatsApp API 模板', 
-        email: 'Email 模板', 
-        messenger: 'Messenger 模板' 
-      };
-      document.getElementById('pageTitleIcon').textContent = icons[channel];
-      document.getElementById('pageTitleText').textContent = titles[channel];
-      
-      // 筛选条件显示/隐藏
       document.querySelectorAll('.filter-item').forEach(item => {
         const select = item.querySelector('select');
         if (select) {
@@ -1025,11 +985,7 @@
     }
 
     function getChannelName(channel) {
-      const names = {
-        whatsapp: 'WhatsApp API',
-        email: 'Email',
-        messenger: 'Messenger'
-      };
+      const names = { whatsapp: 'WhatsApp API', email: 'Email', messenger: 'Messenger' };
       return names[channel] || channel;
     }
 
@@ -1068,7 +1024,6 @@
       }, 2000);
     }
 
-    // 初始化
     switchChannel('whatsapp');
   </script>
 </body>
