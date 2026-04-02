@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SaleSmartly 邮箱发送功能优化方案</title>
+    <style>
+        :root {
+            --primary-color: #1890ff;
+            --success-color: #52c41a;
+            --warning-color: #faad14;
+            --error-color: #f5222d;
+            --text-primary: #262626;
+            --text-secondary: #595959;
+            --border-color: #d9d9d9;
+            --bg-color: #fafafa;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif;
+            line-height: 1.6; color: var(--text-primary);
+            background: var(--bg-color); padding: 40px 20px;
+        }
+        .container { max-width: 1200px; margin: 0 auto; }
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white; padding: 40px; border-radius: 12px;
+            margin-bottom: 30px; box-shadow: 0 4px 20px rgba(102, 126, 234, 0.3);
+        }
+        .header h1 { font-size: 32px; margin-bottom: 10px; }
+        .header .subtitle { font-size: 16px; opacity: 0.9; }
+        .card {
+            background: #ffffff; border-radius: 12px; padding: 30px;
+            margin-bottom: 24px; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+        }
+        .card h2 {
+            font-size: 24px; color: var(--primary-color); margin-bottom: 20px;
+            padding-bottom: 12px; border-bottom: 2px solid var(--primary-color);
+        }
+        .card h3 { font-size: 18px; color: var(--text-primary); margin: 24px 0 12px; }
+        .info-box {
+            background: #e6f7ff; border: 1px solid #91d5ff;
+            border-radius: 8px; padding: 16px; margin: 16px 0;
+        }
+        .info-box.warning { background: #fffbe6; border-color: #ffe58f; }
+        .comparison-table { width: 100%; border-collapse: collapse; margin: 20px 0; }
+        .comparison-table th, .comparison-table td {
+            padding: 12px 16px; text-align: left; border: 1px solid var(--border-color);
+        }
+        .comparison-table th { background: #fafafa; font-weight: 600; }
+        .comparison-table tr:nth-child(even) { background: #fafafa; }
+        .feature-tag {
+            display: inline-block; padding: 4px 12px; border-radius: 12px;
+            font-size: 12px; font-weight: 500; margin: 4px;
+        }
+        .feature-tag.new { background: #e6f7ff; color: #1890ff; }
+        .feature-tag.optimized { background: #f6ffed; color: #52c41a; }
+        .feature-tag.existing { background: #f5f5f5; color: #595959; }
+        .flow-diagram {
+            background: #fafafa; border: 1px solid var(--border-color);
+            border-radius: 8px; padding: 24px; margin: 20px 0;
+        }
+        .flow-step {
+            display: flex; align-items: center; margin: 12px 0; padding: 12px;
+            background: white; border-radius: 6px;
+            border-left: 4px solid var(--primary-color);
+        }
+        .flow-step .step-number {
+            width: 32px; height: 32px; background: var(--primary-color);
+            color: white; border-radius: 50%; display: flex;
+            align-items: center; justify-content: center;
+            font-weight: bold; margin-right: 16px; flex-shrink: 0;
+        }
+        .mockup {
+            border: 1px solid var(--border-color); border-radius: 8px;
+            overflow: hidden; margin: 20px 0;
+        }
+        .mockup-header {
+            background: #f5f5f5; padding: 12px 16px;
+            border-bottom: 1px solid var(--border-color); font-weight: 600;
+        }
+        .mockup-body { padding: 20px; background: white; }
+        .form-group { margin-bottom: 16px; }
+        .form-group label { display: block; margin-bottom: 6px; font-weight: 500; }
+        .radio-group { display: flex; flex-direction: column; gap: 12px; }
+        .radio-option {
+            display: flex; align-items: flex-start; padding: 12px;
+            border: 1px solid var(--border-color); border-radius: 6px;
+            cursor: pointer; transition: all 0.2s;
+        }
+        .radio-option:hover { border-color: var(--primary-color); background: #e6f7ff; }
+        .radio-option input[type="radio"] { margin-right: 12px; margin-top: 4px; }
+        .radio-option .option-content { flex: 1; }
+        .radio-option .option-title { font-weight: 500; margin-bottom: 4px; }
+        .radio-option .option-desc { font-size: 13px; color: var(--text-secondary); }
+        .btn {
+            display: inline-block; padding: 10px 24px; border-radius: 6px;
+            font-size: 14px; font-weight: 500; cursor: pointer; border: none;
+        }
+        .btn-primary { background: var(--primary-color); color: white; }
+        .btn-secondary { background: white; color: var(--text-primary); border: 1px solid var(--border-color); }
+        .btn-group { display: flex; gap: 12px; margin-top: 20px; }
+        .toc {
+            background: #fafafa; border: 1px solid var(--border-color);
+            border-radius: 8px; padding: 20px; margin-bottom: 24px;
+        }
+        .toc h3 { margin-top: 0; }
+        .toc ul { list-style: none; }
+        .toc li { padding: 6px 0; }
+        .toc a { color: var(--primary-color); text-decoration: none; }
+        code {
+            background: #f5f5f5; padding: 2px 6px; border-radius: 4px;
+            font-family: monospace; font-size: 13px;
+        }
+        pre {
+            background: #282c34; color: #abb2bf; padding: 16px;
+            border-radius: 8px; overflow-x: auto; font-size: 12px; line-height: 1.5;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="header">
+        <h1>📧 SaleSmartly 邮箱发送功能优化方案</h1>
+        <div class="subtitle">统一邮箱群发与 EDM 代发 · 提升用户体验 · 增强发送灵活性</div>
+    </div>
+
+    <div class="toc">
+        <h3>📑 目录</h3>
+        <ul>
+            <li><a href="#current-analysis">1. 当前功能分析</a></li>
+            <li><a href="#optimization-goals">2. 优化目标</a></li>
+            <li><a href="#solution-design">3. 解决方案设计</a></li>
+            <li><a href="#interaction-design">4. 交互设计</a></li>
+            <li><a href="#technical-implementation">5. 技术实现要点</a></li>
+        </ul>
+    </div>
+
+    <div class="card" id="current-analysis">
+        <h2>1. 当前功能分析</h2>
+        <h3>1.1 现有两种发送路径对比</h3>
+        <table class="comparison-table">
+            <thead>
+                <tr>
+                    <th width="20%">对比维度</th>
+                    <th width="40%">Email 群发</th>
+                    <th width="40%">EDM 代发</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr><td><strong>入口位置</strong></td><td>营销 → 消息群发 → Email 渠道</td><td>营销 → 第三方代发</td></tr>
+                <tr><td><strong>发送方式</strong></td><td>通过用户集成的邮箱直接发送</td><td>通过平台 EDM 代发服务</td></tr>
+                <tr><td><strong>邮箱授权</strong></td><td>需要授权邮箱账号（IMAP/SMTP）</td><td>无需授权邮箱账号</td></tr>
+                <tr><td><strong>费用</strong></td><td>免费</td><td>收费（按发送量计费）</td></tr>
+                <tr><td><strong>发件人</strong></td><td>用户集成的邮箱地址</td><td>可自定义发件人邮箱</td></tr>
+                <tr><td><strong>优势</strong></td><td>成本低、品牌一致性好</td><td>送达率高、不消耗邮箱信誉</td></tr>
+                <tr><td><strong>劣势</strong></td><td>受邮箱服务商限制</td><td>需要额外费用</td></tr>
+            </tbody>
+        </table>
+        <div class="info-box warning">
+            <strong>⚠️ 当前问题：</strong>
+            <ul>
+                <li>两个功能入口分离，用户需要理解两种发送方式的区别</li>
+                <li>无法在同一计划中混合使用两种发送方式</li>
+                <li>不支持按客户归属自动选择发送邮箱</li>
+                <li>创建群发计划时需要预先决定使用哪种方式</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="card" id="optimization-goals">
+        <h2>2. 优化目标</h2>
+        <div class="feature-tag existing">保留现有功能</div>
+        <div class="feature-tag optimized">优化交互流程</div>
+        <div class="feature-tag new">新增灵活配置</div>
+        
+        <h3>2.1 核心优化点</h3>
+        <div class="flow-diagram">
+            <div class="flow-step"><div class="step-number">1</div><div><strong>统一入口</strong><p>将「消息群发 -Email」和「第三方代发」合并为统一的「邮件营销」功能</p></div></div>
+            <div class="flow-step"><div class="step-number">2</div><div><strong>灵活选择发送通道</strong><p>在创建计划时可选择：集成邮箱发送 / 代发邮箱发送 / 智能分配</p></div></div>
+            <div class="flow-step"><div class="step-number">3</div><div><strong>客户归属邮箱</strong><p>支持每个客户绑定归属邮箱，自动使用该邮箱发送</p></div></div>
+            <div class="flow-step"><div class="step-number">4</div><div><strong>指定邮箱发送</strong><p>支持临时指定任意已集成邮箱或代发邮箱发送</p></div></div>
+        </div>
+    </div>
+
+    <div class="card" id="solution-design">
+        <h2>3. 解决方案设计</h2>
+        <h3>3.1 发送通道配置</h3>
+        <div class="mockup">
+            <div class="mockup-header">⚙️ 发送方式选择</div>
+            <div class="mockup-body">
+                <div class="form-group">
+                    <label>📤 发送方式</label>
+                    <div class="radio-group">
+                        <label class="radio-option">
+                            <input type="radio" name="sendMethod" value="smart" checked>
+                            <div class="option-content">
+                                <div class="option-title">🤖 智能分配（推荐）</div>
+                                <div class="option-desc">系统根据客户归属自动选择：有归属用归属邮箱，无归属用代发邮箱</div>
+                            </div>
+                        </label>
+                        <label class="radio-option">
+                            <input type="radio" name="sendMethod" value="integrated">
+                            <div class="option-content">
+                                <div class="option-title">📧 统一使用集成邮箱发送</div>
+                                <div class="option-desc">从已授权邮箱中选择一个作为发件人，适合品牌一致性要求高的场景</div>
+                            </div>
+                        </label>
+                        <label class="radio-option">
+                            <input type="radio" name="sendMethod" value="edm">
+                            <div class="option-content">
+                                <div class="option-title">🚀 统一使用代发邮箱发送</div>
+                                <div class="option-desc">使用平台 EDM 服务，可自定义发件人地址，送达率高，按量计费</div>
+                            </div>
+                        </label>
+                        <label class="radio-option">
+                            <input type="radio" name="sendMethod" value="attribution">
+                            <div class="option-content">
+                                <div class="option-title">👤 按客户归属邮箱发送</div>
+                                <div class="option-desc">每个客户使用其绑定的归属邮箱发送，适合多销售团队、多品牌场景</div>
+                            </div>
+                        </label>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="card" id="interaction-design">
+        <h2>4. 交互设计</h2>
+        <h3>4.1 创建计划流程</h3>
+        <div class="flow-diagram">
+            <div class="flow-step"><div class="step-number">1</div><div><strong>进入邮件营销</strong><p>营销 → 邮件营销 → 创建计划</p></div></div>
+            <div class="flow-step"><div class="step-number">2</div><div><strong>填写基础信息</strong><p>计划名称（必填，最多 50 字符）</p></div></div>
+            <div class="flow-step"><div class="step-number">3</div><div><strong>选择目标客户</strong><p>全部客户/客户分组/手动选择/导入客户</p></div></div>
+            <div class="flow-step"><div class="step-number">4</div><div><strong>编辑邮件内容</strong><p>邮件主题 + 富文本编辑器 + 模板选择 + 附件</p></div></div>
+            <div class="flow-step"><div class="step-number">5</div><div><strong>配置发送通道 ⭐</strong><p>选择发送方式（智能分配/集成邮箱/代发邮箱/归属邮箱）</p></div></div>
+            <div class="flow-step"><div class="step-number">6</div><div><strong>设置发送时间</strong><p>立即发送 / 定时发送 / 分批发送</p></div></div>
+            <div class="flow-step"><div class="step-number">7</div><div><strong>预览并确认</strong><p>预览效果 → 确认配置 → 提交计划</p></div></div>
+        </div>
+
+        <h3>4.2 客户归属邮箱管理</h3>
+        <div class="info-box">
+            <strong>💡 客户归属邮箱功能：</strong>
+            <ul>
+                <li>在客户详情页新增「归属邮箱」字段</li>
+                <li>支持批量设置客户归属邮箱</li>
+                <li>归属邮箱必须是已集成的邮箱账号</li>
+                <li>支持导入客户时指定归属邮箱</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="card" id="technical-implementation">
+        <h2>5. 技术实现要点</h2>
+        <h3>5.1 数据模型变更</h3>
+        <div class="info-box">
+            <strong>📦 需要新增/修改的字段：</strong>
+            <ul>
+                <li><code>customers</code> 表新增 <code>attribution_email_id</code>（关联已集成邮箱）</li>
+                <li><code>email_campaigns</code> 表新增 <code>send_method</code>（smart/integrated/edm/attribution）</li>
+                <li><code>email_campaigns</code> 表新增 <code>sender_email_id</code>（指定发件邮箱）</li>
+                <li><code>email_logs</code> 表新增 <code>send_channel</code>（记录实际发送通道）</li>
+            </ul>
+        </div>
+
+        <h3>5.2 发送通道选择逻辑</h3>
+        <div class="mockup">
+            <div class="mockup-header">💻 核心逻辑伪代码</div>
+            <div class="mockup-body">
+                <pre><code>function selectSendChannel(customer, campaign) {
+    switch (campaign.sendMethod) {
+        case 'smart':
+            // 智能分配：有归属用归属，无归属用代发
+            if (customer.attributionEmailId) {
+                return { channel: 'integrated', emailId: customer.attributionEmailId };
+            } else {
+                return { channel: 'edm', emailId: campaign.defaultEdmEmailId };
+            }
+        case 'integrated':
+            return { channel: 'integrated', emailId: campaign.senderEmailId };
+        case 'edm':
+            return { channel: 'edm', senderAddress: campaign.customSenderAddress };
+        case 'attribution':
+            if (customer.attributionEmailId) {
+                return { channel: 'integrated', emailId: customer.attributionEmailId };
+            } else {
+                return { channel: 'integrated', emailId: campaign.defaultEmailId };
+            }
+    }
+}</code></pre>
+            </div>
+        </div>
+
+        <h3>5.3 发送能力对比</h3>
+        <table class="comparison-table">
+            <thead><tr><th>能力</th><th>集成邮箱</th><th>EDM 代发</th></tr></thead>
+            <tbody>
+                <tr><td>日发送限额</td><td>取决于邮箱服务商（通常 500-2000 封/天）</td><td>平台配额（可购买增加）</td></tr>
+                <tr><td>送达率</td><td>中等（可能进垃圾箱）</td><td>高（专业邮件服务器）</td></tr>
+                <tr><td>追踪能力</td><td>基础（打开/点击）</td><td>完整（漏斗转化/行为分析）</td></tr>
+                <tr><td>成本</td><td>免费</td><td>按量计费</td></tr>
+                <tr><td>品牌一致性</td><td>高（自有域名）</td><td>中（可配置发件人）</td></tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+</body>
+</html>
