@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SaleSmartly 邮件群发优化方案 v3</title>
+    <style>
+        :root {
+            --primary: #1890ff;
+            --success: #52c41a;
+            --warning: #faad14;
+            --error: #f5222d;
+            --text: #262626;
+            --text-secondary: #595959;
+            --border: #d9d9d9;
+            --bg: #fafafa;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+            line-height: 1.6; color: var(--text); background: var(--bg);
+            padding: 40px 20px;
+        }
+        .container { max-width: 1100px; margin: 0 auto; }
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white; padding: 40px; border-radius: 12px;
+            margin-bottom: 30px;
+        }
+        .header h1 { font-size: 28px; margin-bottom: 8px; }
+        .header .subtitle { font-size: 14px; opacity: 0.9; }
+        .card {
+            background: #fff; border-radius: 12px; padding: 28px;
+            margin-bottom: 24px; box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+        }
+        .card h2 {
+            font-size: 22px; color: var(--primary); margin-bottom: 18px;
+            padding-bottom: 12px; border-bottom: 2px solid var(--primary);
+        }
+        .card h3 { font-size: 17px; margin: 20px 0 12px; color: var(--text); }
+        .info-box {
+            background: #e6f7ff; border: 1px solid #91d5ff;
+            border-radius: 8px; padding: 14px; margin: 16px 0;
+        }
+        .info-box.warning { background: #fffbe6; border-color: #ffe58f; }
+        .info-box.success { background: #f6ffed; border-color: #b7eb8f; }
+        table { width: 100%; border-collapse: collapse; margin: 16px 0; }
+        th, td { padding: 10px 14px; text-align: left; border: 1px solid var(--border); }
+        th { background: #fafafa; font-weight: 600; }
+        tr:nth-child(even) { background: #fafafa; }
+        .flow {
+            background: #fafafa; border: 1px solid var(--border);
+            border-radius: 8px; padding: 20px; margin: 16px 0;
+        }
+        .step {
+            display: flex; align-items: flex-start; margin: 12px 0; padding: 14px;
+            background: #fff; border-radius: 6px;
+            border-left: 4px solid var(--primary);
+        }
+        .step-num {
+            width: 28px; height: 28px; background: var(--primary);
+            color: #fff; border-radius: 50%; display: flex;
+            align-items: center; justify-content: center;
+            font-weight: bold; margin-right: 14px; flex-shrink: 0; font-size: 13px;
+        }
+        .mockup {
+            border: 1px solid var(--border); border-radius: 8px;
+            overflow: hidden; margin: 16px 0;
+        }
+        .mockup-header {
+            background: #f5f5f5; padding: 10px 14px;
+            border-bottom: 1px solid var(--border); font-weight: 600; font-size: 13px;
+        }
+        .mockup-body { padding: 16px; background: #fff; }
+        .mockup-body pre {
+            font-size: 11px; line-height: 1.7; overflow-x: auto;
+            background: #282c34; color: #abb2bf; padding: 14px; border-radius: 6px;
+        }
+        code {
+            background: #f5f5f5; padding: 2px 6px; border-radius: 4px;
+            font-family: monospace; font-size: 12px;
+        }
+        .mermaid {
+            background: #fff; border: 1px solid var(--border);
+            border-radius: 8px; padding: 20px; margin: 16px 0;
+            text-align: center;
+        }
+    </style>
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+    <script>mermaid.initialize({ startOnLoad: true, theme: 'default' });</script>
+</head>
+<body>
+<div class="container">
+    <div class="header">
+        <h1>📧 SaleSmartly 邮件群发优化方案 v3</h1>
+        <div class="subtitle">受众驱动 · 费用透明 · 智能推荐</div>
+    </div>
+
+    <div class="card">
+        <h2>🎯 核心产品决策</h2>
+        <div class="info-box">
+            <strong>关键洞察：</strong> 发送方式不是用户的主观偏好，而是基于<strong>受众特征</strong>和<strong>费用预算</strong>的客观决策
+        </div>
+        
+        <h3>创建路径设计</h3>
+        <div class="flow">
+            <div class="step"><div class="step-num">1</div><div><strong>选择受众</strong> — 决定发送策略的基础数据</div></div>
+            <div class="step"><div class="step-num">2</div><div><strong>系统推荐发送策略</strong> — 基于受众数量、归属关系、费用预估</div></div>
+            <div class="step"><div class="step-num">3</div><div><strong>编辑邮件内容</strong> — 主题、内容、模板、附件</div></div>
+            <div class="step"><div class="step-num">4</div><div><strong>确认发送</strong> — 再次确认费用和发送策略</div></div>
+        </div>
+    </div>
+
+    <div class="card">
+        <h2>📊 决策矩阵：受众特征 → 推荐策略</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>场景</th>
+                    <th>受众特征</th>
+                    <th>推荐方案</th>
+                    <th>费用</th>
+                    <th>原因</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>销售跟进</td>
+                    <td>客户有归属邮箱</td>
+                    <td>归属邮箱发送</td>
+                    <td>免费</td>
+                    <td>销售个人跟进，品牌一致性</td>
+                </tr>
+                <tr>
+                    <td>小批量营销</td>
+                    <td>&lt;500 人，无归属</td>
+                    <td>邮箱直发</td>
+                    <td>免费</td>
+                    <td>在限额内，成本最优</td>
+                </tr>
+                <tr>
+                    <td>中批量营销</td>
+                    <td>500-2000 人</td>
+                    <td>智能混合</td>
+                    <td>部分收费</td>
+                    <td>平衡成本和送达率</td>
+                </tr>
+                <tr>
+                    <td>大批量营销</td>
+                    <td>&gt;2000 人</td>
+                    <td>EDM 代发</td>
+                    <td>收费</td>
+                    <td>避免封号，送达率高</td>
+                </tr>
+                <tr>
+                    <td>重要通知</td>
+                    <td>高价值客户（&lt;100）</td>
+                    <td>邮箱直发</td>
+                    <td>免费</td>
+                    <td>品牌信任度优先</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="card">
+        <h2>🎨 界面设计：步骤 1 - 选择受众</h2>
+        <div class="mockup">
+            <div class="mockup-header">📋 创建群发计划 - 步骤 1/4</div>
+            <div class="mockup-body">
+                <pre>消息群发 / 创建群发计划
+← 返回
+
+选择发送对象 ①
+● 全部客户 (5,280 人)
+○ 客户分组 [▼]
+○ 手动选择 (已选 0 人)
+○ 导入客户 [上传 CSV]
+
+─────────────────────────────────────────
+受众分析（实时）
+─────────────────────────────────────────
+总人数：320 人
+┌────────────────────────────────────────┐
+│ 有归属邮箱：180 人（56%）              │
+│ 无归属邮箱：140 人（44%）              │
+└────────────────────────────────────────┘
+
+发送策略预览：
+┌────────────────────────────────────────┐
+│ 🤖 智能分配（推荐）                    │
+│ • 180 人 → 归属邮箱发送（免费）        │
+│ • 140 人 → EDM 代发（¥0.14）           │
+│ ─────────────────────────────────────  │
+│ 预计总费用：¥0.14                      │
+│ 预计送达率：98%+                       │
+└────────────────────────────────────────┘
+
+[下一步：确认发送策略]  [保存草稿]
+                </pre>
+            </div>
+        </div>
+    </div>
+
+    <div class="card">
+        <h2>🎨 界面设计：步骤 2 - 发送策略选择</h2>
+        <div class="mockup">
+            <div class="mockup-header">📋 创建群发计划 - 步骤 2/4</div>
+            <div class="mockup-body">
+                <pre>选择发送策略 ⭐
+
+┌─────────────────────────────────────────────────┐
+│ 🤖 智能分配（推荐）                    [已选择] │
+├─────────────────────────────────────────────────┤
+│ • 180 人 → 归属邮箱发送（免费）                 │
+│ • 140 人 → EDM 代发（¥0.14）                    │
+│                                                 │
+│ 优势：                                          │
+│ ✓ 成本最优（仅 44% 需要付费）                   │
+│ ✓ 送达率高（98%+）                              │
+│ ✓ 有归属客户体验更好（销售个人邮箱）            │
+│                                                 │
+│ 预计总费用：¥0.14                               │
+│ 预计送达率：98%+                                │
+└─────────────────────────────────────────────────┘
+
+┌─────────────────────────────────────────────────┐
+│ 📧 全部邮箱直发                                 │
+├─────────────────────────────────────────────────┤
+│ • 320 人 → 集成邮箱发送                         │
+│                                                 │
+│ 优势：                                          │
+│ ✓ 完全免费                                      │
+│ ✓ 品牌一致性最好                                │
+│                                                 │
+│ ⚠️ 注意：                                       │
+│ • 接近日发送限额（500 封/天）                    │
+│ • 送达率可能较低（85% 左右）                     │
+│                                                 │
+│ 预计总费用：¥0.00                               │
+│ 预计送达率：85%                                 │
+└─────────────────────────────────────────────────┘
+
+┌─────────────────────────────────────────────────┐
+│ 🚀 全部 EDM 代发                                │
+├─────────────────────────────────────────────────┤
+│ • 320 人 → EDM 专业通道发送                     │
+│                                                 │
+│ 优势：                                          │
+│ ✓ 送达率最高（99%+）                            │
+│ ✓ 不消耗自有邮箱信誉                            │
+│ ✓ 无发送限额                                    │
+│                                                 │
+│ 预计总费用：¥0.32                               │
+│ 预计送达率：99%+                                │
+└─────────────────────────────────────────────────┘
+
+[上一步]  [下一步：编辑邮件内容]
+                </pre>
+            </div>
+        </div>
+    </div>
+
+    <div class="card">
+        <h2>🎨 界面设计：步骤 3 - 编辑内容</h2>
+        <div class="mockup">
+            <div class="mockup-header">📋 创建群发计划 - 步骤 3/4</div>
+            <div class="mockup-body">
+                <pre>计划名称
+┌─────────────────────────────────────┐
+│ 双 12 VIP 客户促销通知        12/50 │
+└─────────────────────────────────────┘
+
+邮件主题
+┌─────────────────────────────────────┐
+│ 【VIP 专享】双 12 提前购，5 折起！  18/100│
+└─────────────────────────────────────┘
+
+邮件内容  ● 直接编辑  ○ 使用模板
+┌─────────────────────────────────────┐
+│ [富文本编辑器]                      │
+│                                     │
+│ 尊敬的 {客户姓名}，                 │
+│                                     │
+│ 感谢您一直以来的支持...             │
+│                                     │
+│ [插入变量] [插入产品] [预览]        │
+└─────────────────────────────────────┘
+
+邮件附件
+┌────────┐ ┌────────┐
+│ + 上传 │ │ 产品册 │
+│        │ │ .pdf   │
+└────────┘ └────────┘
+
+─────────────────────────────────────────
+当前发送策略：智能分配
+受众：320 人 | 预计费用：¥0.14
+[修改发送策略]
+─────────────────────────────────────────
+
+[上一步]  [下一步：确认发送]
+                </pre>
+            </div>
+        </div>
+    </div>
+
+    <div class="card">
+        <h2>🎨 界面设计：步骤 4 - 确认发送</h2>
+        <div class="mockup">
+            <div class="mockup-header">📋 创建群发计划 - 步骤 4/4</div>
+            <div class="mockup-body">
+                <pre>请确认发送信息
+
+┌─────────────────────────────────────────┐
+│ 计划名称：双 12 VIP 客户促销通知         │
+│ 邮件主题：【VIP 专享】双 12 提前购，5 折起！│
+│ 受众总数：320 人                        │
+│ 发送策略：智能分配                      │
+│   • 归属邮箱发送：180 人（免费）        │
+│   • EDM 代发：140 人（¥0.14）           │
+└─────────────────────────────────────────┘
+
+┌─────────────────────────────────────────┐
+│ 费用确认                                │
+├─────────────────────────────────────────┤
+│ 预计费用：¥0.14（140 封 × ¥0.001/封）   │
+│ 扣费账户：[余额账户 ▼]                  │
+│ 当前余额：¥1,250.00                     │
+│ 发送后余额：¥1,249.86                   │
+│                                         │
+│ [充值] [查看账单]                       │
+└─────────────────────────────────────────┘
+
+发送时间
+● 立即发送
+○ 定时发送 [2026-04-03 10:00 ▼]
+○ 分批发送 [每批 50 人] [间隔 10 分钟]
+
+□ 我已阅读并同意《邮件营销服务条款》
+
+[上一步]  [确认发送]
+                </pre>
+            </div>
+        </div>
+    </div>
+
+    <div class="card">
+        <h2>🔧 数据模型变更</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>表名</th>
+                    <th>字段</th>
+                    <th>类型</th>
+                    <th>说明</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><code>customers</code></td>
+                    <td><code>attribution_email_id</code></td>
+                    <td>BIGINT</td>
+                    <td>客户归属邮箱 ID（关联已集成邮箱）</td>
+                </tr>
+                <tr>
+                    <td><code>email_campaigns</code></td>
+                    <td><code>send_strategy</code></td>
+                    <td>VARCHAR(20)</td>
+                    <td>发送策略：smart/integrated/edm</td>
+                </tr>
+                <tr>
+                    <td><code>email_campaigns</code></td>
+                    <td><code>estimated_cost</code></td>
+                    <td>DECIMAL(10,2)</td>
+                    <td>预计费用</td>
+                </tr>
+                <tr>
+                    <td><code>email_campaigns</code></td>
+                    <td><code>actual_cost</code></td>
+                    <td>DECIMAL(10,2)</td>
+                    <td>实际费用</td>
+                </tr>
+                <tr>
+                    <td><code>email_logs</code></td>
+                    <td><code>send_channel</code></td>
+                    <td>VARCHAR(20)</td>
+                    <td>实际发送通道：attribution/integrated/edm</td>
+                </tr>
+                <tr>
+                    <td><code>email_logs</code></td>
+                    <td><code>cost</code></td>
+                    <td>DECIMAL(10,4)</td>
+                    <td>单封费用</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="card">
+        <h2>⚙️ 核心算法：发送策略推荐</h2>
+        <div class="mockup">
+            <div class="mockup-header">💻 推荐逻辑伪代码</div>
+            <div class="mockup-body">
+                <pre><code>function recommendSendStrategy(audience, settings) {
+    const total = audience.length;
+    const withAttribution = audience.filter(
+        c => c.attributionEmailId
+    ).length;
+    const withoutAttribution = total - withAttribution;
+    
+    const strategies = [];
+    
+    // 方案 1: 智能分配
+    const smartCost = withoutAttribution * settings.edmPricePerEmail;
+    strategies.push({
+        type: 'smart',
+        cost: smartCost,
+        deliveryRate: 0.98,
+        score: 100 - (smartCost * 10) + (withAttribution / total * 20),
+        desc: `${withAttribution}人归属邮箱 + ${withoutAttribution}人 EDM`
+    });
+    
+    // 方案 2: 全部邮箱直发
+    strategies.push({
+        type: 'integrated',
+        cost: 0,
+        deliveryRate: 0.85,
+        warning: total > settings.dailyLimit ? '超出日限额' : null,
+        score: 80 - (total > settings.dailyLimit ? 30 : 0),
+        desc: `${total}人全部邮箱直发（免费）`
+    });
+    
+    // 方案 3: 全部 EDM
+    const edmCost = total * settings.edmPricePerEmail;
+    strategies.push({
+        type: 'edm',
+        cost: edmCost,
+        deliveryRate: 0.99,
+        score: 90 - (edmCost * 5),
+        desc: `${total}人全部 EDM 代发`
+    });
+    
+    // 按评分排序，返回推荐顺序
+    return strategies.sort((a, b) => b.score - a.score);
+}</code></pre>
+            </div>
+        </div>
+    </div>
+
+    <div class="card">
+        <h2>📈 关键指标对比</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>能力</th>
+                    <th>邮箱直发</th>
+                    <th>EDM 代发</th>
+                    <th>智能分配</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>单封成本</strong></td>
+                    <td>¥0.00</td>
+                    <td>¥0.001</td>
+                    <td>混合（约 40-60% 免费）</td>
+                </tr>
+                <tr>
+                    <td><strong>日发送限额</strong></td>
+                    <td>500-2000 封</td>
+                    <td>无限制</td>
+                    <td>部分受限</td>
+                </tr>
+                <tr>
+                    <td><strong>送达率</strong></td>
+                    <td>85%</td>
+                    <td>99%+</td>
+                    <td>98%+</td>
+                </tr>
+                <tr>
+                    <td><strong>品牌一致性</strong></td>
+                    <td>高（自有域名）</td>
+                    <td>中（可配置）</td>
+                    <td>高（归属客户用自有）</td>
+                </tr>
+                <tr>
+                    <td><strong>适用场景</strong></td>
+                    <td>小批量、重要客户</td>
+                    <td>大批量营销</td>
+                    <td>混合客户群体</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+</body>
+</html>
