@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PageAgent Demo - OpenClaw 集成测试</title>
+    <style>
+        :root {
+            --primary: #1890ff;
+            --success: #52c41a;
+            --bg: #f5f5f5;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', sans-serif;
+            background: var(--bg); padding: 40px 20px;
+        }
+        .container { max-width: 900px; margin: 0 auto; }
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white; padding: 30px; border-radius: 12px;
+            margin-bottom: 24px; text-align: center;
+        }
+        .header h1 { font-size: 24px; margin-bottom: 8px; }
+        .card {
+            background: #fff; border-radius: 12px; padding: 24px;
+            margin-bottom: 20px; box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+        }
+        .card h2 { font-size: 18px; color: var(--primary); margin-bottom: 16px; }
+        .input-group { display: flex; gap: 12px; margin-bottom: 16px; }
+        input[type="text"] {
+            flex: 1; padding: 12px 16px; border: 1px solid #d9d9d9;
+            border-radius: 8px; font-size: 14px;
+        }
+        button {
+            padding: 12px 24px; background: var(--primary); color: white;
+            border: none; border-radius: 8px; cursor: pointer; font-size: 14px;
+            font-weight: 500;
+        }
+        button:hover { opacity: 0.9; }
+        button:disabled { background: #d9d9d9; cursor: not-allowed; }
+        .output {
+            background: #fafafa; border: 1px solid #d9d9d9;
+            border-radius: 8px; padding: 16px; min-height: 120px;
+            font-family: monospace; font-size: 13px; white-space: pre-wrap;
+        }
+        .status { padding: 8px 12px; border-radius: 6px; margin-bottom: 16px; }
+        .status.loading { background: #e6f7ff; color: #1890ff; }
+        .status.success { background: #f6ffed; color: #52c41a; }
+        .status.error { background: #fff1f0; color: #f5222d; }
+        .examples { margin-top: 16px; }
+        .examples h3 { font-size: 14px; margin-bottom: 8px; color: #595959; }
+        .example-tag {
+            display: inline-block; padding: 6px 12px;
+            background: #f5f5f5; border-radius: 6px;
+            font-size: 12px; margin: 4px; cursor: pointer;
+        }
+        .example-tag:hover { background: #e6f7ff; }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="header">
+        <h1>🚀 PageAgent Demo</h1>
+        <div>OpenClaw 集成测试页面</div>
+    </div>
+
+    <div class="card">
+        <h2>📝 执行指令</h2>
+        <div id="status" class="status" style="display: none;"></div>
+        
+        <div class="input-group">
+            <input type="text" id="commandInput" placeholder="输入自然语言指令，例如：点击登录按钮" />
+            <button id="executeBtn" onclick="executeCommand()">执行</button>
+        </div>
+
+        <div class="examples">
+            <h3>示例指令：</h3>
+            <span class="example-tag" onclick="setCommand('点击页面中的登录按钮')">点击登录按钮</span>
+            <span class="example-tag" onclick="setCommand('填写表单：用户名 admin，密码 123456')">填写表单</span>
+            <span class="example-tag" onclick="setCommand('滚动到页面底部')">滚动到底部</span>
+            <span class="example-tag" onclick="setCommand('提取页面所有标题')">提取标题</span>
+            <span class="example-tag" onclick="setCommand('点击第一个提交按钮')">点击提交</span>
+        </div>
+    </div>
+
+    <div class="card">
+        <h2>📊 执行结果</h2>
+        <div id="output" class="output">等待执行指令...</div>
+    </div>
+
+    <div class="card">
+        <h2>📖 使用说明</h2>
+        <ol style="padding-left: 20px; line-height: 1.8; font-size: 14px;">
+            <li>在上方输入框中输入自然语言指令</li>
+            <li>点击"执行"按钮，PageAgent 将自动分析页面并执行操作</li>
+            <li>查看执行结果和详细信息</li>
+            <li>点击示例指令可快速填充</li>
+        </ol>
+    </div>
+</div>
+
+<script>
+    let agent = null;
+    let isInitialized = false;
+
+    // 初始化 PageAgent
+    async function initAgent() {
+        if (isInitialized) return;
+
+        const statusDiv = document.getElementById('status');
+        statusDiv.style.display = 'block';
+        statusDiv.className = 'status loading';
+        statusDiv.textContent = '正在加载 PageAgent...';
+
+        try {
+            // 动态加载 page-agent
+            const script = document.createElement('script');
+            script.src = 'https://cdn.jsdelivr.net/npm/page-agent@1.7.0/dist/iife/page-agent.demo.js';
+            script.crossOrigin = 'true';
+            
+            await new Promise((resolve, reject) => {
+                script.onload = resolve;
+                script.onerror = reject;
+                document.head.appendChild(script);
+            });
+
+            // 初始化 Agent（使用免费测试 API）
+            agent = new window.PageAgent({
+                language: 'zh-CN',
+            });
+
+            isInitialized = true;
+            statusDiv.className = 'status success';
+            statusDiv.textContent = '✅ PageAgent 已就绪';
+            
+            setTimeout(() => {
+                statusDiv.style.display = 'none';
+            }, 3000);
+
+        } catch (error) {
+            statusDiv.className = 'status error';
+            statusDiv.textContent = '❌ 加载失败：' + error.message;
+            console.error('Failed to initialize PageAgent:', error);
+        }
+    }
+
+    // 执行命令
+    async function executeCommand() {
+        const command = document.getElementById('commandInput').value.trim();
+        if (!command) {
+            alert('请输入指令');
+            return;
+        }
+
+        if (!isInitialized) {
+            await initAgent();
+        }
+
+        const outputDiv = document.getElementById('output');
+        const executeBtn = document.getElementById('executeBtn');
+        const statusDiv = document.getElementById('status');
+
+        executeBtn.disabled = true;
+        outputDiv.textContent = '正在执行：' + command + '\n\n分析中...';
+        
+        statusDiv.style.display = 'block';
+        statusDiv.className = 'status loading';
+        statusDiv.textContent = '⏳ 执行中...';
+
+        try {
+            const startTime = Date.now();
+            const result = await agent.execute(command);
+            const duration = Date.now() - startTime;
+
+            outputDiv.textContent = JSON.stringify({
+                success: result.success,
+                result: result.result,
+                steps: result.steps,
+                duration: duration + 'ms',
+                error: result.error
+            }, null, 2);
+
+            statusDiv.className = 'status success';
+            statusDiv.textContent = '✅ 执行成功 (' + duration + 'ms)';
+
+        } catch (error) {
+            outputDiv.textContent = '❌ 执行失败\n\n' + error.message;
+            statusDiv.className = 'status error';
+            statusDiv.textContent = '❌ 执行失败：' + error.message;
+            console.error('Execution error:', error);
+        } finally {
+            executeBtn.disabled = false;
+            setTimeout(() => {
+                statusDiv.style.display = 'none';
+            }, 5000);
+        }
+    }
+
+    // 设置指令
+    function setCommand(cmd) {
+        document.getElementById('commandInput').value = cmd;
+    }
+
+    // 页面加载时初始化
+    window.addEventListener('load', () => {
+        initAgent();
+    });
+
+    // 回车执行
+    document.getElementById('commandInput').addEventListener('keypress', (e) => {
+        if (e.key === 'Enter') {
+            executeCommand();
+        }
+    });
+</script>
+</body>
+</html>
