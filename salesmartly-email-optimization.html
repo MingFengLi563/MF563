@@ -184,43 +184,152 @@
     </div>
 
     <div class="card" id="solution-design">
-        <h2>3. 解决方案设计</h2>
-        <h3>3.1 发送通道配置</h3>
+        <h2>3. 解决方案设计（基于现有界面优化）</h2>
+        
+        <div class="info-box">
+            <strong>💡 优化原则：</strong> 保持现有界面布局，最小化改动，新增功能渐进式增强
+        </div>
+
+        <h3>3.1 界面布局（保持现有结构）</h3>
         <div class="mockup">
-            <div class="mockup-header">⚙️ 发送方式选择</div>
+            <div class="mockup-header">📋 创建群发计划 - 优化后界面</div>
             <div class="mockup-body">
-                <div class="form-group">
-                    <label>📤 发送方式</label>
-                    <div class="radio-group">
-                        <label class="radio-option">
-                            <input type="radio" name="sendMethod" value="smart" checked>
-                            <div class="option-content">
-                                <div class="option-title">🤖 智能分配（推荐）</div>
-                                <div class="option-desc">系统根据客户归属自动选择：有归属用归属邮箱，无归属用代发邮箱</div>
-                            </div>
-                        </label>
-                        <label class="radio-option">
-                            <input type="radio" name="sendMethod" value="integrated">
-                            <div class="option-content">
-                                <div class="option-title">📧 统一使用集成邮箱发送</div>
-                                <div class="option-desc">从已授权邮箱中选择一个作为发件人，适合品牌一致性要求高的场景</div>
-                            </div>
-                        </label>
-                        <label class="radio-option">
-                            <input type="radio" name="sendMethod" value="edm">
-                            <div class="option-content">
-                                <div class="option-title">🚀 统一使用代发邮箱发送</div>
-                                <div class="option-desc">使用平台 EDM 服务，可自定义发件人地址，送达率高，按量计费</div>
-                            </div>
-                        </label>
-                        <label class="radio-option">
-                            <input type="radio" name="sendMethod" value="attribution">
-                            <div class="option-content">
-                                <div class="option-title">👤 按客户归属邮箱发送</div>
-                                <div class="option-desc">每个客户使用其绑定的归属邮箱发送，适合多销售团队、多品牌场景</div>
-                            </div>
-                        </label>
-                    </div>
+                <pre style="font-size:12px; line-height:1.8;">
+消息群发 / 创建群发计划
+← 返回
+
+社媒渠道
+┌─────────────────────────────┐
+│ 📧 Email                    ▼│
+└─────────────────────────────┘
+
+邮件发送方式  ⭐优化点
+○ 邮箱直发  ○ EDM 代发  ● 智能选择
+
+计划名称
+┌─────────────────────────────┐
+│ 群发计划 -1770366799907   18/50│
+└─────────────────────────────┘
+
+* 邮件主题
+┌────────────────────────────────────────────┐
+│ 请输入邮件主题                          0/100│
+└────────────────────────────────────────────┘
+
+* 邮件内容  ● 直接编辑  ○ 使用模板
+┌────────────────────────────────────────────┐
+│ 文件 编辑 查看 插入 格式 工具 表格        │
+│ ↶ ↷  段落 ▼ 14px ▼ B I A ▼ 🎨 ≡  ≡ ≡   │
+│ ∷ ∷ 🔗 ️ 田 ▼ ─ <> Ix ⛶ 插入变量        │
+├────────────────────────────────────────────┤
+│ 请输入邮件内容                            │
+│                                            │
+│                                            │
+└────────────────────────────────────────────┘
+──────────┐
+│ + 话术库 │
+└──────────┘
+
+邮件附件 ┌──────┐
+         │ 上传 │
+         └──────┘
+
+⭐ 新增：发件人配置（当选择"邮箱直发"或"智能选择"时显示）
+┌─────────────────────────────────────────────┐
+│ 发件邮箱：[support@company.com          ▼] │
+│ □ 使用客户归属邮箱（优先）                   │
+│   若客户有归属邮箱则使用，否则使用上方邮箱   │
+└─────────────────────────────────────────────┘
+
+⭐ 新增：代发配置（当选择"EDM 代发"时显示）
+┌─────────────────────────────────────────────┐
+│ 发件人邮箱：[marketing@company.com       ▼] │
+│ 发件人名称：[Your Company Name           ] │
+│ 预计费用：¥0.00（0/1000 封）                │
+└─────────────────────────────────────────────┘
+
+选择发送对象 ①
+● 选择客户列表数据  ○ 导入客户
+┌─────────────────────────────┐
+│ 已选择 xx 人              > │
+└─────────────────────────────┘
+
+发送频率
+● 系统默认  ○ 自定义频率
+
+发送规则
+● 单次发送  ○ 循环发送
+
+发送时间
+● 立即发送  ○ 定时发送
+
+┌──────────────┐ ┌────────
+│保存并创建下一个│ │ 保存   │ 保存后，即表示您知悉并同意此合规使用承诺!
+└──────────────┘ └────────┘
+                </pre>
+            </div>
+        </div>
+
+        <h3>3.2 核心优化点说明</h3>
+        <table class="comparison-table">
+            <thead>
+                <tr>
+                    <th width="30%">优化项</th>
+                    <th width="35%">改动说明</th>
+                    <th width="35%">用户价值</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>邮件发送方式</strong></td>
+                    <td>新增「智能选择」选项，默认推荐</td>
+                    <td>降低选择成本，系统自动匹配最优发送方式</td>
+                </tr>
+                <tr>
+                    <td><strong>发件人配置</strong></td>
+                    <td>邮箱直发时可选择已集成邮箱，支持勾选"使用客户归属邮箱"</td>
+                    <td>支持多销售团队、多品牌场景，客户体验更个性化</td>
+                </tr>
+                <tr>
+                    <td><strong>代发配置</strong></td>
+                    <td>EDM 代发时可自定义发件人邮箱和名称，显示预计费用</td>
+                    <td>透明化成本，灵活配置品牌形象</td>
+                </tr>
+                <tr>
+                    <td><strong>客户归属邮箱</strong></td>
+                    <td>客户列表新增"归属邮箱"字段，支持批量设置</td>
+                    <td>自动匹配销售负责人，提升客户体验</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h3>3.3 发送方式详解</h3>
+        <div class="flow-diagram">
+            <div class="flow-step">
+                <div class="step-number">1</div>
+                <div>
+                    <strong>📧 邮箱直发（现有功能增强）</strong>
+                    <p>• 从已集成邮箱中选择发件人</p>
+                    <p>• 可勾选"使用客户归属邮箱"自动匹配</p>
+                    <p>• 免费，受邮箱服务商限额限制</p>
+                </div>
+            </div>
+            <div class="flow-step">
+                <div class="step-number">2</div>
+                <div>
+                    <strong>🚀 EDM 代发（现有功能增强）</strong>
+                    <p>• 自定义发件人邮箱和名称</p>
+                    <p>• 显示预计费用（按发送量计算）</p>
+                    <p>• 送达率高，不消耗自有邮箱信誉</p>
+                </div>
+            </div>
+            <div class="flow-step">
+                <div class="step-number">3</div>
+                <div>
+                    <strong>🤖 智能选择（新增）</strong>
+                    <p>• 有归属邮箱的客户 → 用归属邮箱发送</p>
+                    <p>• 无归属的客户 → 用默认代发邮箱发送</p>
+                    <p>• 平衡成本和送达率，推荐首选</p>
                 </div>
             </div>
         </div>
