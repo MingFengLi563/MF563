@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SaleSmartly 邮件群发功能整合设计方案</title>
+    <title>SaleSmartly 邮件群发功能整合设计方案 v2.0</title>
     <style>
         * {
             margin: 0;
@@ -57,6 +57,15 @@
             display: flex;
             align-items: center;
             gap: 6px;
+        }
+        
+        .version-badge {
+            background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+            color: white;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
         }
         
         section {
@@ -518,6 +527,61 @@
             font-weight: 500;
         }
         
+        .delegate-box {
+            background: linear-gradient(135deg, #ede9fe 0%, #ddd6fe 100%);
+            border: 2px solid #8b5cf6;
+            border-radius: 12px;
+            padding: 24px;
+            margin: 20px 0;
+        }
+        
+        .delegate-title {
+            font-weight: 600;
+            color: #7c3aed;
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 16px;
+        }
+        
+        .delegate-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 16px;
+        }
+        
+        .delegate-item {
+            background: white;
+            border-radius: 8px;
+            padding: 16px;
+            border: 1px solid #e9d5ff;
+        }
+        
+        .delegate-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 8px 0;
+        }
+        
+        .delegate-label {
+            font-size: 13px;
+            color: #6b7280;
+        }
+        
+        .delegate-value {
+            font-weight: 500;
+            color: #333;
+            font-size: 14px;
+        }
+        
+        .delegate-arrow {
+            color: #8b5cf6;
+            font-weight: bold;
+            margin: 0 8px;
+        }
+        
         footer {
             text-align: center;
             padding: 40px;
@@ -541,6 +605,29 @@
             transform: translateY(-2px);
             box-shadow: 0 4px 12px rgba(0,0,0,0.2);
         }
+        
+        .update-notice {
+            background: linear-gradient(135deg, #dbeafe 0%, #bfdbfe 100%);
+            border-left: 4px solid #3b82f6;
+            padding: 16px 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+        
+        .update-notice-title {
+            font-weight: 600;
+            color: #1e40af;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .update-notice-content {
+            font-size: 14px;
+            color: #1e3a8a;
+            line-height: 1.6;
+        }
     </style>
 </head>
 <body>
@@ -558,11 +645,20 @@
                     <span>设计：J.A.R.V.I.S.</span>
                 </div>
                 <div class="meta-item">
-                    <span>🎯</span>
-                    <span>版本：v1.0</span>
+                    <span class="version-badge">v2.0</span>
                 </div>
             </div>
         </header>
+
+        <!-- 更新说明 -->
+        <div class="update-notice">
+            <div class="update-notice-title">
+                🔄 v2.0 更新说明
+            </div>
+            <div class="update-notice-content">
+                <strong>新增功能：</strong>归属邮箱支持配置单独的代发邮箱。用户添加归属邮箱后，可为每个归属邮箱配置一个实际发送用的代发邮箱，实现"归属关系"与"实际发送"的分离。
+            </div>
+        </div>
 
         <!-- 现状分析 -->
         <section>
@@ -596,7 +692,7 @@
                     </tr>
                     <tr>
                         <td><strong>发送人</strong></td>
-                        <td>自动使用联系人归属邮箱</td>
+                        <td>自动使用联系人归属邮箱<br/><span style="font-size:12px;color:#888;">v2.0: 支持配置代发邮箱</span></td>
                         <td>手动指定统一发送人邮箱</td>
                     </tr>
                     <tr>
@@ -632,17 +728,161 @@
             </div>
         </section>
 
+        <!-- 归属邮箱 + 代发邮箱配置 -->
+        <section>
+            <h2>🔗 归属邮箱与代发邮箱配置</h2>
+            
+            <div class="delegate-box">
+                <div class="delegate-title">
+                    ⚡ 核心概念：归属关系 ≠ 实际发送
+                </div>
+                <div class="delegate-grid">
+                    <div class="delegate-item">
+                        <div class="delegate-row">
+                            <span class="delegate-label">归属邮箱</span>
+                            <span class="delegate-value">alice@company.com</span>
+                        </div>
+                        <div style="text-align:center;margin:8px 0;">
+                            <span class="delegate-arrow">⬇️ 配置代发</span>
+                        </div>
+                        <div class="delegate-row">
+                            <span class="delegate-label">代发邮箱</span>
+                            <span class="delegate-value">noreply@company.com</span>
+                        </div>
+                        <div style="margin-top:12px;font-size:12px;color:#666;">
+                            <strong>效果：</strong>客户看到的归属客服是 Alice，但实际发送邮箱是 noreply
+                        </div>
+                    </div>
+                    <div class="delegate-item">
+                        <div class="delegate-row">
+                            <span class="delegate-label">归属邮箱</span>
+                            <span class="delegate-value">bob@company.com</span>
+                        </div>
+                        <div style="text-align:center;margin:8px 0;">
+                            <span class="delegate-arrow">⬇️ 配置代发</span>
+                        </div>
+                        <div class="delegate-row">
+                            <span class="delegate-label">代发邮箱</span>
+                            <span class="delegate-value">support@company.com</span>
+                        </div>
+                        <div style="margin-top:12px;font-size:12px;color:#666;">
+                            <strong>效果：</strong>客户看到的归属客服是 Bob，但实际发送邮箱是 support
+                        </div>
+                    </div>
+                    <div class="delegate-item">
+                        <div class="delegate-row">
+                            <span class="delegate-label">归属邮箱</span>
+                            <span class="delegate-value">carol@company.com</span>
+                        </div>
+                        <div style="text-align:center;margin:8px 0;">
+                            <span class="delegate-arrow">⬇️ 未配置代发</span>
+                        </div>
+                        <div class="delegate-row">
+                            <span class="delegate-label">代发邮箱</span>
+                            <span class="delegate-value">（使用归属邮箱本身）</span>
+                        </div>
+                        <div style="margin-top:12px;font-size:12px;color:#666;">
+                            <strong>效果：</strong>直接使用 carol@company.com 发送
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <h3>配置界面设计</h3>
+            
+            <div class="ui-mockup">
+                <div class="ui-header">
+                    <span class="ui-title">邮箱账号管理</span>
+                    <span class="ui-badge">设置 → 邮箱账号</span>
+                </div>
+                
+                <div class="preview-box">
+                    <div style="display:grid;grid-template-columns:2fr 2fr 1fr 1fr;gap:12px;padding:12px;background:#f8f9ff;border-radius:8px;margin-bottom:12px;font-weight:600;font-size:13px;color:#666;">
+                        <div>客服账号</div>
+                        <div>归属邮箱</div>
+                        <div>代发邮箱</div>
+                        <div>状态</div>
+                    </div>
+                    
+                    <div style="display:grid;grid-template-columns:2fr 2fr 1fr 1fr;gap:12px;padding:12px;background:white;border:1px solid #e2e8f0;border-radius:8px;margin-bottom:8px;align-items:center;">
+                        <div style="display:flex;align-items:center;gap:8px;">
+                            <div style="width:32px;height:32px;border-radius:50%;background:#667eea;color:white;display:flex;align-items:center;justify-content:center;font-weight:600;">A</div>
+                            <span>Alice Zhang</span>
+                        </div>
+                        <div>alice@company.com</div>
+                        <div>
+                            <select style="width:100%;padding:6px 8px;border:1px solid #e2e8f0;border-radius:4px;font-size:13px;">
+                                <option value="">（无，使用归属邮箱）</option>
+                                <option value="noreply@company.com" selected>noreply@company.com</option>
+                                <option value="support@company.com">support@company.com</option>
+                                <option value="marketing@company.com">marketing@company.com</option>
+                            </select>
+                        </div>
+                        <div><span style="color:#10b981;font-size:13px;">● 已验证</span></div>
+                    </div>
+                    
+                    <div style="display:grid;grid-template-columns:2fr 2fr 1fr 1fr;gap:12px;padding:12px;background:white;border:1px solid #e2e8f0;border-radius:8px;margin-bottom:8px;align-items:center;">
+                        <div style="display:flex;align-items:center;gap:8px;">
+                            <div style="width:32px;height:32px;border-radius:50%;background:#48bb78;color:white;display:flex;align-items:center;justify-content:center;font-weight:600;">B</div>
+                            <span>Bob Li</span>
+                        </div>
+                        <div>bob@company.com</div>
+                        <div>
+                            <select style="width:100%;padding:6px 8px;border:1px solid #e2e8f0;border-radius:4px;font-size:13px;">
+                                <option value="">（无，使用归属邮箱）</option>
+                                <option value="noreply@company.com">noreply@company.com</option>
+                                <option value="support@company.com" selected>support@company.com</option>
+                                <option value="marketing@company.com">marketing@company.com</option>
+                            </select>
+                        </div>
+                        <div><span style="color:#10b981;font-size:13px;">● 已验证</span></div>
+                    </div>
+                    
+                    <div style="display:grid;grid-template-columns:2fr 2fr 1fr 1fr;gap:12px;padding:12px;background:white;border:1px solid #e2e8f0;border-radius:8px;align-items:center;">
+                        <div style="display:flex;align-items:center;gap:8px;">
+                            <div style="width:32px;height:32px;border-radius:50%;background:#f59e0b;color:white;display:flex;align-items:center;justify-content:center;font-weight:600;">C</div>
+                            <span>Carol Wang</span>
+                        </div>
+                        <div>carol@company.com</div>
+                        <div>
+                            <select style="width:100%;padding:6px 8px;border:1px solid #e2e8f0;border-radius:4px;font-size:13px;">
+                                <option value="" selected>（无，使用归属邮箱）</option>
+                                <option value="noreply@company.com">noreply@company.com</option>
+                                <option value="support@company.com">support@company.com</option>
+                                <option value="marketing@company.com">marketing@company.com</option>
+                            </select>
+                        </div>
+                        <div><span style="color:#10b981;font-size:13px;">● 已验证</span></div>
+                    </div>
+                    
+                    <div style="margin-top:16px;padding:12px;background:#f8f9ff;border-radius:8px;font-size:13px;color:#666;">
+                        💡 <strong>提示：</strong>代发邮箱需要先在"邮箱设置 → 代发邮箱管理"中添加并验证，才能在此处选择。
+                    </div>
+                </div>
+            </div>
+
+            <div class="warning-box">
+                <div class="warning-title">⚠️ 使用建议</div>
+                <ul class="warning-list">
+                    <li><strong>统一品牌形象：</strong>所有客服使用统一的 noreply@company.com 或 support@company.com 作为代发邮箱</li>
+                    <li><strong>提高送达率：</strong>使用经过 SPF/DKIM 验证的专业代发邮箱，避免个人邮箱被标记为垃圾邮件</li>
+                    <li><strong>保持归属关系：</strong>即使使用代发邮箱，客户归属关系仍记录在原客服账号下，便于后续跟进</li>
+                    <li><strong>灵活配置：</strong>可为不同客服配置不同代发邮箱（如销售团队用 sales@，客服团队用 support@）</li>
+                </ul>
+            </div>
+        </section>
+
         <!-- 整合方案 -->
         <section>
             <h2>💡 整合方案</h2>
             
             <div class="solution-card">
                 <h4>✅ 核心设计理念</h4>
-                <p><strong>「智能模式切换 + 统一发送流程」</strong></p>
-                <p>根据用户选择的联系人类型，自动推荐发送模式；允许手动切换模式；统一发送配置和预览界面。</p>
+                <p><strong>「智能模式切换 + 统一发送流程 + 代发邮箱映射」</strong></p>
+                <p>根据用户选择的联系人类型，自动推荐发送模式；支持归属邮箱配置代发邮箱；统一发送配置和预览界面。</p>
             </div>
 
-            <h3>模式选择设计</h3>
+            <h3>模式选择设计（v2.0）</h3>
             
             <div class="mode-selector">
                 <div class="mode-card selected">
@@ -650,7 +890,7 @@
                     <div class="mode-title">智能模式（推荐）</div>
                     <div class="mode-desc">系统根据联系人类型自动分配发送规则，最大化送达率</div>
                     <ul class="mode-features">
-                        <li>有归属邮箱 → 使用归属邮箱发送</li>
+                        <li>有归属邮箱 → 使用归属邮箱或其配置的代发邮箱</li>
                         <li>仅有邮箱字段 → 使用统一发送人</li>
                         <li>自动优化发送策略</li>
                         <li>适合混合联系人列表</li>
@@ -660,11 +900,11 @@
                 <div class="mode-card">
                     <div class="mode-icon">👤</div>
                     <div class="mode-title">归属邮箱模式</div>
-                    <div class="mode-desc">仅选择有归属邮箱的联系人，使用各自归属邮箱发送</div>
+                    <div class="mode-desc">仅选择有归属邮箱的联系人，使用各自归属邮箱（或代发邮箱）发送</div>
                     <ul class="mode-features">
-                        <li>100% 使用归属邮箱</li>
+                        <li>100% 使用归属邮箱体系</li>
+                        <li>自动应用代发邮箱配置</li>
                         <li>适合客服跟进场景</li>
-                        <li>自动过滤无归属联系人</li>
                         <li>保持对话连续性</li>
                     </ul>
                 </div>
@@ -722,7 +962,7 @@
                     <div class="step-content">
                         <div class="step-title">配置发送人</div>
                         <div class="step-desc">
-                            根据选择的模式显示不同配置项：智能模式/归属模式显示关联邮箱列表，统一代发模式显示发送人选择器。
+                            根据选择的模式显示不同配置项：智能模式/归属模式显示关联邮箱列表（含代发邮箱映射），统一代发模式显示发送人选择器。
                         </div>
                     </div>
                 </div>
@@ -742,7 +982,7 @@
                     <div class="step-content">
                         <div class="step-title">发送前预览</div>
                         <div class="step-desc">
-                            展示发送摘要：总数量、按发送人分组统计、预计发送时间。支持抽样预览具体邮件的发送人和收件人。
+                            展示发送摘要：总数量、按发送人分组统计（显示归属邮箱→代发邮箱映射）、预计发送时间。支持抽样预览具体邮件的发送人和收件人。
                         </div>
                     </div>
                 </div>
@@ -801,7 +1041,7 @@
                 </div>
             </div>
 
-            <h3>步骤 3：发送人配置（智能模式）</h3>
+            <h3>步骤 3：发送人配置（智能模式 v2.0）</h3>
             
             <div class="ui-mockup">
                 <div class="ui-header">
@@ -816,7 +1056,7 @@
                     </div>
                     <div class="preview-row">
                         <span class="preview-label">归属邮箱发送</span>
-                        <span class="preview-value">856 封（使用各自归属邮箱）</span>
+                        <span class="preview-value">856 封（使用归属邮箱或代发邮箱）</span>
                     </div>
                     <div class="preview-row">
                         <span class="preview-label">统一发送人</span>
@@ -831,6 +1071,34 @@
                                 <option>info@company.com</option>
                             </select>
                         </span>
+                    </div>
+                </div>
+                
+                <div class="delegate-box" style="margin-top:20px;">
+                    <div class="delegate-title">
+                        📋 归属邮箱 → 代发邮箱 映射预览
+                    </div>
+                    <div style="background:white;border-radius:8px;padding:16px;margin-top:12px;">
+                        <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;padding:8px;background:#f8f9ff;border-radius:6px;font-weight:600;font-size:12px;color:#666;">
+                            <div>客服</div>
+                            <div>归属邮箱</div>
+                            <div>实际发送邮箱</div>
+                        </div>
+                        <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;padding:10px 8px;border-bottom:1px solid #f0f0f0;font-size:13px;">
+                            <div>Alice Zhang</div>
+                            <div>alice@company.com</div>
+                            <div><span style="color:#8b5cf6;font-weight:500;">noreply@company.com</span> <span style="color:#888;font-size:12px;">(代发)</span></div>
+                        </div>
+                        <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;padding:10px 8px;border-bottom:1px solid #f0f0f0;font-size:13px;">
+                            <div>Bob Li</div>
+                            <div>bob@company.com</div>
+                            <div><span style="color:#8b5cf6;font-weight:500;">support@company.com</span> <span style="color:#888;font-size:12px;">(代发)</span></div>
+                        </div>
+                        <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;padding:10px 8px;font-size:13px;">
+                            <div>Carol Wang</div>
+                            <div>carol@company.com</div>
+                            <div><span style="color:#10b981;">carol@company.com</span> <span style="color:#888;font-size:12px;">(归属邮箱)</span></div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -853,19 +1121,19 @@
                         <span class="preview-value">1,258 封</span>
                     </div>
                     <div class="preview-row">
-                        <span class="preview-label">发送人分布</span>
+                        <span class="preview-label">实际发送邮箱分布</span>
                         <span class="preview-value">
                             <div style="margin-top: 8px;">
                                 <div style="display: flex; justify-content: space-between; margin: 4px 0;">
-                                    <span>alice@company.com</span>
+                                    <span>noreply@company.com（Alice 的代发）</span>
                                     <span>285 封</span>
                                 </div>
                                 <div style="display: flex; justify-content: space-between; margin: 4px 0;">
-                                    <span>bob@company.com</span>
+                                    <span>support@company.com（Bob 的代发）</span>
                                     <span>312 封</span>
                                 </div>
                                 <div style="display: flex; justify-content: space-between; margin: 4px 0;">
-                                    <span>carol@company.com</span>
+                                    <span>carol@company.com（Carol 的归属邮箱）</span>
                                     <span>259 封</span>
                                 </div>
                                 <div style="display: flex; justify-content: space-between; margin: 4px 0;">
@@ -885,7 +1153,7 @@
                     <div class="success-title">✅ 发送前检查通过</div>
                     <ul class="success-list">
                         <li>所有联系人邮箱格式验证通过</li>
-                        <li>发送人邮箱均已验证可用</li>
+                        <li>所有代发邮箱均已验证可用</li>
                         <li>邮件内容符合反垃圾规范</li>
                         <li>未超过每日发送限额（剩余 3,742 封）</li>
                     </ul>
@@ -904,7 +1172,7 @@
                 </div>
                 <div class="tech-item">
                     <div class="tech-name">状态管理</div>
-                    <div class="tech-desc">Pinia / Redux 管理联系人选择、模式配置、发送人状态</div>
+                    <div class="tech-desc">Pinia / Redux 管理联系人选择、模式配置、发送人状态、代发邮箱映射</div>
                 </div>
                 <div class="tech-item">
                     <div class="tech-name">实时统计</div>
@@ -924,7 +1192,7 @@
                 </div>
             </div>
 
-            <h3>核心数据结构</h3>
+            <h3>核心数据结构（v2.0）</h3>
             
             <div class="ui-mockup">
                 <pre style="background: #1e293b; color: #e2e8f0; padding: 20px; border-radius: 8px; overflow-x: auto; font-size: 13px; line-height: 1.5;"><code>{
@@ -944,34 +1212,105 @@
     invalid: 0                 // 无有效邮箱
   },
   
+  // 邮箱配置（v2.0 新增）
+  emailConfig: {
+    // 客服邮箱映射表
+    agentEmails: [
+      {
+        agentId: "u1",
+        agentName: "Alice Zhang",
+        assignedEmail: "alice@company.com",
+        delegateEmail: "noreply@company.com",  // 代发邮箱（可选）
+        useDelegate: true                       // 是否使用代发
+      },
+      {
+        agentId: "u2",
+        agentName: "Bob Li",
+        assignedEmail: "bob@company.com",
+        delegateEmail: "support@company.com",
+        useDelegate: true
+      },
+      {
+        agentId: "u3",
+        agentName: "Carol Wang",
+        assignedEmail: "carol@company.com",
+        delegateEmail: null,
+        useDelegate: false
+      }
+    ],
+    // 统一代发邮箱列表
+    unifiedEmails: [
+      "marketing@company.com",
+      "support@company.com",
+      "info@company.com"
+    ]
+  },
+  
   // 发送人配置
   senders: {
-    // 智能模式/归属模式：按客服分组
+    // 智能模式/归属模式：按客服分组（v2.0 显示实际发送邮箱）
     byAgent: [
-      { agentId: "u1", email: "alice@company.com", count: 285 },
-      { agentId: "u2", email: "bob@company.com", count: 312 },
-      { agentId: "u3", email: "carol@company.com", count: 259 }
+      { 
+        agentId: "u1", 
+        assignedEmail: "alice@company.com",
+        actualSender: "noreply@company.com",  // 实际发送邮箱
+        count: 285 
+      },
+      { 
+        agentId: "u2", 
+        assignedEmail: "bob@company.com",
+        actualSender: "support@company.com",
+        count: 312 
+      },
+      { 
+        agentId: "u3", 
+        assignedEmail: "carol@company.com",
+        actualSender: "carol@company.com",  // 未配置代发，使用归属邮箱
+        count: 259 
+      }
     ],
     // 统一代发模式：指定发送邮箱
     unified: "marketing@company.com"
   },
   
-  // 发送规则引擎
+  // 发送规则引擎（v2.0）
   sendingRules: {
     // 智能模式规则
-    smart: (contact) => {
+    smart: (contact, emailConfig) => {
       if (contact.assignedEmail) {
-        return { sender: contact.assignedEmail, mode: "assigned" };
+        // 查找该归属邮箱对应的配置
+        const agentConfig = emailConfig.agentEmails.find(
+          a => a.assignedEmail === contact.assignedEmail
+        );
+        // 如果配置了代发邮箱，使用代发；否则使用归属邮箱
+        const actualSender = agentConfig?.useDelegate && agentConfig?.delegateEmail
+          ? agentConfig.delegateEmail
+          : contact.assignedEmail;
+        return { 
+          sender: actualSender, 
+          assignedEmail: contact.assignedEmail,
+          mode: "assigned" 
+        };
       } else if (contact.emailField) {
         return { sender: config.unifiedEmail, mode: "unified" };
       }
       return null; // 跳过无效联系人
     },
     
-    // 归属模式规则
-    assigned: (contact) => {
+    // 归属模式规则（v2.0）
+    assigned: (contact, emailConfig) => {
       if (!contact.assignedEmail) return null;
-      return { sender: contact.assignedEmail, mode: "assigned" };
+      const agentConfig = emailConfig.agentEmails.find(
+        a => a.assignedEmail === contact.assignedEmail
+      );
+      const actualSender = agentConfig?.useDelegate && agentConfig?.delegateEmail
+        ? agentConfig.delegateEmail
+        : contact.assignedEmail;
+      return { 
+        sender: actualSender, 
+        assignedEmail: contact.assignedEmail,
+        mode: "assigned" 
+      };
     },
     
     // 统一代发模式规则
@@ -991,31 +1330,38 @@
             <div class="roadmap">
                 <div class="roadmap-item">
                     <div class="roadmap-phase">Phase 1 - 1-2 周</div>
-                    <div class="roadmap-title">前端界面重构</div>
+                    <div class="roadmap-title">邮箱配置管理界面</div>
                     <div class="roadmap-desc">
-                        统一入口，实现模式选择器、联系人统计、发送人配置组件。保持后端逻辑不变，前端根据模式调用不同 API。
+                        新增"邮箱账号管理"页面，支持为每个归属邮箱配置代发邮箱。实现代发邮箱验证状态显示、下拉选择器组件。
                     </div>
                 </div>
                 
                 <div class="roadmap-item">
                     <div class="roadmap-phase">Phase 2 - 2-3 周</div>
-                    <div class="roadmap-title">后端规则引擎</div>
-                    <div class="roadmap-title">后端规则引擎</div>
+                    <div class="roadmap-title">前端界面重构</div>
                     <div class="roadmap-desc">
-                        实现智能模式发送规则引擎，支持混合联系人列表自动分配。优化邮件队列，支持按发送人分组批量发送。
+                        统一群发入口，实现模式选择器、联系人统计、发送人配置组件。在预览界面显示归属邮箱→代发邮箱映射关系。
                     </div>
                 </div>
                 
                 <div class="roadmap-item">
-                    <div class="roadmap-phase">Phase 3 - 1 周</div>
-                    <div class="roadmap-title">预览与验证</div>
+                    <div class="roadmap-phase">Phase 3 - 2-3 周</div>
+                    <div class="roadmap-title">后端规则引擎</div>
                     <div class="roadmap-desc">
-                        实现发送前预览功能，支持抽样查看具体邮件。添加邮箱格式验证、发送限额检查、反垃圾规则校验。
+                        实现智能模式发送规则引擎（v2.0），支持代发邮箱映射。优化邮件队列，支持按实际发送邮箱分组批量发送。
                     </div>
                 </div>
                 
                 <div class="roadmap-item">
                     <div class="roadmap-phase">Phase 4 - 1 周</div>
+                    <div class="roadmap-title">预览与验证</div>
+                    <div class="roadmap-desc">
+                        实现发送前预览功能，支持抽样查看具体邮件。添加代发邮箱验证检查、邮箱格式验证、发送限额检查。
+                    </div>
+                </div>
+                
+                <div class="roadmap-item">
+                    <div class="roadmap-phase">Phase 5 - 1 周</div>
                     <div class="roadmap-title">测试与上线</div>
                     <div class="roadmap-desc">
                         内部测试、灰度发布、用户反馈收集。保留旧入口 30 天，引导用户迁移到新界面。
@@ -1031,8 +1377,8 @@
             <div class="problem-grid">
                 <div class="problem-card" style="border-left-color: #f59e0b;">
                     <h4>⚠️ 风险 1：发送规则错误</h4>
-                    <p><strong>风险：</strong>智能模式规则 bug 导致邮件从错误邮箱发出</p>
-                    <p><strong>应对：</strong>发送前强制预览确认，首次发送限制小批量测试，记录完整发送日志便于追溯</p>
+                    <p><strong>风险：</strong>代发邮箱映射配置错误，导致邮件从错误邮箱发出</p>
+                    <p><strong>应对：</strong>发送前强制预览确认（显示归属→代发映射），首次发送限制小批量测试，记录完整发送日志便于追溯</p>
                 </div>
                 
                 <div class="problem-card" style="border-left-color: #f59e0b;">
@@ -1043,8 +1389,8 @@
                 
                 <div class="problem-card" style="border-left-color: #f59e0b;">
                     <h4>⚠️ 风险 3：用户混淆</h4>
-                    <p><strong>风险：</strong>老用户习惯旧入口，不理解新模式</p>
-                    <p><strong>应对：</strong>添加新手引导弹窗，旧入口保留 30 天跳转提示，提供详细帮助文档</p>
+                    <p><strong>风险：</strong>用户不理解归属邮箱和代发邮箱的区别</p>
+                    <p><strong>应对：</strong>添加新手引导弹窗、工具提示（tooltip）、帮助文档，在配置界面清晰说明两者关系</p>
                 </div>
                 
                 <div class="problem-card" style="border-left-color: #f59e0b;">
@@ -1065,6 +1411,8 @@
                     <li><strong>用户效率提升：</strong>减少入口选择时间，群发创建时间从 5 分钟降至 2 分钟</li>
                     <li><strong>错误率降低：</strong>发送人选择错误率从 15% 降至 5% 以下</li>
                     <li><strong>混合场景支持：</strong>支持 100% 混合联系人列表场景，无需分多次发送</li>
+                    <li><strong>送达率提升：</strong>使用专业代发邮箱，邮件送达率从 85% 提升至 95%+</li>
+                    <li><strong>品牌形象统一：</strong>80% 企业客户配置统一代发邮箱，提升品牌专业度</li>
                     <li><strong>用户满意度：</strong>NPS 评分从 35 提升至 50+</li>
                     <li><strong>客服工单减少：</strong>相关咨询工单减少 40%</li>
                 </ul>
@@ -1072,8 +1420,9 @@
         </section>
 
         <footer>
-            <p>📧 SaleSmartly 邮件群发功能整合设计方案 v1.0</p>
+            <p>📧 SaleSmartly 邮件群发功能整合设计方案 v2.0</p>
             <p>设计日期：2026-04-07 | 设计：J.A.R.V.I.S.</p>
+            <p style="margin-top:12px;font-size:13px;color:rgba(255,255,255,0.8);">🔄 v2.0 更新：新增归属邮箱配置代发邮箱功能</p>
             <a href="https://mingfengli563.github.io/MF563/salesmartly-email-unified-design.html" class="github-link" target="_blank">
                 🚀 访问 GitHub Pages 查看在线版本
             </a>
@@ -1081,4 +1430,3 @@
     </div>
 </body>
 </html>
-
